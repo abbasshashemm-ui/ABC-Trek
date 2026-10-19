@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+  --color-obsidian: #05070b;
+  --color-ridge: #0b1320;
+  --color-lotus: #00e5ff;
+  --color-solar: #ff8a00;
+  --color-solar-hi: #ffc700;
+  --color-ink: #f8fafc;
+  --color-muted: #94a3b8;
+  --font-display: "Cinzel", "Cormorant Garamond", serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+html {
+  background: var(--color-obsidian);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+body { margin: 0; background: var(--color-obsidian); overflow-x: hidden; }
+
+::selection { background: rgb(255 138 0 / 0.4); }
+
+.font-display { letter-spacing: 0.08em; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse-dot { animation: none; }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.8); }
+}
+.animate-pulse-dot { animation: pulse-dot 1.8s ease-in-out infinite; }
