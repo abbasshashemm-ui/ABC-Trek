@@ -28,10 +28,10 @@ export default function TopNav() {
           </span>
         </div>
 
-        <div className="text-center">
+        <div className="min-w-0 text-center">
           <span
             key={act}
-            className="font-mono text-[10px] tracking-[0.18em] text-lotus sm:text-xs md:text-sm"
+            className="block truncate font-mono text-[9px] tracking-[0.12em] text-lotus sm:text-xs sm:tracking-[0.18em] md:text-sm"
             aria-live="polite"
           >
             {ACT_LABELS[act]}

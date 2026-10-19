@@ -20,11 +20,11 @@ export default function Booking() {
             <span className="text-sm text-muted">All-Inclusive</span>
           </div>
 
-          <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          <ul className="mt-10 grid grid-cols-2 gap-3 lg:grid-cols-5">
             {inclusions.map(({ icon: Icon, title, detail }) => (
               <li
                 key={title}
-                className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-solar/50 hover:bg-white/[0.06]"
+                className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 transition sm:p-5 hover:border-solar/50 hover:bg-white/[0.06]"
               >
                 <Icon size={22} className="text-lotus" aria-hidden />
                 <h3 className="mt-4 text-sm font-semibold text-ink">{title}</h3>
