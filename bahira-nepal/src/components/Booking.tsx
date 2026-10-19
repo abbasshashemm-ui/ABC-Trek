@@ -35,6 +35,8 @@ export default function Booking() {
 
           <a
             href={BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="mt-10 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-solar to-solar-hi px-8 py-4 text-sm font-semibold text-obsidian shadow-[0_0_40px_rgba(255,138,0,0.4)] transition hover:brightness-110"
           >
             Reserve your seat — {PRICE} <ArrowRight size={16} aria-hidden />
