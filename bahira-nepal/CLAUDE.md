@@ -35,4 +35,5 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
 
 ## Data
 - `src/data/itinerary.ts`: the full 15-day dataset (do not summarise).
-- `src/data/booking.ts`: price/seats/date, 10 inclusions, and `BOOKING_URL` (WhatsApp deep link, +961 71 661 075).
+- `src/data/booking.ts`: $1,570 per person + international ticket (not included), optional insurance $120,
+  seats/date, 9 inclusions + `extras`, and `BOOKING_URL` (WhatsApp deep link, +961 71 661 075).

@@ -1,5 +1,5 @@
 import { CalendarDays, ArrowRight } from 'lucide-react'
-import { inclusions, DEPARTURE, PRICE, SEATS, BOOKING_URL } from '../data/booking'
+import { inclusions, extras, DEPARTURE, PRICE, PRICE_EXCLUDES, SEATS, BOOKING_URL } from '../data/booking'
 
 export default function Booking() {
   return (
@@ -17,10 +17,11 @@ export default function Booking() {
               Departure: <strong>{DEPARTURE}</strong>
             </span>
             <span className="font-mono text-3xl font-bold text-solar-hi">{PRICE}</span>
-            <span className="text-sm text-muted">All-Inclusive</span>
+            <span className="text-sm text-muted">per person + {PRICE_EXCLUDES}</span>
           </div>
 
-          <ul className="mt-10 grid grid-cols-2 gap-3 lg:grid-cols-5">
+          <h3 className="mt-10 font-mono text-xs tracking-[0.25em] text-sage">INCLUDED IN {PRICE}</h3>
+          <ul className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
             {inclusions.map(({ icon: Icon, title, detail }) => (
               <li
                 key={title}
@@ -33,13 +34,29 @@ export default function Booking() {
             ))}
           </ul>
 
+          <h3 className="mt-10 font-mono text-xs tracking-[0.25em] text-muted">NOT INCLUDED</h3>
+          <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+            {extras.map(({ icon: Icon, title, detail, price }) => (
+              <li key={title} className="flex items-start gap-4 rounded-2xl border border-dashed border-white/15 p-5">
+                <Icon size={22} className="mt-0.5 shrink-0 text-muted" aria-hidden />
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-baseline justify-between gap-2">
+                    <h4 className="text-sm font-semibold text-ink">{title}</h4>
+                    <span className="font-mono text-sm text-solar-hi">{price}</span>
+                  </div>
+                  <p className="mt-1 text-xs leading-relaxed text-muted">{detail}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+
           <a
             href={BOOKING_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-10 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-solar to-solar-hi px-8 py-4 text-sm font-semibold text-obsidian shadow-[0_0_40px_rgba(255,138,0,0.4)] transition hover:brightness-110"
           >
-            Reserve your seat — {PRICE} <ArrowRight size={16} aria-hidden />
+            Reserve your seat on WhatsApp <ArrowRight size={16} aria-hidden />
           </a>
         </div>
         <p className="mt-10 text-center font-mono text-[10px] tracking-[0.25em] text-muted">
