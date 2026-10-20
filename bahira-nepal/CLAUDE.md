@@ -17,7 +17,8 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
 - No `GL_OES_standard_derivatives` pragma: three targets WebGL2, where `fwidth` is core.
 - Look: sunny and inviting: natural shaded terrain (vivid green biomes by height/slope/act, snow from ~41 on all but
   sheer faces, rounded irregular ridges, Phewa Lake at Day 5), warm mid-morning sun, clear blue sky dome, light vignette.
-  Contours are faint shade lines that lighten near the trekkers; no orange ground glow (`src/scene/palette.ts` shared by both), faint contour overlay. Palette authored in sRGB, lit in linear (`lin()`).
+  Contours are faint shade lines that lighten near the trekkers; no orange ground glow. Sun and sky live in
+  `src/scene/palette.ts` (shared by terrain and sky dome). Palette authored in sRGB, lit in linear (`lin()`).
   Terrain fog colour must equal the sky horizon or the seam shows.
 - Scroll state lives in `src/state/scrollStore.ts` (mutable, updated once per GSAP tick). Never put per-frame
   scroll values in React state.
