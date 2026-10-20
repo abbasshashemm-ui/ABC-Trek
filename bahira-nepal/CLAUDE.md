@@ -5,7 +5,8 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
 
 ## Commands
 - `npm run dev` / `npm run build` (tsc + vite) / `npm run lint`
-- Drop the client logo at `public/bahira-logo.png` (preferred, real alpha) or `.jpeg`. Until then `<BahiraLogo />` draws a placeholder.
+- Logo: `public/bahira-logo.png` is generated from `assets-src/bahira-logo-source.jpeg` by `node scripts/make-logo.mjs <src>`
+  (colour-to-alpha, trimmed). Prefer a designer-exported transparent PNG if one exists.
 
 ## Rules that must not drift
 - **Terrain height is defined twice and must stay identical:** `src/utils/terrainMath.ts` (trail, beacon, camera)
@@ -28,7 +29,7 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
   `merge()` normalises indexed/non-indexed parts (raw `mergeGeometries` returns null). `SceneBoundary` keeps the page
   usable if WebGL fails. The ABC basin is a shelf carved into the height function (both twins).
 
-- Photos: raw files go in `photos-src/<place>/` (see its README), `npm run photos` writes WebP to `public/photos/`
+- Photos: `photos-src/manifest.json` maps days to files (folder mode is the fallback; see its README), `npm run photos` writes WebP to `public/photos/`
   and `src/data/photos.generated.json`. Never hand-edit the JSON. Non-trek photos need a `credits.json` entry
   (author, licence allowing commercial use, source URL); never ship placeholder or unlicensed images.
 

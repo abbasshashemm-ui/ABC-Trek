@@ -79,6 +79,8 @@ export default function Lightbox({ photos, index, title, onIndex, onClose }: Pro
 /** Attribution: ours by name; licensed images by author, licence and a link to the source. */
 export function PhotoCredit({ photo }: { photo: Photo }) {
   if (photo.ours) return <span className="text-solar-hi/90">📷 {photo.credit}</span>
+  // Never invent attribution: unknown-source images show no credit line.
+  if (!photo.credit) return null
   return (
     <span>
       Photo: {photo.credit}

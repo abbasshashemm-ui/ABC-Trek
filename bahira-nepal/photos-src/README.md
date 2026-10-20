@@ -1,5 +1,9 @@
 # Photo drop folder
 
+**Current setup:** `manifest.json` lists exactly which photo goes on which day (with alt text and
+whether it's one of ours). Edit it, then run `npm run photos`. Files not listed there are ignored.
+Without a manifest, the folder convention below is used instead.
+
 Put raw photos (JPG, PNG, HEIC from iPhone, even .MOV clips) into the folder for the place
 they were taken, then run `npm run photos`. Originals are never served; the script writes
 resized WebP files to `public/photos/`.

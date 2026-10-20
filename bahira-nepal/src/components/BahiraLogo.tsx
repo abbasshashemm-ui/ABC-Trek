@@ -63,9 +63,12 @@ export default function BahiraLogo({ size = 40, className }: Props) {
       canvas.width = img.naturalWidth
       canvas.height = img.naturalHeight
       ctx.drawImage(img, 0, 0)
-      const frame = ctx.getImageData(0, 0, canvas.width, canvas.height)
-      knockOutWhite(frame.data)
-      ctx.putImageData(frame, 0, 0)
+      // The PNG is already cut out (scripts/make-logo.mjs); only flat JPEG exports need keying.
+      if (!img.src.endsWith('.png')) {
+        const frame = ctx.getImageData(0, 0, canvas.width, canvas.height)
+        knockOutWhite(frame.data)
+        ctx.putImageData(frame, 0, 0)
+      }
     }
     const sources = ['/bahira-logo.png', '/bahira-logo.jpeg', '/bahira-logo.jpg']
     img.onerror = () => {

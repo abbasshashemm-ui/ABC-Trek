@@ -6,7 +6,7 @@ export interface Photo {
   width: number
   height: number
   alt: string
-  credit: string
+  credit?: string
   license?: string
   source?: string
   /** true = from the trek leaders' own past treks */

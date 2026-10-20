@@ -1,1 +1,220 @@
-{}
+{
+  "1": [
+    {
+      "src": "/photos/day01-1-800.webp",
+      "srcSet": "/photos/day01-1-800.webp 683w, /photos/day01-1-1600.webp 736w",
+      "width": 736,
+      "height": 862,
+      "alt": "Prayer flags over the evening streets of Thamel, Kathmandu",
+      "ours": false
+    },
+    {
+      "src": "/photos/day01-2-800.webp",
+      "srcSet": "/photos/day01-2-800.webp 600w, /photos/day01-2-1600.webp 736w",
+      "width": 736,
+      "height": 981,
+      "alt": "Evening aarti ceremony at Pashupatinath Temple",
+      "ours": false
+    },
+    {
+      "src": "/photos/day01-3-800.webp",
+      "srcSet": "/photos/day01-3-800.webp 655w, /photos/day01-3-1600.webp 735w",
+      "width": 735,
+      "height": 898,
+      "alt": "The ghats of Pashupatinath on the Bagmati river",
+      "ours": false
+    }
+  ],
+  "2": [
+    {
+      "src": "/photos/day02-1-800.webp",
+      "srcSet": "/photos/day02-1-800.webp 800w, /photos/day02-1-1600.webp 1500w",
+      "width": 1500,
+      "height": 1000,
+      "alt": "Swayambhunath, the Monkey Temple, under prayer flags",
+      "ours": false
+    },
+    {
+      "src": "/photos/day02-2-800.webp",
+      "srcSet": "/photos/day02-2-800.webp 600w, /photos/day02-2-1600.webp 736w",
+      "width": 736,
+      "height": 981,
+      "alt": "The golden spire of Swayambhunath Stupa",
+      "ours": false
+    },
+    {
+      "src": "/photos/day02-3-800.webp",
+      "srcSet": "/photos/day02-3-800.webp 735w",
+      "width": 735,
+      "height": 414,
+      "alt": "Boudhanath Stupa ringed with prayer flags",
+      "ours": false
+    }
+  ],
+  "3": [
+    {
+      "src": "/photos/day03-1-800.webp",
+      "srcSet": "/photos/day03-1-800.webp 533w, /photos/day03-1-1600.webp 736w",
+      "width": 736,
+      "height": 1104,
+      "alt": "Dugout canoe on the river in Chitwan",
+      "ours": false
+    },
+    {
+      "src": "/photos/day03-2-800.webp",
+      "srcSet": "/photos/day03-2-800.webp 739w",
+      "width": 739,
+      "height": 415,
+      "alt": "Elephants bathing in a Chitwan river",
+      "ours": false
+    },
+    {
+      "src": "/photos/day03-3-800.webp",
+      "srcSet": "/photos/day03-3-800.webp 502w",
+      "width": 502,
+      "height": 611,
+      "alt": "Elephants and rhinos in the Chitwan forest",
+      "ours": false
+    }
+  ],
+  "4": [
+    {
+      "src": "/photos/day04-1-800.webp",
+      "srcSet": "/photos/day04-1-800.webp 736w",
+      "width": 736,
+      "height": 736,
+      "alt": "Elephant ride through tall grass beside a rhino, Chitwan",
+      "ours": false
+    },
+    {
+      "src": "/photos/day04-2-800.webp",
+      "srcSet": "/photos/day04-2-800.webp 516w",
+      "width": 516,
+      "height": 387,
+      "alt": "Jeep safari through the Chitwan jungle",
+      "ours": false
+    },
+    {
+      "src": "/photos/day04-3-800.webp",
+      "srcSet": "/photos/day04-3-800.webp 450w, /photos/day04-3-1600.webp 736w",
+      "width": 736,
+      "height": 1308,
+      "alt": "Sunrise from elephant-back in Sauraha, Chitwan",
+      "ours": false
+    }
+  ],
+  "5": [
+    {
+      "src": "/photos/day05-1-800.webp",
+      "srcSet": "/photos/day05-1-800.webp 658w, /photos/day05-1-1600.webp 720w",
+      "width": 720,
+      "height": 876,
+      "alt": "Painted boats on Phewa Lake below Machhapuchhre",
+      "ours": false
+    }
+  ],
+  "6": [
+    {
+      "src": "/photos/day06-1-800.webp",
+      "srcSet": "/photos/day06-1-800.webp 736w",
+      "width": 736,
+      "height": 736,
+      "alt": "The Pumdikot Shiva statue above Pokhara and Phewa Lake",
+      "ours": false
+    },
+    {
+      "src": "/photos/day06-2-800.webp",
+      "srcSet": "/photos/day06-2-800.webp 600w, /photos/day06-2-1600.webp 736w",
+      "width": 736,
+      "height": 981,
+      "alt": "The spiral entrance to Gupteshwor Mahadev Cave",
+      "ours": false
+    }
+  ],
+  "7": [
+    {
+      "src": "/photos/day07-1-800.webp",
+      "srcSet": "/photos/day07-1-800.webp 800w, /photos/day07-1-1600.webp 1600w",
+      "width": 1600,
+      "height": 1280,
+      "alt": "Blue-roofed lodges of Sinuwa on a forested ridge",
+      "ours": false
+    },
+    {
+      "src": "/photos/day07-2-800.webp",
+      "srcSet": "/photos/day07-2-800.webp 800w, /photos/day07-2-1600.webp 1200w",
+      "width": 1200,
+      "height": 900,
+      "alt": "Trekkers on the trail toward Annapurna",
+      "ours": false
+    }
+  ],
+  "8": [
+    {
+      "src": "/photos/day08-1-800.webp",
+      "srcSet": "/photos/day08-1-800.webp 638w",
+      "width": 638,
+      "height": 480,
+      "alt": "A trekker climbing through grassland beneath snow peaks",
+      "ours": false
+    }
+  ],
+  "9": [
+    {
+      "src": "/photos/day09-1-800.webp",
+      "srcSet": "/photos/day09-1-800.webp 640w, /photos/day09-1-1600.webp 1281w",
+      "width": 1281,
+      "height": 1600,
+      "alt": "Hmayed and Farhat at the Annapurna Base Camp sign, 4,130 m",
+      "credit": "Hmayed & Farhat · Annapurna Base Camp",
+      "ours": true
+    },
+    {
+      "src": "/photos/day09-2-800.webp",
+      "srcSet": "/photos/day09-2-800.webp 640w, /photos/day09-2-1600.webp 1080w",
+      "width": 1080,
+      "height": 1350,
+      "alt": "The Namaste sign and prayer flags at Annapurna Base Camp",
+      "ours": false
+    }
+  ],
+  "11": [
+    {
+      "src": "/photos/day11-1-800.webp",
+      "srcSet": "/photos/day11-1-800.webp 533w, /photos/day11-1-1600.webp 550w",
+      "width": 550,
+      "height": 826,
+      "alt": "Bathing in the natural hot springs at Jhinu Danda",
+      "ours": false
+    },
+    {
+      "src": "/photos/day11-2-800.webp",
+      "srcSet": "/photos/day11-2-800.webp 678w",
+      "width": 678,
+      "height": 452,
+      "alt": "Steaming hot-spring pool beside the river at Jhinu Danda",
+      "ours": false
+    }
+  ],
+  "14": [
+    {
+      "src": "/photos/day14-1-800.webp",
+      "srcSet": "/photos/day14-1-800.webp 735w",
+      "width": 735,
+      "height": 490,
+      "alt": "Boudhanath Stupa lit at dusk, Kathmandu",
+      "ours": false
+    }
+  ],
+  "15": [
+    {
+      "src": "/photos/day15-1-800.webp",
+      "srcSet": "/photos/day15-1-800.webp 640w, /photos/day15-1-1600.webp 1280w",
+      "width": 1280,
+      "height": 1600,
+      "alt": "Hmayed and Farhat with the Lebanese flag at Everest Base Camp",
+      "credit": "Hmayed & Farhat · Everest Base Camp, 2025",
+      "ours": true
+    }
+  ]
+}
