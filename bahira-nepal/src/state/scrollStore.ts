@@ -1,5 +1,5 @@
-import { itinerary, actOf, ABC_ALTITUDE, type ActId } from '../data/itinerary'
-import { DAY_COUNT } from '../utils/journey'
+// Not from utils/journey: that module pulls in three.js, which must stay in the lazy Scene chunk.
+import { itinerary, actOf, ABC_ALTITUDE, DAY_COUNT, type ActId } from '../data/itinerary'
 import { smoothstep } from '../utils/terrainMath'
 
 /**

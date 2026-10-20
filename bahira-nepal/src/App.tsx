@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useRef } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import Lenis from 'lenis'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -17,6 +17,19 @@ const Scene = lazy(() => import('./scene/Scene'))
 
 export default function App() {
   const journey = useRef<HTMLElement>(null)
+  // The 3D scene is ~280 KB gzipped plus shader compiles: fetch it once the hero text, fonts and logo
+  // have painted, so a slow phone shows the headline and price first instead of a blank screen.
+  const [sceneWanted, setSceneWanted] = useState(false)
+
+  useEffect(() => {
+    const start = () => setSceneWanted(true)
+    if ('requestIdleCallback' in window) {
+      const id = requestIdleCallback(start, { timeout: 1200 })
+      return () => cancelIdleCallback(id)
+    }
+    const id = setTimeout(start, 300)
+    return () => clearTimeout(id)
+  }, [])
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -42,9 +55,7 @@ export default function App() {
   return (
     <div className="relative min-h-screen bg-obsidian">
       <SceneBoundary>
-        <Suspense fallback={null}>
-          <Scene />
-        </Suspense>
+        <Suspense fallback={null}>{sceneWanted && <Scene />}</Suspense>
       </SceneBoundary>
       <TopNav />
       <AltimeterHUD />

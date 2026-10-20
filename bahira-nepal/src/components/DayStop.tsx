@@ -22,7 +22,7 @@ export default function DayStop({ item, side }: { item: ItineraryDay; side: 'lef
         side === 'right' && 'md:justify-end',
       )}
     >
-      <div data-reveal className="relative w-full max-w-md [text-shadow:0_1px_20px_rgb(10_17_14/0.75)]">
+      <div data-reveal className="relative w-full max-w-md [text-shadow:0_1px_3px_rgb(10_17_14/0.6),0_2px_24px_rgb(10_17_14/0.85)]">
         {/* Base camp: fades in when the page settles here (SummitCelebration sets data-reached) */}
         {summit && (
           <p aria-hidden className="summit-figure font-display tabular mb-4 text-7xl leading-none text-ink md:text-8xl">

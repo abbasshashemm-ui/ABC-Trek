@@ -6,7 +6,8 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
 ## Commands
 - `npm run dev` / `npm run build` (tsc + vite) / `npm run lint`
 - Logo: `public/bahira-logo.png` is generated from `assets-src/bahira-logo-source.jpeg` by `node scripts/make-logo.mjs <src>`
-  (colour-to-alpha, trimmed). Prefer a designer-exported transparent PNG if one exists.
+  (colour-to-alpha, trimmed), plus `bahira-logo-nav.webp` (header, ~17 KB) and `icon-180/64.png`. The page never loads
+  the 640px master. Prefer a designer-exported transparent PNG if one exists.
 
 ## Rules that must not drift
 - **Terrain height is defined twice and must stay identical:** `src/utils/terrainMath.ts` (trail, beacon, camera)
@@ -14,8 +15,8 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
   GLSL `smoothstep` needs `edge0 < edge1` and `pow` needs a non-negative base, hence `t = -z` and `k*k`.
 - Contours use per-fragment height (`getTerrainHeight(vWorldPos.xz)`), not the interpolated vertex value (avoids facets).
 - No `GL_OES_standard_derivatives` pragma: three targets WebGL2, where `fwidth` is core.
-- Look: natural shaded terrain (biome by height/slope/act, snow above ~40, Phewa Lake at Day 5), golden-hour sun +
-  sky dome (`src/scene/palette.ts` shared by both), faint contour overlay. Palette authored in sRGB, lit in linear (`lin()`).
+- Look: sunny and inviting: natural shaded terrain (biome by height/slope/act, snow above ~40, Phewa Lake at Day 5), warm
+  mid-morning sun, clear blue sky dome, light vignette (`src/scene/palette.ts` shared by both), faint contour overlay. Palette authored in sRGB, lit in linear (`lin()`).
   Terrain fog colour must equal the sky horizon or the seam shows.
 - Scroll state lives in `src/state/scrollStore.ts` (mutable, updated once per GSAP tick). Never put per-frame
   scroll values in React state.
@@ -44,7 +45,12 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
   valley under ONE journey-wide tint (`Journey.tsx`, fades in/out at the ends; per-day scrims caused visible bands) and its 2-3 photos above it (`PhotoStrip`, tap = gallery). Full-screen photo moments
   were tried and dropped (client preferred the grid). `updateScroll` interpolates between the real `[data-day]` centres.
   Header auto-hides on scroll down, returns on scroll up/focus.
-- Guides (`Guides.tsx`, manifest key `"guides"`): copy only states what photos/itinerary back up; replace with their bio.
+- Guides (`Guides.tsx`, manifest key `"guides"`): experienced trekkers (EBC, this ABC trail, many more), Instagram links
+  @mhmd_hmayed and @_hsenfarhat_; "Bahira Expeditions is run by Hussein Farhat" (= Farhat).
+- Speed: three.js must only be imported under `src/scene/` (and `utils/journey.ts`, which only the scene uses); anything the
+  page shell imports stays three-free (`DAY_COUNT` lives in `itinerary.ts` for that reason). The Scene chunk is fetched on
+  idle after first paint and fades in; `PerformanceMonitor` drops DPR to 1 on slow devices. Photo `sizes` must match the
+  rendered tile width so phones pick the 800w file.
 - Base camp (`SummitCelebration.tsx`): when the Day 9 stop scrolls up into place, the page settles on it for 3 s,
   "4,130 m" fades in above the photos (`[data-reached]`) and a few prayer-flag pieces drift. Skips jumps and button scrolls; Escape or
   `scrollToId` releases; reduced motion = number only. Hold = `lenis.stop()` then `scrollTo({ force })`.

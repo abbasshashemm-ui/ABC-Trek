@@ -5,6 +5,16 @@ import type { Photo } from '../data/photos'
 import Lightbox from './Lightbox'
 
 /** 1 photo: wide. 2: side by side. 3: one tall lead + two stacked. */
+
+/**
+ * Rendered width of each tile (column is max-w-md = 448px, phones get 100vw minus the 40px gutter),
+ * so a phone downloads the 800w file for a half-width tile instead of the 1600w one.
+ */
+function tileSizes(n: number, i: number) {
+  if (n === 1) return '(min-width: 768px) 448px, calc(100vw - 40px)'
+  if (n === 2) return '(min-width: 768px) 224px, calc(50vw - 20px)'
+  return i === 0 ? '(min-width: 768px) 262px, 58vw' : '(min-width: 768px) 186px, 42vw'
+}
 export default function PhotoStrip({ photos, title }: { photos: Photo[]; title: string }) {
   const [handle] = useState(() => Dialog.createHandle<number>())
   if (!photos.length) return null
@@ -35,7 +45,7 @@ export default function PhotoStrip({ photos, title }: { photos: Photo[]; title: 
             <img
               src={p.src}
               srcSet={p.srcSet}
-              sizes="(min-width: 768px) 360px, 90vw"
+              sizes={tileSizes(n, i)}
               alt={p.alt}
               loading="lazy"
               decoding="async"

@@ -79,13 +79,13 @@ void main() {
   n = normalize(n + vec3(b0 - bx, 0.0, b0 - bz) * grain);
 
   // --- Biomes ---------------------------------------------------------------
-  vec3 terrace = lin(vec3(0.27, 0.36, 0.16));   // Kathmandu valley / Act IV
-  vec3 jungle  = lin(vec3(0.11, 0.25, 0.12));   // Chitwan & Pokhara (Act II)
-  vec3 meadow  = lin(vec3(0.38, 0.39, 0.23));   // alpine scrub
-  vec3 moraine = lin(vec3(0.47, 0.44, 0.39));
-  vec3 rock    = lin(vec3(0.33, 0.31, 0.29));
+  vec3 terrace = lin(vec3(0.38, 0.5, 0.2));   // Kathmandu valley / Act IV
+  vec3 jungle  = lin(vec3(0.17, 0.38, 0.15));   // Chitwan & Pokhara (Act II)
+  vec3 meadow  = lin(vec3(0.5, 0.53, 0.27));   // alpine scrub
+  vec3 moraine = lin(vec3(0.58, 0.53, 0.45));
+  vec3 rock    = lin(vec3(0.46, 0.42, 0.38));
   vec3 snow    = lin(vec3(0.90, 0.93, 0.97));
-  vec3 water   = lin(vec3(0.10, 0.27, 0.34));
+  vec3 water   = lin(vec3(0.12, 0.42, 0.52));
 
   float lush = smoothstep(30.0, 60.0, t) * (1.0 - smoothstep(105.0, 135.0, t));
   vec3 lowland = mix(terrace, jungle, lush) * (0.8 + noise * 0.4);
@@ -103,12 +103,12 @@ void main() {
   float lake = (1.0 - smoothstep(6.0, 9.0, d)) * smoothstep(76.0, 80.0, t) * (1.0 - smoothstep(94.0, 98.0, t));
   albedo = mix(albedo, water, lake);
 
-  // --- Lighting: low golden-hour sun + sky/ground hemisphere ----------------
+  // --- Lighting: warm mid-morning sun + sky/ground hemisphere ---------------
   float diff = max(dot(n, uSunDir), 0.0);
   float hemi = n.y * 0.5 + 0.5;
-  vec3 sunCol = lin(vec3(1.0, 0.88, 0.70)) * 1.25;
-  vec3 skyAmb = lin(vec3(0.55, 0.66, 0.80)) * 0.55;
-  vec3 gndAmb = lin(vec3(0.30, 0.26, 0.20)) * 0.35;
+  vec3 sunCol = lin(vec3(1.0, 0.94, 0.82)) * 1.45;
+  vec3 skyAmb = lin(vec3(0.62, 0.74, 0.90)) * 0.62;
+  vec3 gndAmb = lin(vec3(0.42, 0.36, 0.26)) * 0.4;
   vec3 col = albedo * (sunCol * diff + mix(gndAmb, skyAmb, hemi));
   col += water * lake * 0.6 * pow(max(n.y, 0.0), 8.0); // sky sheen on the lake
 
@@ -164,7 +164,7 @@ void main() {
   float y = max(dir.y, 0.0);
   vec3 col = mix(uHorizon, uZenith, pow(y, 0.55));
   float s = max(dot(dir, uSunDir), 0.0);
-  col += vec3(1.0, 0.62, 0.28) * (pow(s, 6.0) * 0.18 + pow(s, 180.0) * 1.2);
+  col += vec3(1.0, 0.86, 0.62) * (pow(s, 5.0) * 0.22 + pow(s, 220.0) * 1.4);
   gl_FragColor = vec4(col, 1.0);
 }
 `
