@@ -13,42 +13,50 @@ const GAP = 1.5
 /** Legs swing once per this many units walked, so they only walk while the page scrolls. */
 const STRIDE = 1.1
 
-const legGeo = new THREE.BoxGeometry(0.13, 0.5, 0.15).translate(0, -0.25, 0) // hinged at the hip
-const bodyGeo = new THREE.CylinderGeometry(0.2, 0.24, 0.62, 8).translate(0, 0.81, 0) // jacket
-const headGeo = new THREE.SphereGeometry(0.15, 10, 8).translate(0, 1.27, 0)
-const hatGeo = new THREE.CylinderGeometry(0.16, 0.17, 0.1, 10).translate(0, 1.38, 0)
-const packGeo = new THREE.BoxGeometry(0.34, 0.5, 0.2).translate(0, 0.86, -0.23)
-const poleGeo = new THREE.CylinderGeometry(0.018, 0.018, 1.05, 4).translate(0, 0.52, 0)
+/** Bakes a flat colour into the geometry, so differently coloured parts can share one mesh. */
+function paint(geo: THREE.BufferGeometry, color: string) {
+  const g = geo.index ? geo.toNonIndexed() : geo
+  const c = new THREE.Color(color)
+  const n = g.getAttribute('position').count
+  g.setAttribute('color', new THREE.Float32BufferAttribute(Array.from({ length: n * 3 }, (_, k) => [c.r, c.g, c.b][k % 3]), 3))
+  return g
+}
 
-function Walker({ jacket, setRef }: { jacket: string; setRef: (g: THREE.Group | null) => void }) {
+const legGeo = new THREE.BoxGeometry(0.13, 0.5, 0.15).translate(0, -0.25, 0) // hinged at the hip
+const poleGeo = new THREE.CylinderGeometry(0.018, 0.018, 1.05, 4).translate(0, 0.52, 0)
+/** Everything that doesn't swing, merged per jacket colour: one draw call for the torso. */
+const torsoGeo = (jacket: string) =>
+  merge([
+    paint(new THREE.CylinderGeometry(0.2, 0.24, 0.62, 8).translate(0, 0.81, 0), jacket),
+    paint(new THREE.SphereGeometry(0.15, 10, 8).translate(0, 1.27, 0), '#c99a74'), // head
+    paint(new THREE.CylinderGeometry(0.16, 0.17, 0.1, 10).translate(0, 1.38, 0), '#2d2d2d'), // hat
+    paint(new THREE.BoxGeometry(0.34, 0.5, 0.2).translate(0, 0.86, -0.23), '#6b5a3f'), // pack
+  ])
+// Shared by all three walkers.
+const torsoMat = new THREE.MeshLambertMaterial({ vertexColors: true })
+const legMat = new THREE.MeshLambertMaterial({ color: '#3a3f47' })
+const poleMat = new THREE.MeshLambertMaterial({ color: '#9aa0a6' })
+
+interface WalkerRefs {
+  root: THREE.Group | null
+  legL: THREE.Group | null
+  legR: THREE.Group | null
+  pole: THREE.Group | null
+}
+
+function Walker({ jacket, setRef }: { jacket: string; setRef: (part: keyof WalkerRefs, g: THREE.Group | null) => void }) {
+  const torso = useMemo(() => torsoGeo(jacket), [jacket])
   return (
-    <group ref={setRef}>
-      <group name="legL" position={[-0.08, 0.5, 0]}>
-        <mesh geometry={legGeo}>
-          <meshLambertMaterial color="#3a3f47" />
-        </mesh>
+    <group ref={(g) => setRef('root', g)}>
+      <group ref={(g) => setRef('legL', g)} position={[-0.08, 0.5, 0]}>
+        <mesh geometry={legGeo} material={legMat} />
       </group>
-      <group name="legR" position={[0.08, 0.5, 0]}>
-        <mesh geometry={legGeo}>
-          <meshLambertMaterial color="#3a3f47" />
-        </mesh>
+      <group ref={(g) => setRef('legR', g)} position={[0.08, 0.5, 0]}>
+        <mesh geometry={legGeo} material={legMat} />
       </group>
-      <mesh geometry={bodyGeo}>
-        <meshLambertMaterial color={jacket} />
-      </mesh>
-      <mesh geometry={headGeo}>
-        <meshLambertMaterial color="#c99a74" />
-      </mesh>
-      <mesh geometry={hatGeo}>
-        <meshLambertMaterial color="#2d2d2d" />
-      </mesh>
-      <mesh geometry={packGeo}>
-        <meshLambertMaterial color="#6b5a3f" />
-      </mesh>
-      <group name="pole" position={[0.27, 0.05, 0.12]}>
-        <mesh geometry={poleGeo}>
-          <meshLambertMaterial color="#9aa0a6" />
-        </mesh>
+      <mesh geometry={torso} material={torsoMat} />
+      <group ref={(g) => setRef('pole', g)} position={[0.27, 0.05, 0.12]}>
+        <mesh geometry={poleGeo} material={poleMat} />
       </group>
     </group>
   )
@@ -81,7 +89,7 @@ function Plane({ setRef }: { setRef: (g: THREE.Group | null) => void }) {
  * in the overview.
  */
 export default function Trekkers() {
-  const walkers = useRef<(THREE.Group | null)[]>([])
+  const walkers = useMemo<WalkerRefs[]>(() => JACKETS.map(() => ({ root: null, legL: null, legR: null, pole: null })), [])
   const party = useRef<THREE.Group>(null)
   const plane = useRef<THREE.Group | null>(null)
   const tmp = useMemo(
@@ -109,7 +117,8 @@ export default function Trekkers() {
       return
     }
 
-    walkers.current.forEach((g, i) => {
+    walkers.forEach((w, i) => {
+      const g = w.root
       if (!g) return
       const ui = Math.max(0, u - (i * GAP * scale) / TRAIL_LENGTH)
       trailCurve.getPointAt(ui, tmp.p)
@@ -123,9 +132,9 @@ export default function Trekkers() {
       // Walk cycle driven by distance, offset per walker so they don't march in step.
       const phase = ((walked - i * 0.7) / STRIDE) * Math.PI * 2
       const swing = Math.sin(phase) * 0.55
-      g.getObjectByName('legL')!.rotation.x = swing
-      g.getObjectByName('legR')!.rotation.x = -swing
-      g.getObjectByName('pole')!.rotation.x = -swing * 0.6
+      w.legL!.rotation.x = swing
+      w.legR!.rotation.x = -swing
+      w.pole!.rotation.x = -swing * 0.6
       g.position.y += Math.abs(Math.cos(phase)) * 0.05 * scale
     })
   })
@@ -137,8 +146,8 @@ export default function Trekkers() {
           <Walker
             key={c}
             jacket={c}
-            setRef={(g) => {
-              walkers.current[i] = g
+            setRef={(part, g) => {
+              walkers[i][part] = g
             }}
           />
         ))}

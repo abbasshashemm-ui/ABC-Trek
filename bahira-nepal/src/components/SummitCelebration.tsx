@@ -36,12 +36,11 @@ function driftFlags() {
   }
 }
 
-/** Ease the Day 9 stop to the centre of the screen, then rest on it (mouse/trackpad only). Escape or any button-driven scroll releases. */
+/** Ease the Day 9 stop to the centre of the screen, then rest on it. Escape or any button-driven scroll releases. */
 function holdOn(el: HTMLElement): () => void {
   const lenis = scrollApi.lenis
-  // Reduced motion runs without Lenis: never take over the user's scroll there. Touch screens skip
-  // the hold too: stopping Lenis mid-fling fights iOS momentum scrolling and the page jumps.
-  if (!lenis || window.matchMedia('(pointer: coarse)').matches) return () => {}
+  // Reduced motion runs without Lenis: never take over the user's scroll there.
+  if (!lenis) return () => {}
   let done = false
   const release = () => {
     if (done) return
@@ -71,6 +70,16 @@ export default function SummitCelebration() {
     let prevC: number | null = null
     let armed = true
     let release = () => {}
+    // Skip the hold when a finger did the scrolling: stopping Lenis mid-fling fights native momentum
+    // scrolling (iOS especially) and the page jumps. Judged by the last input rather than
+    // `(pointer: coarse)`, which only describes the primary pointer: touchscreen laptops report
+    // fine, and an iPad with a trackpad reports coarse.
+    let touched = false
+    const onTouch = () => (touched = true)
+    const onDesk = () => (touched = false)
+    window.addEventListener('touchstart', onTouch, { passive: true })
+    window.addEventListener('wheel', onDesk, { passive: true })
+    window.addEventListener('keydown', onDesk)
     const tick = () => {
       const el = document.querySelector<HTMLElement>('[data-day="9"]')
       if (el) {
@@ -84,7 +93,7 @@ export default function SummitCelebration() {
             armed = false
             el.dataset.reached = 'true'
             driftFlags()
-            release = holdOn(el)
+            if (!touched) release = holdOn(el)
           }
           // Re-arm once Day 9 is back below the fold (scrolled down the trail).
           if (c > vh * 1.2) {
@@ -101,6 +110,9 @@ export default function SummitCelebration() {
     raf = requestAnimationFrame(tick)
     return () => {
       cancelAnimationFrame(raf)
+      window.removeEventListener('touchstart', onTouch)
+      window.removeEventListener('wheel', onDesk)
+      window.removeEventListener('keydown', onDesk)
       release()
     }
   }, [])

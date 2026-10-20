@@ -2,6 +2,7 @@ import { useMemo, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { besideTrail } from './placement'
+import { idleTime } from '../motion'
 import { getTerrainHeight } from '../../utils/terrainMath'
 import { SPOTS } from './spots'
 
@@ -71,7 +72,7 @@ export default function PrayerFlags() {
 
   useFrame((state) => {
     const mesh = ref.current!
-    const time = state.clock.elapsedTime
+    const time = idleTime(state.clock.elapsedTime)
     flags.forEach((f, i) => {
       // Face across the string, then flutter about it.
       tmp.q.setFromUnitVectors(new THREE.Vector3(1, 0, 0), f.dir)

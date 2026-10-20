@@ -5,6 +5,7 @@ import { trailCurve, dayToU, waypoints } from '../utils/journey'
 import { scrollState } from '../state/scrollStore'
 import { getTerrainHeight, smoothstep } from '../utils/terrainMath'
 import { ANNAPURNA } from './props/spots'
+import { idleTime } from './motion'
 
 const MIN_CLEARANCE = 14
 
@@ -79,7 +80,7 @@ export default function CameraRig() {
     // base camp with the range on the horizon. A slow sway instead of a full orbit, which used to
     // drift over the high range and fill the foreground with snow.
     const tOver = smoothstep(11, 12.8, d)
-    const sway = Math.sin(state.clock.elapsedTime * 0.08) * 0.12
+    const sway = Math.sin(idleTime(state.clock.elapsedTime) * 0.08) * 0.12
     v.overPos.set(OVERVIEW_TARGET.x + Math.sin(0.55 + sway) * 215, 175, OVERVIEW_TARGET.z + Math.cos(0.55 + sway) * 215)
 
     const tDrone = smoothstep(8.5, 9, d)
