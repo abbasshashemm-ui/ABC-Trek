@@ -2,11 +2,11 @@ import { useEffect } from 'react'
 import confetti from 'canvas-confetti'
 import { scrollApi } from '../state/scrollApi'
 
-/** How long the page rests on the base-camp photo. */
+/** How long the page rests on the base-camp stop. */
 const HOLD_MS = 3000
 const SETTLE_S = 1.1
-/** The moment counts as reached when its top climbs above this fraction of the viewport. */
-const ARRIVE_AT = 0.45
+/** Day 9 counts as reached when its centre climbs above this fraction of the viewport. */
+const ARRIVE_AT = 0.62
 
 // Prayer-flag colours (sky, air, fire, water, earth).
 const FLAG_COLORS = ['#1f5fbf', '#f5f5f0', '#c62828', '#2e7d32', '#f9c80e']
@@ -36,7 +36,7 @@ function driftFlags() {
   }
 }
 
-/** Ease the photo to fill the screen, then rest on it. Escape or any button-driven scroll releases. */
+/** Ease the Day 9 stop to the centre of the screen, then rest on it. Escape or any button-driven scroll releases. */
 function holdOn(el: HTMLElement): () => void {
   const lenis = scrollApi.lenis
   // Reduced motion runs without Lenis: never take over the user's scroll there.
@@ -53,45 +53,47 @@ function holdOn(el: HTMLElement): () => void {
   window.addEventListener('keydown', onKey)
   // stop() first: the stopped state also blocks native wheel/touch during the glide.
   lenis.stop()
-  lenis.scrollTo(el, { duration: SETTLE_S, force: true })
+  const r = el.getBoundingClientRect()
+  lenis.scrollTo(window.scrollY + r.top + r.height / 2 - window.innerHeight / 2, { duration: SETTLE_S, force: true })
   const timer = window.setTimeout(release, HOLD_MS)
   return release
 }
 
 /**
- * Base camp, quietly: when the Day 9 photo scrolls up into place the page settles on it,
- * "4,130 m" fades in over the photo (CSS on [data-reached]) and a few prayer flags drift down.
+ * Base camp, quietly: when the Day 9 stop scrolls up into place the page settles on it,
+ * "4,130 m" fades in above the title (CSS on [data-reached]) and a few prayer flags drift down.
  * Only on a real climb: not on reload/jumps, not while a button scroll flies past.
  */
 export default function SummitCelebration() {
   useEffect(() => {
     let raf = 0
-    let prevTop: number | null = null
+    let prevC: number | null = null
     let armed = true
     let release = () => {}
     const tick = () => {
-      const el = document.querySelector<HTMLElement>('[data-moment="9"]')
+      const el = document.querySelector<HTMLElement>('[data-day="9"]')
       if (el) {
         const vh = window.innerHeight
-        const top = el.getBoundingClientRect().top
-        if (prevTop !== null) {
+        const r = el.getBoundingClientRect()
+        const c = r.top + r.height / 2
+        if (prevC !== null) {
           const line = vh * ARRIVE_AT
-          const climbed = prevTop > line && top <= line && prevTop - top < vh // >1 screen in a frame = jump
+          const climbed = prevC > line && c <= line && prevC - c < vh // >1 screen in a frame = jump
           if (armed && climbed && !scrollApi.auto) {
             armed = false
             el.dataset.reached = 'true'
             driftFlags()
             release = holdOn(el)
           }
-          // Re-arm once the photo is back below the fold (scrolled down the trail).
-          if (top > vh) {
+          // Re-arm once Day 9 is back below the fold (scrolled down the trail).
+          if (c > vh * 1.2) {
             armed = true
             delete el.dataset.reached
           }
         }
         // Arriving any other way (reload, jump) still shows the altitude, just without the moment.
-        if (top < vh * 0.2 && top > -vh * 0.5) el.dataset.reached = 'true'
-        prevTop = top
+        if (Math.abs(c - vh / 2) < vh * 0.3) el.dataset.reached = 'true'
+        prevC = c
       }
       raf = requestAnimationFrame(tick)
     }

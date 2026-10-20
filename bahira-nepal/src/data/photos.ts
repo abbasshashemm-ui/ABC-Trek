@@ -11,8 +11,6 @@ export interface Photo {
   source?: string
   /** true = from the trek leaders' own past treks */
   ours: boolean
-  /** sharp enough to fill the screen (shortest side of the largest rendition ≥ 1000 px) */
-  full: boolean
 }
 
 /** Written by `npm run photos`; keyed by 1-based itinerary day, plus named galleries ("guides"). */

@@ -41,13 +41,12 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
   focus management works), clsx for conditional classes.
 
 - Layout (direction C, quiet/premium, phone first): no cards. Each day is a `DayStop` (`[data-day]`) with text on the
-  valley over a soft radial scrim. Days whose lead photo is `full` (shortest side >= 1000 px, set by `npm run photos`)
-  get a full-screen `[data-moment]` photo after the text (CSS scroll-timeline settle-in); others show a framed photo.
-  `updateScroll` interpolates between the real `[data-day]` centres, so stops may have different heights.
-  The altimeter fades out while a moment covers the screen. Header auto-hides on scroll down, returns on scroll up/focus.
+  valley over a soft radial scrim and its 2-3 photos above it (`PhotoStrip`, tap = gallery). Full-screen photo moments
+  were tried and dropped (client preferred the grid). `updateScroll` interpolates between the real `[data-day]` centres.
+  Header auto-hides on scroll down, returns on scroll up/focus.
 - Guides (`Guides.tsx`, manifest key `"guides"`): copy only states what photos/itinerary back up; replace with their bio.
-- Base camp (`SummitCelebration.tsx`): when the Day 9 moment scrolls up into place, the page settles on it for 3 s,
-  "4,130 m" fades in (`[data-reached]`) and a few prayer-flag pieces drift. Skips jumps and button scrolls; Escape or
+- Base camp (`SummitCelebration.tsx`): when the Day 9 stop scrolls up into place, the page settles on it for 3 s,
+  "4,130 m" fades in above the photos (`[data-reached]`) and a few prayer-flag pieces drift. Skips jumps and button scrolls; Escape or
   `scrollToId` releases; reduced motion = number only. Hold = `lenis.stop()` then `scrollTo({ force })`.
 
 - Chrome (Apple-style): header is a translucent material (`.nav-material`, blur fading out at the bottom, no border),
