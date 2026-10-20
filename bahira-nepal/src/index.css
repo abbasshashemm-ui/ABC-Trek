@@ -7,6 +7,7 @@
   --color-solar: #ff8a00;
   --color-solar-hi: #ffc700;
   --color-ink: #f8fafc;
+  --color-snow: #f4efe6;
   --color-muted: #94a3b8;
   --font-display: "Instrument Serif", ui-serif, Georgia, serif;
   --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
@@ -35,3 +36,63 @@ body { margin: 0; background: var(--color-obsidian); overflow-x: hidden; }
 
 h1, h2, h3 { text-wrap: balance; }
 p, li { text-wrap: pretty; }
+
+/* ---------- Buttons ----------
+   Primary: warm off-white on the dark scene (gold stays an accent, not a fill).
+   Glass: translucent material for secondary actions.
+   Feedback on press, not release (Apple: respond on pointer-down). */
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 100ms ease-out, background-color 150ms ease, border-color 150ms ease;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn:focus-visible { outline: 2px solid var(--color-solar-hi); outline-offset: 3px; }
+
+  .btn-primary { background: var(--color-snow); color: var(--color-obsidian); }
+  @media (hover: hover) { .btn-primary:hover { background: #ffffff; } }
+
+  .btn-glass {
+    background: rgb(255 255 255 / 0.1);
+    color: var(--color-ink);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.18), inset 0 0 0 1px rgb(255 255 255 / 0.1);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    backdrop-filter: blur(16px) saturate(160%);
+  }
+  @media (hover: hover) { .btn-glass:hover { background: rgb(255 255 255 / 0.16); } }
+}
+
+/* ---------- Header material ----------
+   Translucent layer the page scrolls under; the blur fades out at the bottom edge
+   instead of a hard border (iOS scroll-edge effect). Extends under the status bar. */
+.nav-material { position: relative; }
+.nav-material::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 -24px 0;
+  background: linear-gradient(to bottom, rgb(10 17 14 / 0.78), rgb(10 17 14 / 0.45) 70%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent);
+  mask-image: linear-gradient(to bottom, black 65%, transparent);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .nav-material::before { background: var(--color-obsidian); -webkit-backdrop-filter: none; backdrop-filter: none; -webkit-mask-image: none; mask-image: none; inset: 0; }
+  .btn-glass { background: #26302b; -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+@media (prefers-contrast: more) {
+  .btn-glass { box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.6); }
+  .nav-material::before { background: var(--color-obsidian); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn:active { transform: none; }
+}

@@ -1,51 +1,145 @@
 {
   "_note": "Day -> photos. 'ours' = taken by the trek leaders. Everything else was supplied from online sources without licence info: replace or license before launch (see README).",
   "1": [
-    { "file": "The streets of Thamel, kathmandu.jpg", "alt": "Prayer flags over the evening streets of Thamel, Kathmandu" },
-    { "file": "pashupatinath kathmandu.jpg", "alt": "Evening aarti ceremony at Pashupatinath Temple" },
-    { "file": "Pasupatinath Kathmandu Nepal.jpg", "alt": "The ghats of Pashupatinath on the Bagmati river" }
+    {
+      "file": "The streets of Thamel, kathmandu.jpg",
+      "alt": "Prayer flags over the evening streets of Thamel, Kathmandu"
+    },
+    {
+      "file": "pashupatinath kathmandu.jpg",
+      "alt": "Evening aarti ceremony at Pashupatinath Temple"
+    },
+    {
+      "file": "Pasupatinath Kathmandu Nepal.jpg",
+      "alt": "The ghats of Pashupatinath on the Bagmati river"
+    }
   ],
   "2": [
-    { "file": "Swayambhunath-Monkey-Templ, kathmandu.jpg", "alt": "Swayambhunath, the Monkey Temple, under prayer flags" },
-    { "file": "Swayambhunath Stupa, Kathmandu Nepal.jpg", "alt": "The golden spire of Swayambhunath Stupa" },
-    { "file": "Boudhanath Stupa, kathmandu.jpg", "alt": "Boudhanath Stupa ringed with prayer flags" }
+    {
+      "file": "Swayambhunath-Monkey-Templ, kathmandu.jpg",
+      "alt": "Swayambhunath, the Monkey Temple, under prayer flags"
+    },
+    {
+      "file": "Swayambhunath Stupa, Kathmandu Nepal.jpg",
+      "alt": "The golden spire of Swayambhunath Stupa"
+    },
+    {
+      "file": "Boudhanath Stupa, kathmandu.jpg",
+      "alt": "Boudhanath Stupa ringed with prayer flags"
+    }
   ],
   "3": [
-    { "file": "Canueing Chitwan National Park.jpg", "alt": "Dugout canoe on the river in Chitwan" },
-    { "file": "chitwan park.jpg", "alt": "Elephants bathing in a Chitwan river" },
-    { "file": "ride elephant chitwan.jpg", "alt": "Elephants and rhinos in the Chitwan forest" }
+    {
+      "file": "Canueing Chitwan National Park.jpg",
+      "alt": "Dugout canoe on the river in Chitwan"
+    },
+    {
+      "file": "chitwan park.jpg",
+      "alt": "Elephants bathing in a Chitwan river"
+    },
+    {
+      "file": "ride elephant chitwan.jpg",
+      "alt": "Elephants and rhinos in the Chitwan forest"
+    }
   ],
   "4": [
-    { "file": "Chitwan national park - elephent ride.jpg", "alt": "Elephant ride through tall grass beside a rhino, Chitwan" },
-    { "file": "jeep safari chitwan.jpg", "alt": "Jeep safari through the Chitwan jungle" },
-    { "file": "Sauraha National Park Chitwan, Nepal.jpg", "alt": "Sunrise from elephant-back in Sauraha, Chitwan" }
+    {
+      "file": "Chitwan national park - elephent ride.jpg",
+      "alt": "Elephant ride through tall grass beside a rhino, Chitwan"
+    },
+    {
+      "file": "jeep safari chitwan.jpg",
+      "alt": "Jeep safari through the Chitwan jungle"
+    },
+    {
+      "file": "Sauraha National Park Chitwan, Nepal.jpg",
+      "alt": "Sunrise from elephant-back in Sauraha, Chitwan"
+    }
   ],
   "5": [
-    { "file": "phewa lake.jpg", "alt": "Painted boats on Phewa Lake below Machhapuchhre" }
+    {
+      "file": "phewa lake.jpg",
+      "alt": "Painted boats on Phewa Lake below Machhapuchhre"
+    }
   ],
   "6": [
-    { "file": "God Shiva Pokhara.jpg", "alt": "The Pumdikot Shiva statue above Pokhara and Phewa Lake" },
-    { "file": "Gupteshwor Mahadev Cave, pokhara.jpg", "alt": "The spiral entrance to Gupteshwor Mahadev Cave" }
+    {
+      "file": "God Shiva Pokhara.jpg",
+      "alt": "The Pumdikot Shiva statue above Pokhara and Phewa Lake"
+    },
+    {
+      "file": "Gupteshwor Mahadev Cave, pokhara.jpg",
+      "alt": "The spiral entrance to Gupteshwor Mahadev Cave"
+    }
   ],
   "7": [
-    { "file": "sinuwa-lodges.webp", "alt": "Blue-roofed lodges of Sinuwa on a forested ridge" },
-    { "file": "abc trek,..jpg", "alt": "Trekkers on the trail toward Annapurna" }
+    {
+      "file": "sinuwa-lodges.webp",
+      "alt": "Blue-roofed lodges of Sinuwa on a forested ridge"
+    },
+    {
+      "file": "abc trek,..jpg",
+      "alt": "Trekkers on the trail toward Annapurna"
+    }
   ],
   "8": [
-    { "file": "abc trek..jpg", "alt": "A trekker climbing through grassland beneath snow peaks" }
+    {
+      "file": "abc trek..jpg",
+      "alt": "A trekker climbing through grassland beneath snow peaks"
+    }
   ],
   "9": [
-    { "file": "8CC7916A-1BAD-464E-9858-DBE654C1B2CB.jpg", "alt": "Hmayed and Farhat at the Annapurna Base Camp sign, 4,130 m", "ours": true, "credit": "Photo: Hmayed & Farhat" },
-    { "file": "abc.jpg", "alt": "The Namaste sign and prayer flags at Annapurna Base Camp" }
+    {
+      "file": "8CC7916A-1BAD-464E-9858-DBE654C1B2CB.jpg",
+      "alt": "Hmayed and Farhat at the Annapurna Base Camp sign, 4,130 m",
+      "ours": true,
+      "credit": "Photo: Hmayed & Farhat"
+    },
+    {
+      "file": "abc.jpg",
+      "alt": "The Namaste sign and prayer flags at Annapurna Base Camp"
+    }
+  ],
+  "10": [
+    {
+      "file": "sinuwa-2048x541.webp",
+      "alt": "Sinuwa’s lodges strung along a forested ridge above the Modi Khola"
+    }
   ],
   "11": [
-    { "file": "jhinu-danda hot-springs,.jpg", "alt": "Bathing in the natural hot springs at Jhinu Danda" },
-    { "file": "jhinu-danda,hot-springs.jpg", "alt": "Steaming hot-spring pool beside the river at Jhinu Danda" }
+    {
+      "file": "jhinu-danda hot-springs,.jpg",
+      "alt": "Bathing in the natural hot springs at Jhinu Danda"
+    },
+    {
+      "file": "jhinu-danda,hot-springs.jpg",
+      "alt": "Steaming hot-spring pool beside the river at Jhinu Danda"
+    }
+  ],
+  "12": [
+    {
+      "file": "Jhinu danda.webp",
+      "alt": "The suspension bridge over the Modi Khola below the terraces of Jhinu Danda"
+    }
+  ],
+  "13": [
+    {
+      "file": "Pokhara lakeside.avif",
+      "alt": "Machhapuchhre reflected in Phewa Lake, Pokhara"
+    }
   ],
   "14": [
-    { "file": "Photo Nepal - Share Nepal_s Beauty.jpg", "alt": "Boudhanath Stupa lit at dusk, Kathmandu" }
+    {
+      "file": "Photo Nepal - Share Nepal_s Beauty.jpg",
+      "alt": "Boudhanath Stupa lit at dusk, Kathmandu"
+    }
   ],
   "15": [
-    { "file": "IMG_2736 2.jpg", "alt": "Hmayed and Farhat with the Lebanese flag at Everest Base Camp", "ours": true, "credit": "Photo: Hmayed & Farhat, 2025" }
+    {
+      "file": "IMG_2736 2.jpg",
+      "alt": "Hmayed and Farhat with the Lebanese flag at Everest Base Camp",
+      "ours": true,
+      "credit": "Photo: Hmayed & Farhat, 2025"
+    }
   ]
 }
