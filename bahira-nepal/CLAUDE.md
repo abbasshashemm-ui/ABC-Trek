@@ -20,8 +20,13 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
   scroll values in React state.
 - Trail curve = all 15 day waypoints plus 6 terrain-sampled points per leg (Catmull-Rom overshoot would otherwise
   dip under the terrain on the ABC crest).
-- Camera: Days 1-9 chase, Days 10-12 orbit to an east-ridge vantage looking back at ABC, Act IV orbital overview.
+- Camera: Days 1-9 chase (Day 9: wide-lens reveal in the ABC basin tilting up to Annapurna), Days 10-12 high drone follow (an east-ridge
+  vantage was tried and dropped: shadowed walls in haze, trail invisible), Act IV orbital overview.
   Fog density eases down for the overview.
+- Props (`src/scene/props/`): procedural low-poly, instanced, placed with `getTerrainHeight` and a seeded RNG so
+  layouts are stable. Landmark sites and the backdrop summits live in `spots.ts`; villages and trees keep clear of them.
+  `merge()` normalises indexed/non-indexed parts (raw `mergeGeometries` returns null). `SceneBoundary` keeps the page
+  usable if WebGL fails. The ABC basin is a shelf carved into the height function (both twins).
 
 ## Data
 - `src/data/itinerary.ts`: the full 15-day dataset (do not summarise).

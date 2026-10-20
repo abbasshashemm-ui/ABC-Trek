@@ -6,6 +6,8 @@ import Sky from './Sky'
 import Trail from './Trail'
 import Beacon from './Beacon'
 import CameraRig from './CameraRig'
+import Atmosphere from './Atmosphere'
+import Props from './props/Props'
 
 export default function Scene() {
   return (
@@ -16,7 +18,9 @@ export default function Scene() {
       gl={{ antialias: false, powerPreference: 'high-performance', toneMapping: THREE.NoToneMapping }}
     >
       <Sky />
+      <Atmosphere />
       <Terrain />
+      <Props />
       <Trail />
       <Beacon />
       <CameraRig />

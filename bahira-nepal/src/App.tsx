@@ -7,6 +7,7 @@ import AltimeterHUD from './components/AltimeterHUD'
 import Hero from './components/Hero'
 import Journey from './components/Journey'
 import Booking from './components/Booking'
+import SceneBoundary from './components/SceneBoundary'
 import { updateScroll } from './state/scrollStore'
 import { scrollApi } from './state/scrollApi'
 
@@ -38,9 +39,11 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-obsidian">
-      <Suspense fallback={null}>
-        <Scene />
-      </Suspense>
+      <SceneBoundary>
+        <Suspense fallback={null}>
+          <Scene />
+        </Suspense>
+      </SceneBoundary>
       <TopNav />
       <AltimeterHUD />
       <main>

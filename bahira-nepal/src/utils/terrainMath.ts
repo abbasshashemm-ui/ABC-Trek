@@ -55,5 +55,9 @@ export function getTerrainHeight(x: number, z: number): number {
 
   const ripple = 0.15 * Math.sin(x * 0.8 + z * 0.5) * Math.sin(z * 0.6 - x * 0.3)
 
-  return floor + hs * (wall + peaks) + ripple
+  // Flat amphitheatre floor at Annapurna Base Camp so the lodges have somewhere to stand.
+  const kb = (t - 171.4) / 13
+  const shelf = Math.exp(-(kb * kb)) * (1 - smoothstep(9, 22, d)) * 0.9
+
+  return floor + hs * (wall + peaks) * (1 - shelf) + ripple
 }
