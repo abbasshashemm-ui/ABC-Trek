@@ -1,5 +1,7 @@
 import { Mountain, MapPin } from 'lucide-react'
 import { actOf, ACT_LABELS, type ItineraryDay } from '../data/itinerary'
+import { photosForDay } from '../data/photos'
+import PhotoStrip from './PhotoStrip'
 
 interface Props {
   item: ItineraryDay
@@ -14,6 +16,8 @@ export default function WaypointCard({ item, side }: Props) {
         side === 'right' ? 'md:ml-auto' : 'md:mr-auto'
       }`}
     >
+      <PhotoStrip photos={photosForDay(item.day)} title={item.title} />
+
       <div className="mb-4 flex flex-wrap items-center gap-2">
         <span className="rounded-full border border-sage/40 bg-sage/10 px-3 py-1 font-mono text-[10px] tracking-[0.15em] text-sage">
           {ACT_LABELS[actOf(item)]}

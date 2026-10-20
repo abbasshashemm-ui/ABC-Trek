@@ -18,7 +18,8 @@ function knockOutWhite(data: Uint8ClampedArray) {
     const sat = max === min || denom === 0 ? 0 : (max - min) / denom
     // Smoothly fade out bright, low-saturation (white / near-white) pixels
     const whiteness = Math.max(0, (lum - 0.72) / 0.28) * Math.max(0, 1 - sat * 2.2)
-    data[i + 3] = Math.round(255 * (1 - Math.min(1, whiteness)))
+    // Scale existing alpha so a PNG's own transparency survives.
+    data[i + 3] = Math.round(data[i + 3] * (1 - Math.min(1, whiteness)))
   }
 }
 
@@ -66,12 +67,18 @@ export default function BahiraLogo({ size = 40, className }: Props) {
       knockOutWhite(frame.data)
       ctx.putImageData(frame, 0, 0)
     }
+    const sources = ['/bahira-logo.png', '/bahira-logo.jpeg', '/bahira-logo.jpg']
     img.onerror = () => {
       if (cancelled) return
+      const next = sources.shift()
+      if (next) {
+        img.src = next
+        return
+      }
       canvas.width = canvas.height = 256
       drawFallback(ctx, 256)
     }
-    img.src = '/bahira-logo.jpeg'
+    img.src = sources.shift()!
 
     return () => {
       cancelled = true
