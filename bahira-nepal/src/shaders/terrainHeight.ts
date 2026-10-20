@@ -22,11 +22,11 @@ float getTerrainHeight(float x, float z) {
   float floorH = 30.0 * exp(-(k * k));
 
   float wall = 55.0 * (1.0 - exp(-pow(d / 30.0, 1.5)));
-  float rn = abs(
+  float s =
     sin(x * 0.11 + z * 0.05) * 0.55 +
     sin(x * 0.27 - z * 0.19 + 1.7) * 0.3 +
-    sin(x * 0.61 + z * 0.47 + 0.4) * 0.15
-  );
+    sin(x * 0.61 + z * 0.47 + 0.4) * 0.15;
+  float rn = sqrt(s * s + 0.004);
   float ridged = (1.0 - rn) * (1.0 - rn);
   float peaks = 22.0 * smoothstep(8.0, 45.0, d) * ridged;
 

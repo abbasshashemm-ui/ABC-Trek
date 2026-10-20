@@ -10,12 +10,12 @@ export default function WaypointCard({ item, side }: Props) {
   return (
     <article
       data-card
-      className={`pointer-events-auto w-full max-w-xl rounded-2xl border border-white/10 bg-[#070B12]/75 p-6 backdrop-blur-xl md:p-8 ${
+      className={`pointer-events-auto w-full max-w-xl rounded-2xl border border-white/10 bg-panel/75 p-6 backdrop-blur-xl md:p-8 ${
         side === 'right' ? 'md:ml-auto' : 'md:mr-auto'
       }`}
     >
       <div className="mb-4 flex flex-wrap items-center gap-2">
-        <span className="rounded-full border border-lotus/40 bg-lotus/10 px-3 py-1 font-mono text-[10px] tracking-[0.15em] text-lotus">
+        <span className="rounded-full border border-sage/40 bg-sage/10 px-3 py-1 font-mono text-[10px] tracking-[0.15em] text-sage">
           {ACT_LABELS[actOf(item)]}
         </span>
         <span className="inline-flex items-center gap-1 rounded-full border border-white/15 px-3 py-1 text-[11px] text-muted">

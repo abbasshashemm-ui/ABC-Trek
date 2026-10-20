@@ -5,7 +5,7 @@ import { trailCurve, dayToU, waypoints } from '../utils/journey'
 import { scrollState } from '../state/scrollStore'
 
 const GOLD = new THREE.Color('#FFB800')
-const DIM = new THREE.Color('#00E5FF')
+const DIM = new THREE.Color('#F1F5E9')
 
 const progressVertex = /* glsl */ `
 varying vec2 vUv;

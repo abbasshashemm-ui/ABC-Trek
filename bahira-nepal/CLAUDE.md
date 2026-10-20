@@ -13,7 +13,9 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
   GLSL `smoothstep` needs `edge0 < edge1` and `pow` needs a non-negative base, hence `t = -z` and `k*k`.
 - Contours use per-fragment height (`getTerrainHeight(vWorldPos.xz)`), not the interpolated vertex value (avoids facets).
 - No `GL_OES_standard_derivatives` pragma: three targets WebGL2, where `fwidth` is core.
-- Terrain palette is authored in sRGB and `pow(col, 2.2)` on output because the post chain is linear.
+- Look: natural shaded terrain (biome by height/slope/act, snow above ~40, Phewa Lake at Day 5), golden-hour sun +
+  sky dome (`src/scene/palette.ts` shared by both), faint contour overlay. Palette authored in sRGB, lit in linear (`lin()`).
+  Terrain fog colour must equal the sky horizon or the seam shows.
 - Scroll state lives in `src/state/scrollStore.ts` (mutable, updated once per GSAP tick). Never put per-frame
   scroll values in React state.
 - Trail curve = all 15 day waypoints plus 6 terrain-sampled points per leg (Catmull-Rom overshoot would otherwise

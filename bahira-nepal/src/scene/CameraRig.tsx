@@ -5,7 +5,7 @@ import { trailCurve, dayToU } from '../utils/journey'
 import { scrollState } from '../state/scrollStore'
 import { getTerrainHeight, smoothstep, valleyCenter } from '../utils/terrainMath'
 
-const MIN_CLEARANCE = 9
+const MIN_CLEARANCE = 14
 
 // Fixed pivot of the sanctuary (just below Annapurna Base Camp) for the descent orbit.
 const SANCTUARY_Z = -185
@@ -54,14 +54,14 @@ export default function CameraRig() {
     // on the east wall, looking back across the basin toward ABC.
     const sx = valleyCenter(SANCTUARY_Z)
     v.sanctuary.set(sx, getTerrainHeight(sx, SANCTUARY_Z), SANCTUARY_Z)
-    v.ridgePos.set(sx + 58, v.sanctuary.y + 62, SANCTUARY_Z + 26)
+    v.ridgePos.set(sx + 58, v.sanctuary.y + 85, SANCTUARY_Z + 26)
     v.ridgeLook.lerpVectors(v.sanctuary, v.beacon, 0.45)
 
     // Overview (Act IV): slow orbital pull-up.
     const tOver = smoothstep(11, 12.8, d)
     const orbit = state.clock.elapsedTime * 0.05
     const a = 0.9 + orbit
-    v.overPos.set(OVERVIEW_TARGET.x + Math.sin(a) * 150, 190, OVERVIEW_TARGET.z + Math.cos(a) * 230)
+    v.overPos.set(OVERVIEW_TARGET.x + Math.sin(a) * 110, 300, OVERVIEW_TARGET.z + Math.cos(a) * 170)
 
     // Chase -> ridge orbit (angle/radius interpolation about the sanctuary pivot).
     const tRidge = smoothstep(8.0, 9.2, d)

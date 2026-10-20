@@ -33,8 +33,8 @@ export default function AltimeterHUD() {
       aria-label="Altitude"
       className="pointer-events-none fixed right-3 top-1/2 z-30 hidden -translate-y-1/2 select-none sm:block md:right-6"
     >
-      <div className="flex flex-col items-end gap-3 font-mono">
-        <div className="text-right">
+      <div className="flex flex-col items-end gap-3 font-mono [text-shadow:0_1px_10px_rgba(5,10,8,0.8)]">
+        <div className="rounded-xl bg-obsidian/45 px-3 py-2 text-right backdrop-blur-md">
           <div className="text-[10px] tracking-[0.2em] text-muted">ALTITUDE</div>
           <span ref={readout} className="text-2xl font-bold text-solar-hi md:text-3xl">
             1,400m

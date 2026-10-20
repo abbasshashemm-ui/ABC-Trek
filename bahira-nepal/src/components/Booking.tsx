@@ -5,8 +5,8 @@ export default function Booking() {
   return (
     <section id="booking" className="relative z-10 px-4 pb-24 pt-32 md:px-16">
       <div className="mx-auto max-w-6xl">
-        <div className="rounded-3xl border border-white/10 bg-[#070B12]/80 p-8 backdrop-blur-xl md:p-14">
-          <p className="font-mono text-xs tracking-[0.3em] text-lotus">THE EXPEDITION</p>
+        <div className="rounded-3xl border border-white/10 bg-panel/80 p-8 backdrop-blur-xl md:p-14">
+          <p className="font-mono text-xs tracking-[0.3em] text-sage">THE EXPEDITION</p>
           <h2 className="font-display mt-3 max-w-3xl text-4xl font-bold leading-tight md:text-6xl">
             The Himalayas Call. Only {SEATS} Seats Available.
           </h2>
@@ -26,7 +26,7 @@ export default function Booking() {
                 key={title}
                 className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 transition sm:p-5 hover:border-solar/50 hover:bg-white/[0.06]"
               >
-                <Icon size={22} className="text-lotus" aria-hidden />
+                <Icon size={22} className="text-sage" aria-hidden />
                 <h3 className="mt-4 text-sm font-semibold text-ink">{title}</h3>
                 <p className="mt-1 text-xs leading-relaxed text-muted">{detail}</p>
               </li>

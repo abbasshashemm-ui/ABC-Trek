@@ -28,14 +28,14 @@ export default function Beacon() {
       <mesh ref={halo}>
         <sphereGeometry args={[1.4, 24, 24]} />
         <meshBasicMaterial
-          color={new THREE.Color(0, 0.9, 1.2)}
+          color={new THREE.Color(1.6, 1.3, 0.8)}
           transparent
           opacity={0.18}
           depthWrite={false}
           toneMapped={false}
         />
       </mesh>
-      <pointLight color="#7df0ff" intensity={60} distance={45} decay={2} />
+      <pointLight color="#FFD08A" intensity={60} distance={45} decay={2} />
       <Sparkles count={70} scale={[7, 7, 7]} size={7} speed={0.6} color="#FFC700" noise={0.6} />
     </group>
   )
