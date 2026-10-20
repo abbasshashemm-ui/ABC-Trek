@@ -178,6 +178,16 @@
       "ours": false
     }
   ],
+  "10": [
+    {
+      "src": "/photos/day10-1-800.webp",
+      "srcSet": "/photos/day10-1-800.webp 800w, /photos/day10-1-1600.webp 1600w",
+      "width": 1600,
+      "height": 423,
+      "alt": "Sinuwa’s lodges strung along a forested ridge above the Modi Khola",
+      "ours": false
+    }
+  ],
   "11": [
     {
       "src": "/photos/day11-1-800.webp",
@@ -193,6 +203,26 @@
       "width": 678,
       "height": 452,
       "alt": "Steaming hot-spring pool beside the river at Jhinu Danda",
+      "ours": false
+    }
+  ],
+  "12": [
+    {
+      "src": "/photos/day12-1-800.webp",
+      "srcSet": "/photos/day12-1-800.webp 800w, /photos/day12-1-1600.webp 1600w",
+      "width": 1600,
+      "height": 1200,
+      "alt": "The suspension bridge over the Modi Khola below the terraces of Jhinu Danda",
+      "ours": false
+    }
+  ],
+  "13": [
+    {
+      "src": "/photos/day13-1-800.webp",
+      "srcSet": "/photos/day13-1-800.webp 800w",
+      "width": 800,
+      "height": 530,
+      "alt": "Machhapuchhre reflected in Phewa Lake, Pokhara",
       "ours": false
     }
   ],
