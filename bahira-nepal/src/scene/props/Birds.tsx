@@ -2,6 +2,7 @@ import { useMemo, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { besideTrail } from './placement'
+import { idleTime } from '../motion'
 
 // One wing: a thin triangle hinged at the body (x = 0), spanning +x.
 const wing = new THREE.BufferGeometry().setAttribute(
@@ -39,7 +40,7 @@ export default function Birds() {
   )
 
   useFrame((state) => {
-    const time = state.clock.elapsedTime
+    const time = idleTime(state.clock.elapsedTime)
     let i = 0
     for (const f of flocks) {
       for (let b = 0; b < f.count; b++) {

@@ -10,8 +10,6 @@ const LAKESIDE_ROOF = ['#2f5f8a', '#a53c32', '#3d6b4a']
 const TEAHOUSE = ['#ece6da', '#d9d2c4', '#b8b2a6']
 const TIN_ROOF = ['#2a5d9a', '#2f7a4f', '#b23a2e']
 const STONE = ['#9b958b', '#8a8378', '#a39d92']
-const LEBANESE = ['#efe9dc', '#e6dcc8']
-const TERRACOTTA = ['#b5523a', '#a8472f']
 
 const teahouses = (seed: number, day: number, count = 6) =>
   village({ seed, day, count, minOff: 3, maxOff: 8, along: 4, size: [1.4, 2], walls: TEAHOUSE, roofs: TIN_ROOF, roofH: 0.35, maxSlope: 0.45, litRatio: 0.8 })
@@ -30,11 +28,8 @@ export const buildings: BuildingSpec[] = [
   ...teahouses(31, 6),
   ...teahouses(32, 7, 5),
   ...village({ seed: 33, day: 8, count: 8, minOff: 2.8, maxOff: 9, along: 5, size: [1.6, 2.4], walls: STONE, roofs: TIN_ROOF, roofH: 0.32, maxSlope: 0.5, litRatio: 0.9 }),
+  // The way back down the other bank (Pokhara and Kathmandu already have their towns; Beirut is off the map)
   ...teahouses(34, 9, 5),
   ...teahouses(35, 10),
   ...teahouses(36, 11),
-  // Act IV: back to Pokhara, Kathmandu, then home to Beirut
-  ...village({ seed: 41, day: 12, count: 12, minOff: 3, maxOff: 12, along: 7, size: [1.1, 1.7], walls: LAKESIDE, roofs: LAKESIDE_ROOF }),
-  ...village({ seed: 42, day: 13, count: 14, minOff: 3, maxOff: 12, along: 7, size: [1.1, 1.8], walls: BRICK, roofs: DARK_ROOF }),
-  ...village({ seed: 43, day: 14, count: 12, minOff: 3, maxOff: 12, along: 6, size: [1.2, 1.9], walls: LEBANESE, roofs: TERRACOTTA, roofH: 0.4 }),
 ]

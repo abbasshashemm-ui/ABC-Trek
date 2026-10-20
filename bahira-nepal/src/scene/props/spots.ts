@@ -1,4 +1,4 @@
-import { besideTrail } from './placement'
+import { besideTrail, upValley } from './placement'
 
 /** Landmark sites, shared by the landmark meshes and the scatterers that must keep clear of them. */
 export const SPOTS = {
@@ -11,8 +11,8 @@ export const SPOTS = {
 export const spotPos = (s: { day: number; offset: number; along: number }) => besideTrail(s.day, s.offset, s.along)
 
 /** Summits on the west side of the sanctuary; the east-ridge camera looks back across ABC at them. */
-export const ANNAPURNA = { ...besideTrail(8.9, -40), sink: 28, height: 95 }
-export const FISHTAIL = { ...besideTrail(7, -34), sink: 22, height: 100 }
+export const ANNAPURNA = { ...upValley(8.9, -40), sink: 28, height: 95 }
+export const FISHTAIL = { ...upValley(7, -34), sink: 22, height: 100 }
 
 export function clearOfLandmarks(x: number, z: number, margin = 0) {
   return Object.values(SPOTS).every((s) => {

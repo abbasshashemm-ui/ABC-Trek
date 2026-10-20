@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
 import { getTerrainHeight, valleyCenter } from '../../utils/terrainMath'
-import { dayZ } from '../../utils/journey'
+import { dayZ, stationAt } from '../../utils/journey'
 
 /** Deterministic PRNG so props land in the same place on every load. */
 export function rng(seed: number) {
@@ -15,8 +15,16 @@ export function rng(seed: number) {
   }
 }
 
-/** World position `offset` units across the valley from the trail at a given (fractional) day. */
+/** World position `offset` units across the valley from the trail at a given (fractional) day, way up or way back. */
 export function besideTrail(dayIndex: number, offset: number, along = 0) {
+  const st = stationAt(dayIndex)
+  const z = -st.t + along
+  const x = valleyCenter(z) + st.off + offset
+  return { x, z, y: getTerrainHeight(x, z) }
+}
+
+/** Like `besideTrail` on the way up, extrapolated past base camp: for the backdrop summits. */
+export function upValley(dayIndex: number, offset: number, along = 0) {
   const z = dayZ(dayIndex) + along
   const x = valleyCenter(z) + offset
   return { x, z, y: getTerrainHeight(x, z) }

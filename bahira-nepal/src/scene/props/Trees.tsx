@@ -4,6 +4,7 @@ import { getTerrainHeight, valleyCenter } from '../../utils/terrainMath'
 import { rng, slopeAt, merge } from './placement'
 import { buildings } from './places'
 import { clearOfLandmarks } from './spots'
+import { nearTrail } from '../../utils/journey'
 
 const conifer = merge([
   new THREE.CylinderGeometry(0.06, 0.08, 0.5, 5).translate(0, 0.25, 0),
@@ -40,6 +41,7 @@ function plant() {
     if (t > 74 && t < 100 && Math.abs(off) < 10) continue // Phewa Lake
     if (buildings.some((b) => Math.hypot(b.x - x, b.z - z) < b.w + 0.6)) continue
     if (!clearOfLandmarks(x, z, 0.5)) continue
+    if (nearTrail(x, z, 1.4)) continue
 
     const lush = t > 35 && t < 120 && h < 10
     const tree = { x, y: h - 0.1, z, s: 0.8 + r() * 0.9, rot: r() * Math.PI * 2, shade: r() }
