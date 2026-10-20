@@ -42,6 +42,7 @@ export interface Inclusion {
 }
 
 export const inclusions: Inclusion[] = [
+  { icon: PlaneLanding, text: 'Domestic flight' },
   { icon: Bus, text: 'Ground transport' },
   { icon: Binoculars, text: 'Jeep safari' },
   { icon: PawPrint, text: 'Elephant ride' },
@@ -55,6 +56,5 @@ export const inclusions: Inclusion[] = [
 /** Not in the package price; shown next to the inclusions so the total is never a surprise. */
 export const extras: (Inclusion & { price?: string })[] = [
   { icon: Plane, text: 'Return flight Beirut to Kathmandu (book separately)' },
-  { icon: PlaneLanding, text: 'Domestic flight Pokhara to Kathmandu' },
   { icon: ShieldCheck, text: 'Travel insurance, optional', price: `+${INSURANCE_PRICE}` },
 ]
