@@ -22,16 +22,19 @@ float getTerrainHeight(float x, float z) {
   float floorH = 30.0 * exp(-(k * k));
 
   float wall = 55.0 * (1.0 - exp(-pow(d / 30.0, 1.5)));
-  float rn = abs(
+  float s =
     sin(x * 0.11 + z * 0.05) * 0.55 +
     sin(x * 0.27 - z * 0.19 + 1.7) * 0.3 +
-    sin(x * 0.61 + z * 0.47 + 0.4) * 0.15
-  );
+    sin(x * 0.61 + z * 0.47 + 0.4) * 0.15;
+  float rn = sqrt(s * s + 0.004);
   float ridged = (1.0 - rn) * (1.0 - rn);
   float peaks = 22.0 * smoothstep(8.0, 45.0, d) * ridged;
 
   float ripple = 0.15 * sin(x * 0.8 + z * 0.5) * sin(z * 0.6 - x * 0.3);
 
-  return floorH + hs * (wall + peaks) + ripple;
+  float kb = (t - 171.4) / 13.0;
+  float shelf = exp(-(kb * kb)) * (1.0 - smoothstep(9.0, 22.0, d)) * 0.9;
+
+  return floorH + hs * (wall + peaks) * (1.0 - shelf) + ripple;
 }
 `

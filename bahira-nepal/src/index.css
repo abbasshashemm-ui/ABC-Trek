@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --color-obsidian: #05070b;
-  --color-ridge: #0b1320;
-  --color-lotus: #00e5ff;
+  --color-obsidian: #0a110e;
+  --color-panel: #0b1410;
+  --color-sage: #a7d8b8;
   --color-solar: #ff8a00;
   --color-solar-hi: #ffc700;
   --color-ink: #f8fafc;

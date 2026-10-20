@@ -4,12 +4,19 @@ export const terrainVertex = /* glsl */ `
 ${terrainHeightGLSL}
 
 varying vec3 vWorldPos;
+varying vec3 vNormal;
 varying float vFogDepth;
 
 void main() {
   vec3 p = position;
   float h = getTerrainHeight(p.x, p.z);
   p.y = h;
+
+  // Height-field normal from forward differences of the same function.
+  float e = 0.35;
+  float hx = getTerrainHeight(p.x + e, p.z);
+  float hz = getTerrainHeight(p.x, p.z + e);
+  vNormal = normalize(vec3(h - hx, e, h - hz));
 
   vec4 world = modelMatrix * vec4(p, 1.0);
   vec4 mv = viewMatrix * world;
@@ -22,54 +29,142 @@ void main() {
 
 // fwidth() is core in WebGL2 / GLSL ES 3.00, which three.js targets; the
 // GL_OES_standard_derivatives pragma is WebGL1-only and not needed here.
+// All palette values are authored in sRGB and converted with lin() so
+// lighting and fog happen in linear space.
 export const terrainFragment = /* glsl */ `
 ${terrainHeightGLSL}
 
 uniform vec3 uActivePos;
-uniform vec3 uFogColor;
+uniform vec3 uFogColor;   // linear
 uniform float uFogDensity;
+uniform vec3 uSunDir;
 
 varying vec3 vWorldPos;
+varying vec3 vNormal;
 varying float vFogDepth;
 
-void main() {
-  // Evaluated per fragment (not interpolated from vertices) so contours stay
-  // smooth on steep walls instead of showing triangle facets.
-  float vElevation = getTerrainHeight(vWorldPos.x, vWorldPos.z);
+vec3 lin(vec3 c) { return pow(c, vec3(2.2)); }
 
+float hash(vec2 p) {
+  return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+}
+float vnoise(vec2 p) {
+  vec2 i = floor(p);
+  vec2 f = fract(p);
+  vec2 u = f * f * (3.0 - 2.0 * f);
+  return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), u.x),
+             mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x), u.y);
+}
+
+void main() {
+  // Per-fragment height keeps contours smooth on steep walls.
+  float vElevation = getTerrainHeight(vWorldPos.x, vWorldPos.z);
+  vec3 n = normalize(vNormal);
+  float slope = 1.0 - n.y;
+
+  float t = -vWorldPos.z;
+  float d = abs(vWorldPos.x - valleyCenter(vWorldPos.z));
+
+  // Noise coords skewed by height so steep walls don't stretch a top-down projection into streaks.
+  vec2 q = vWorldPos.xz + vWorldPos.y * vec2(0.71, -0.53);
+  float noise = vnoise(q * 0.12) * 0.65 + vnoise(q * 0.45) * 0.35;
+
+  // Fine surface grain: perturb the normal with value-noise gradients so rock
+  // and snow read as textured rather than as a smooth sheet.
+  float b0 = vnoise(q * 0.7) + 0.5 * vnoise(q * 2.1);
+  float bx = vnoise((q + vec2(0.2, 0.0)) * 0.7) + 0.5 * vnoise((q + vec2(0.2, 0.0)) * 2.1);
+  float bz = vnoise((q + vec2(0.0, 0.2)) * 0.7) + 0.5 * vnoise((q + vec2(0.0, 0.2)) * 2.1);
+  float grain = 0.45 + smoothstep(0.25, 0.6, slope) * 0.6;
+  grain *= 1.0 - smoothstep(50.0, 140.0, vFogDepth); // noise aliases into streaks at distance
+  n = normalize(n + vec3(b0 - bx, 0.0, b0 - bz) * grain);
+
+  // --- Biomes ---------------------------------------------------------------
+  vec3 terrace = lin(vec3(0.27, 0.36, 0.16));   // Kathmandu valley / Act IV
+  vec3 jungle  = lin(vec3(0.11, 0.25, 0.12));   // Chitwan & Pokhara (Act II)
+  vec3 meadow  = lin(vec3(0.38, 0.39, 0.23));   // alpine scrub
+  vec3 moraine = lin(vec3(0.47, 0.44, 0.39));
+  vec3 rock    = lin(vec3(0.33, 0.31, 0.29));
+  vec3 snow    = lin(vec3(0.90, 0.93, 0.97));
+  vec3 water   = lin(vec3(0.10, 0.27, 0.34));
+
+  float lush = smoothstep(30.0, 60.0, t) * (1.0 - smoothstep(105.0, 135.0, t));
+  vec3 lowland = mix(terrace, jungle, lush) * (0.8 + noise * 0.4);
+
+  vec3 albedo = lowland;
+  albedo = mix(albedo, meadow * (0.85 + noise * 0.3), smoothstep(13.0, 24.0, vElevation));
+  albedo = mix(albedo, moraine, smoothstep(26.0, 34.0, vElevation));
+  albedo = mix(albedo, rock * (0.8 + noise * 0.4), smoothstep(0.38, 0.62, slope));
+
+  float snowline = 45.0 + (noise - 0.5) * 8.0;
+  float snowAmt = smoothstep(snowline - 2.0, snowline + 3.0, vElevation) * (1.0 - smoothstep(0.55, 0.8, slope));
+  albedo = mix(albedo, snow, snowAmt);
+
+  // Phewa Lake around Day 5 (Pokhara)
+  float lake = (1.0 - smoothstep(6.0, 9.0, d)) * smoothstep(76.0, 80.0, t) * (1.0 - smoothstep(94.0, 98.0, t));
+  albedo = mix(albedo, water, lake);
+
+  // --- Lighting: low golden-hour sun + sky/ground hemisphere ----------------
+  float diff = max(dot(n, uSunDir), 0.0);
+  float hemi = n.y * 0.5 + 0.5;
+  vec3 sunCol = lin(vec3(1.0, 0.88, 0.70)) * 1.25;
+  vec3 skyAmb = lin(vec3(0.55, 0.66, 0.80)) * 0.55;
+  vec3 gndAmb = lin(vec3(0.30, 0.26, 0.20)) * 0.35;
+  vec3 col = albedo * (sunCol * diff + mix(gndAmb, skyAmb, hemi));
+  col += water * lake * 0.6 * pow(max(n.y, 0.0), 8.0); // sky sheen on the lake
+
+  // --- Subtle topographic overlay --------------------------------------------
   float contourFreq = 1.8;
   float scaledHeight = vElevation * contourFreq;
-  float fw = fwidth(scaledHeight);
+  float fw = max(fwidth(scaledHeight), 1e-4); // 0 on flat patches -> NaN, which bloom smears over the frame
   float line = abs(fract(scaledHeight - 0.5) - 0.5) / fw;
   float contourAlpha = 1.0 - smoothstep(0.0, 1.35, line);
 
-  // Major contour every 5th line
   float majorScaled = vElevation * (contourFreq * 0.2);
-  float fwMajor = fwidth(majorScaled);
+  float fwMajor = max(fwidth(majorScaled), 1e-4);
   float majorLine = abs(fract(majorScaled - 0.5) - 0.5) / fwMajor;
   float majorAlpha = 1.0 - smoothstep(0.0, 1.6, majorLine);
 
-  // Fade lines that would collapse below pixel spacing (moire on steep/far slopes)
   contourAlpha *= 1.0 - smoothstep(0.55, 1.1, fw);
   majorAlpha *= 1.0 - smoothstep(0.55, 1.1, fwMajor);
+  float ink = (contourAlpha * 0.16 + majorAlpha * 0.32) * (1.0 - lake);
 
-  // Proximity glow from the active trekker position
   float distToTrail = length(vWorldPos.xz - uActivePos.xz);
   float trailGlow = exp(-distToTrail * 0.09);
+  vec3 inkColor = mix(col * 0.45, lin(vec3(1.0, 0.72, 0.25)) * 1.2, trailGlow);
+  col = mix(col, inkColor, clamp(ink + trailGlow * ink * 1.5, 0.0, 1.0));
+  col += lin(vec3(1.0, 0.6, 0.15)) * trailGlow * 0.05;
 
-  vec3 baseColor = mix(vec3(0.02, 0.03, 0.05), vec3(0.05, 0.09, 0.15), clamp(vElevation / 25.0, 0.0, 1.0));
-  vec3 cyanContour = vec3(0.0, 0.898, 1.0);
-  vec3 goldGlow = vec3(1.0, 0.54, 0.0);
-
-  vec3 lineColor = mix(cyanContour * 0.35, goldGlow, trailGlow);
-  vec3 col = mix(baseColor, lineColor, clamp(contourAlpha * 0.45 + majorAlpha * 0.85, 0.0, 1.0));
-  col += goldGlow * trailGlow * 0.035;
-
-  // Exponential depth fog
+  // --- Aerial perspective -----------------------------------------------------
   float fogFactor = 1.0 - exp(-uFogDensity * vFogDepth * vFogDepth);
-  col = mix(col, uFogColor, clamp(fogFactor, 0.0, 1.0));
+  // Dissolve the mesh borders into the haze so the sky never shows a hard edge.
+  float edge = max(smoothstep(85.0, 118.0, abs(vWorldPos.x)),
+                   max(smoothstep(15.0, 38.0, vWorldPos.z), smoothstep(305.0, 335.0, t)));
+  col = mix(col, uFogColor, clamp(max(fogFactor, edge), 0.0, 1.0));
 
-  // Palette above is authored in sRGB; the post chain expects linear input.
-  gl_FragColor = vec4(pow(col, vec3(2.2)), 1.0);
+  gl_FragColor = vec4(max(col, vec3(0.0)), 1.0);
+}
+`
+
+export const skyVertex = /* glsl */ `
+varying vec3 vDir;
+void main() {
+  vDir = normalize(position);
+  vec4 p = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  gl_Position = p.xyww; // pin to the far plane
+}
+`
+
+export const skyFragment = /* glsl */ `
+uniform vec3 uHorizon; // linear
+uniform vec3 uZenith;  // linear
+uniform vec3 uSunDir;
+varying vec3 vDir;
+void main() {
+  vec3 dir = normalize(vDir);
+  float y = max(dir.y, 0.0);
+  vec3 col = mix(uHorizon, uZenith, pow(y, 0.55));
+  float s = max(dot(dir, uSunDir), 0.0);
+  col += vec3(1.0, 0.62, 0.28) * (pow(s, 6.0) * 0.18 + pow(s, 180.0) * 1.2);
+  gl_FragColor = vec4(col, 1.0);
 }
 `

@@ -4,9 +4,7 @@ import * as THREE from 'three'
 import { terrainVertex, terrainFragment } from '../shaders/terrain'
 import { trailCurve, dayToU } from '../utils/journey'
 import { scrollState } from '../state/scrollStore'
-import { smoothstep } from '../utils/terrainMath'
-
-export const FOG_COLOR = '#05070B'
+import { HORIZON, SUN_DIR, fogDensityAt } from './palette'
 
 export default function Terrain() {
   const geometry = useMemo(() => {
@@ -24,18 +22,16 @@ export default function Terrain() {
         fragmentShader: terrainFragment,
         uniforms: {
           uActivePos: { value: new THREE.Vector3() },
-          // sRGB components of #05070B; the shader linearises on output.
-          uFogColor: { value: new THREE.Vector3(5 / 255, 7 / 255, 11 / 255) },
-          uFogDensity: { value: 0.00012 },
+          uFogColor: { value: HORIZON },
+          uFogDensity: { value: 0.00006 },
+          uSunDir: { value: SUN_DIR },
         },
       }),
     [],
   )
 
   useFrame(() => {
-    // Act IV pull-up: the close-range fog would swallow the whole overview.
-    const over = smoothstep(11, 12.8, scrollState.dayFloat)
-    material.uniforms.uFogDensity.value = THREE.MathUtils.lerp(0.00012, 0.000005, over)
+    material.uniforms.uFogDensity.value = fogDensityAt(scrollState.dayFloat)
     trailCurve.getPointAt(dayToU(scrollState.dayFloat), material.uniforms.uActivePos.value)
   })
 

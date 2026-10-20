@@ -19,7 +19,7 @@ export default function TopNav() {
   }, [])
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-[#05070B]/55 backdrop-blur-xl">
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-obsidian/55 backdrop-blur-xl">
       <div className="mx-auto grid h-16 max-w-[1600px] grid-cols-[auto_1fr_auto] items-center gap-4 px-4 md:px-8">
         <div className="flex items-center gap-3">
           <BahiraLogo size={36} />
@@ -31,7 +31,7 @@ export default function TopNav() {
         <div className="min-w-0 text-center">
           <span
             key={act}
-            className="block truncate font-mono text-[9px] tracking-[0.12em] text-lotus sm:text-xs sm:tracking-[0.18em] md:text-sm"
+            className="block truncate font-mono text-[9px] tracking-[0.12em] text-sage sm:text-xs sm:tracking-[0.18em] md:text-sm"
             aria-live="polite"
           >
             {ACT_LABELS[act]}

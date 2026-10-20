@@ -5,7 +5,8 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
 
 ## Commands
 - `npm run dev` / `npm run build` (tsc + vite) / `npm run lint`
-- Drop the client logo at `public/bahira-logo.jpeg`. Until then `<BahiraLogo />` draws a placeholder.
+- Logo: `public/bahira-logo.png` is generated from `assets-src/bahira-logo-source.jpeg` by `node scripts/make-logo.mjs <src>`
+  (colour-to-alpha, trimmed). Prefer a designer-exported transparent PNG if one exists.
 
 ## Rules that must not drift
 - **Terrain height is defined twice and must stay identical:** `src/utils/terrainMath.ts` (trail, beacon, camera)
@@ -13,14 +14,25 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
   GLSL `smoothstep` needs `edge0 < edge1` and `pow` needs a non-negative base, hence `t = -z` and `k*k`.
 - Contours use per-fragment height (`getTerrainHeight(vWorldPos.xz)`), not the interpolated vertex value (avoids facets).
 - No `GL_OES_standard_derivatives` pragma: three targets WebGL2, where `fwidth` is core.
-- Terrain palette is authored in sRGB and `pow(col, 2.2)` on output because the post chain is linear.
+- Look: natural shaded terrain (biome by height/slope/act, snow above ~40, Phewa Lake at Day 5), golden-hour sun +
+  sky dome (`src/scene/palette.ts` shared by both), faint contour overlay. Palette authored in sRGB, lit in linear (`lin()`).
+  Terrain fog colour must equal the sky horizon or the seam shows.
 - Scroll state lives in `src/state/scrollStore.ts` (mutable, updated once per GSAP tick). Never put per-frame
   scroll values in React state.
 - Trail curve = all 15 day waypoints plus 6 terrain-sampled points per leg (Catmull-Rom overshoot would otherwise
   dip under the terrain on the ABC crest).
-- Camera: Days 1-9 chase, Days 10-12 orbit to an east-ridge vantage looking back at ABC, Act IV orbital overview.
+- Camera: Days 1-9 chase (Day 9: wide-lens reveal in the ABC basin tilting up to Annapurna), Days 10-12 high drone follow (an east-ridge
+  vantage was tried and dropped: shadowed walls in haze, trail invisible), Act IV orbital overview.
   Fog density eases down for the overview.
+- Props (`src/scene/props/`): procedural low-poly, instanced, placed with `getTerrainHeight` and a seeded RNG so
+  layouts are stable. Landmark sites and the backdrop summits live in `spots.ts`; villages and trees keep clear of them.
+  `merge()` normalises indexed/non-indexed parts (raw `mergeGeometries` returns null). `SceneBoundary` keeps the page
+  usable if WebGL fails. The ABC basin is a shelf carved into the height function (both twins).
+
+- Photos: `photos-src/manifest.json` maps days to files (folder mode is the fallback; see its README), `npm run photos` writes WebP to `public/photos/`
+  and `src/data/photos.generated.json`. Never hand-edit the JSON. Non-trek photos need a `credits.json` entry
+  (author, licence allowing commercial use, source URL); never ship placeholder or unlicensed images.
 
 ## Data
 - `src/data/itinerary.ts`: the full 15-day dataset (do not summarise).
-- `src/data/booking.ts`: price/seats/date, 10 inclusions, and `BOOKING_URL` (placeholder `#booking`; wire to checkout).
+- `src/data/booking.ts`: price/seats/date, 10 inclusions, and `BOOKING_URL` (WhatsApp deep link, +961 71 661 075).

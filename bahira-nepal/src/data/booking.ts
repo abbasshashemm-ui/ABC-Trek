@@ -15,8 +15,10 @@ import {
 export const DEPARTURE = 'April 3'
 export const PRICE = '$2,500'
 export const SEATS = 9
-/** Wire this to the real checkout / WhatsApp / form URL. */
-export const BOOKING_URL = '#booking'
+/** International format, digits only (wa.me requires no +, spaces or dashes). */
+export const WHATSAPP_NUMBER = '96171661075'
+const WHATSAPP_MESSAGE = `Hi Bahira, I'd like to reserve a seat on the ${DEPARTURE} Nepal expedition (${PRICE}).`
+export const BOOKING_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`
 
 export interface Inclusion {
   icon: LucideIcon
