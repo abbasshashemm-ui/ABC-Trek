@@ -32,9 +32,7 @@ const MANIFEST = join(ROOT, 'src', 'data', 'photos.generated.json')
 
 const TREK_CREDIT = 'Hmayed & Farhat · past trek'
 const PER_DAY = 3
-const WIDTHS = [800, 1600, 2400]
-/** Shortest side of the largest rendition needed to fill a phone or laptop screen without looking soft. */
-const FULL_MIN = 1000
+const WIDTHS = [800, 1600]
 
 /** Folder name -> itinerary days (1-based) spent there. */
 const PLACES = {
@@ -101,7 +99,7 @@ async function processPhoto(path, slug, info) {
     w = out.width
     h = out.height
   }
-  return { src: `/photos/${slug}-${WIDTHS[0]}.webp`, srcSet: srcSet.join(', '), width: w, height: h, full: Math.min(w, h) >= FULL_MIN, ...info }
+  return { src: `/photos/${slug}-${WIDTHS[0]}.webp`, srcSet: srcSet.join(', '), width: w, height: h, ...info }
 }
 
 async function fromManifest(byDay) {
