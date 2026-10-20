@@ -1,8 +1,8 @@
 import * as THREE from 'three'
 import { getTerrainHeight, valleyCenter, JOURNEY_LENGTH } from './terrainMath'
-import { itinerary } from '../data/itinerary'
+import { itinerary, DAY_COUNT } from '../data/itinerary'
 
-export const DAY_COUNT = itinerary.length
+export { DAY_COUNT }
 const SEGMENTS_PER_LEG = 7
 const TRAIL_LIFT = 0.6
 

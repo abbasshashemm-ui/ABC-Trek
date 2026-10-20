@@ -188,4 +188,6 @@ export const itinerary: ItineraryDay[] = [
   },
 ]
 
+export const DAY_COUNT = itinerary.length
+
 export const actOf = (d: ItineraryDay): ActId => d.act.split(' ')[0] as ActId

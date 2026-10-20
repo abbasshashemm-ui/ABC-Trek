@@ -16,10 +16,10 @@ export default function Hero() {
       {/* Dark floor under the copy so it reads over the 3D valley without hiding it */}
       <div
         aria-hidden
-        className="absolute inset-0 bg-[linear-gradient(to_top,var(--color-obsidian)_0%,rgb(10_17_14/0.85)_28%,rgb(10_17_14/0.35)_55%,transparent_75%)]"
+        className="absolute inset-0 bg-[linear-gradient(to_top,var(--color-obsidian)_0%,rgb(10_17_14/0.85)_30%,rgb(10_17_14/0.45)_62%,transparent_88%)]"
       />
 
-      <div className="relative mx-auto w-full max-w-[1400px] px-5 pb-[max(3.5rem,calc(env(safe-area-inset-bottom)+2rem))] pt-32 md:px-12 md:pb-20">
+      <div className="relative mx-auto w-full max-w-[1400px] [text-shadow:0_1px_3px_rgb(10_17_14/0.6),0_2px_24px_rgb(10_17_14/0.85)] px-5 pb-[max(3.5rem,calc(env(safe-area-inset-bottom)+2rem))] pt-32 md:px-12 md:pb-20">
         <p className="font-mono text-xs text-sage">Nepal · departs {DEPARTURE}</p>
 
         <h1 className="font-display mt-4 max-w-4xl text-[clamp(2.75rem,8vw,6.5rem)] leading-[0.95] text-ink">

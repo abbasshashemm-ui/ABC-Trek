@@ -51,7 +51,7 @@ const Journey = forwardRef<HTMLElement>(function Journey(_, ref) {
       <div
         ref={tint}
         aria-hidden
-        className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-lvh bg-obsidian/50 opacity-0"
+        className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-lvh bg-obsidian/30 opacity-0"
       />
       {itinerary.map((item, i) => (
         <DayStop key={item.day} item={item} side={i % 2 === 0 ? 'left' : 'right'} />

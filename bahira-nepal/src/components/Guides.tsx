@@ -4,10 +4,24 @@ import { Dialog } from '@base-ui/react/dialog'
 import { photosFor } from '../data/photos'
 import Lightbox from './Lightbox'
 
-/**
- * "Meet your guides". Copy only states what the photos and the itinerary back up;
- * replace it with Hmayed & Farhat's own words when they send a bio.
- */
+/** Their public trek logs; tracking params stripped from the links the client sent. */
+const PROFILES = [
+  { name: 'Hmayed', handle: 'mhmd_hmayed' },
+  { name: 'Farhat', handle: '_hsenfarhat_' },
+]
+
+/** Instagram's glyph (lucide v1 dropped brand icons). */
+function InstagramGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
+    </svg>
+  )
+}
+
+/** "Meet your guides": who runs the trip, what they've walked, and where to see it. */
 export default function Guides() {
   const photos = photosFor('guides')
   const [handle] = useState(() => Dialog.createHandle<number>())
@@ -24,10 +38,28 @@ export default function Guides() {
             You’ll walk with Hmayed &amp; Farhat.
           </h2>
           <p className="mt-6 max-w-md text-base leading-relaxed text-ink/75 md:text-lg">
-            They’ve done this trip themselves, from the temples of Kathmandu and the Chitwan jungle to Pokhara and the
-            climb to Annapurna Base Camp, and reached Everest Base Camp in 2025. This April they lead a small group
-            along the same trail.
+            Both are experienced trekkers. They’ve reached Everest Base Camp, walked this trail to Annapurna Base Camp,
+            and done many treks besides. This April they lead a small group along the same route.
           </p>
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-ink/60">
+            Bahira Expeditions is run by Hussein Farhat.
+          </p>
+
+          <ul className="pointer-events-auto mt-7 flex flex-wrap gap-2">
+            {PROFILES.map((p) => (
+              <li key={p.handle}>
+                <a
+                  href={`https://www.instagram.com/${p.handle}/`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${p.name} on Instagram, @${p.handle}`}
+                  className="btn btn-glass h-11 gap-2 px-4 text-sm"
+                >
+                  <InstagramGlyph />@{p.handle}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         {photos.length > 0 && (
