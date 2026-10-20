@@ -6,7 +6,7 @@ import * as THREE from 'three'
 import Terrain from './Terrain'
 import Sky from './Sky'
 import Trail from './Trail'
-import Beacon from './Beacon'
+import Trekkers from './Trekkers'
 import CameraRig from './CameraRig'
 import Atmosphere from './Atmosphere'
 import Props from './props/Props'
@@ -48,10 +48,10 @@ export default function Scene() {
       <Terrain />
       <Props />
       <Trail />
-      <Beacon />
+      <Trekkers />
       <CameraRig />
       <EffectComposer multisampling={COARSE ? 2 : 4}>
-        <Bloom mipmapBlur luminanceThreshold={1} luminanceSmoothing={0.15} intensity={0.7} radius={0.7} />
+        <Bloom mipmapBlur luminanceThreshold={1.1} luminanceSmoothing={0.15} intensity={0.6} radius={0.7} />
         <Vignette eskil={false} offset={0.3} darkness={0.3} />
       </EffectComposer>
     </Canvas>

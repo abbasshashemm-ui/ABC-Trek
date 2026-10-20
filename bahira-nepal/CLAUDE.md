@@ -15,16 +15,26 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
   GLSL `smoothstep` needs `edge0 < edge1` and `pow` needs a non-negative base, hence `t = -z` and `k*k`.
 - Contours use per-fragment height (`getTerrainHeight(vWorldPos.xz)`), not the interpolated vertex value (avoids facets).
 - No `GL_OES_standard_derivatives` pragma: three targets WebGL2, where `fwidth` is core.
-- Look: sunny and inviting: natural shaded terrain (biome by height/slope/act, snow above ~40, Phewa Lake at Day 5), warm
-  mid-morning sun, clear blue sky dome, light vignette (`src/scene/palette.ts` shared by both), faint contour overlay. Palette authored in sRGB, lit in linear (`lin()`).
+- Look: sunny and inviting: natural shaded terrain (vivid green biomes by height/slope/act, snow from ~41 on all but
+  sheer faces, rounded irregular ridges, Phewa Lake at Day 5), warm mid-morning sun, clear blue sky dome, light vignette.
+  Contours are faint shade lines that lighten near the trekkers; no orange ground glow (`src/scene/palette.ts` shared by both), faint contour overlay. Palette authored in sRGB, lit in linear (`lin()`).
   Terrain fog colour must equal the sky horizon or the seam shows.
 - Scroll state lives in `src/state/scrollStore.ts` (mutable, updated once per GSAP tick). Never put per-frame
   scroll values in React state.
-- Trail curve = all 15 day waypoints plus 6 terrain-sampled points per leg (Catmull-Rom overshoot would otherwise
-  dip under the terrain on the ABC crest).
-- Camera: Days 1-9 chase (Day 9: wide-lens reveal in the ABC basin tilting up to Annapurna), Days 10-12 high drone follow (an east-ridge
-  vantage was tried and dropped: shadowed walls in haze, trail invisible), Act IV orbital overview.
-  Fog density eases down for the overview.
+- The trip is a loop, not a line: `STATIONS` in `utils/journey.ts` puts Days 1-9 up the valley centre to base camp
+  (z = -171.4), Days 10-12 back down the other bank (offset +5..6.5), Day 13 Pokhara's east shore, then two flights
+  (Pokhara -> Kathmandu arc, Kathmandu -> Beirut climbing off the map). Behind base camp the floor keeps rising into
+  the range. `besideTrail` places by station (way up or back); `upValley` is for the backdrop summits. Villages and
+  trees call `nearTrail` so they keep off both trails.
+- Trail curve = all 15 day waypoints plus 6 sampled points per leg (Catmull-Rom overshoot would otherwise
+  dip under the terrain on the ABC crest). Walked part gold, ahead a faint sand footpath, flight legs dashed.
+  Checkpoints are cairns with a prayer-flag pennant that takes its colour when reached. Three trekkers (`Trekkers.tsx`)
+  walk single file at the scroll position (legs swing with distance walked); a small plane replaces them on flights.
+- Camera: Days 1-9 chase (Day 9: wide-lens reveal in the ABC basin tilting up to Annapurna, finished before d = 9),
+  Days 10-12 a drone a little further down the trail looking back up at the group (following from behind put the lens
+  in the range past base camp; an east-ridge vantage was all shadow), Act IV a swaying vantage south-east of Kathmandu
+  over the whole loop (a full orbit drifted over the high range). Heading is averaged over a window so the camera
+  turns smoothly at base camp. Fog density eases down for the overview.
 - Props (`src/scene/props/`): procedural low-poly, instanced, placed with `getTerrainHeight` and a seeded RNG so
   layouts are stable. Landmark sites and the backdrop summits live in `spots.ts`; villages and trees keep clear of them.
   `merge()` normalises indexed/non-indexed parts (raw `mergeGeometries` returns null). `SceneBoundary` keeps the page
@@ -51,7 +61,8 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
   page shell imports stays three-free (`DAY_COUNT` lives in `itinerary.ts` for that reason). The Scene chunk is fetched on
   idle after first paint and fades in; `PerformanceMonitor` drops DPR to 1 on slow devices. Photo `sizes` must match the
   rendered tile width so phones pick the 800w file.
-- Base camp (`SummitCelebration.tsx`): when the Day 9 stop scrolls up into place, the page settles on it for 3 s,
+- Base camp (`SummitCelebration.tsx`): when the Day 9 stop scrolls up into place, the page settles on it for 3 s (mouse
+  and trackpad only: on touch screens stopping Lenis fights iOS momentum scrolling and the page jumps),
   "4,130 m" fades in above the photos (`[data-reached]`) and a few prayer-flag pieces drift. Skips jumps and button scrolls; Escape or
   `scrollToId` releases; reduced motion = number only. Hold = `lenis.stop()` then `scrollTo({ force })`.
 

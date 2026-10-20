@@ -79,12 +79,12 @@ void main() {
   n = normalize(n + vec3(b0 - bx, 0.0, b0 - bz) * grain);
 
   // --- Biomes ---------------------------------------------------------------
-  vec3 terrace = lin(vec3(0.38, 0.5, 0.2));   // Kathmandu valley / Act IV
-  vec3 jungle  = lin(vec3(0.17, 0.38, 0.15));   // Chitwan & Pokhara (Act II)
-  vec3 meadow  = lin(vec3(0.5, 0.53, 0.27));   // alpine scrub
+  vec3 terrace = lin(vec3(0.33, 0.56, 0.17));   // Kathmandu valley / Act IV
+  vec3 jungle  = lin(vec3(0.13, 0.44, 0.13));   // Chitwan & Pokhara (Act II)
+  vec3 meadow  = lin(vec3(0.44, 0.6, 0.24));   // alpine scrub
   vec3 moraine = lin(vec3(0.58, 0.53, 0.45));
   vec3 rock    = lin(vec3(0.46, 0.42, 0.38));
-  vec3 snow    = lin(vec3(0.90, 0.93, 0.97));
+  vec3 snow    = lin(vec3(0.95, 0.97, 1.0));
   vec3 water   = lin(vec3(0.12, 0.42, 0.52));
 
   float lush = smoothstep(30.0, 60.0, t) * (1.0 - smoothstep(105.0, 135.0, t));
@@ -95,8 +95,9 @@ void main() {
   albedo = mix(albedo, moraine, smoothstep(26.0, 34.0, vElevation));
   albedo = mix(albedo, rock * (0.8 + noise * 0.4), smoothstep(0.38, 0.62, slope));
 
-  float snowline = 45.0 + (noise - 0.5) * 8.0;
-  float snowAmt = smoothstep(snowline - 2.0, snowline + 3.0, vElevation) * (1.0 - smoothstep(0.55, 0.8, slope));
+  // Snow from ~41 up, clinging to all but the sheerest faces so the range reads as Himalayan.
+  float snowline = 41.0 + (noise - 0.5) * 8.0;
+  float snowAmt = smoothstep(snowline - 3.0, snowline + 3.0, vElevation) * (1.0 - smoothstep(0.7, 0.93, slope));
   albedo = mix(albedo, snow, snowAmt);
 
   // Phewa Lake around Day 5 (Pokhara)
@@ -106,7 +107,7 @@ void main() {
   // --- Lighting: warm mid-morning sun + sky/ground hemisphere ---------------
   float diff = max(dot(n, uSunDir), 0.0);
   float hemi = n.y * 0.5 + 0.5;
-  vec3 sunCol = lin(vec3(1.0, 0.94, 0.82)) * 1.45;
+  vec3 sunCol = lin(vec3(1.0, 0.95, 0.84)) * 1.6;
   vec3 skyAmb = lin(vec3(0.62, 0.74, 0.90)) * 0.62;
   vec3 gndAmb = lin(vec3(0.42, 0.36, 0.26)) * 0.4;
   vec3 col = albedo * (sunCol * diff + mix(gndAmb, skyAmb, hemi));
@@ -126,13 +127,12 @@ void main() {
 
   contourAlpha *= 1.0 - smoothstep(0.55, 1.1, fw);
   majorAlpha *= 1.0 - smoothstep(0.55, 1.1, fwMajor);
-  float ink = (contourAlpha * 0.16 + majorAlpha * 0.32) * (1.0 - lake);
+  float ink = (contourAlpha * 0.1 + majorAlpha * 0.2) * (1.0 - lake);
 
+  // Contours are faint shade lines; around the trekkers they lift to a sunlit tone (no orange glow).
   float distToTrail = length(vWorldPos.xz - uActivePos.xz);
-  float trailGlow = exp(-distToTrail * 0.09);
-  vec3 inkColor = mix(col * 0.45, lin(vec3(1.0, 0.72, 0.25)) * 1.2, trailGlow);
-  col = mix(col, inkColor, clamp(ink + trailGlow * ink * 1.5, 0.0, 1.0));
-  col += lin(vec3(1.0, 0.6, 0.15)) * trailGlow * 0.05;
+  float near = exp(-distToTrail * 0.15);
+  col = mix(col, mix(col * 0.62, col * 1.3, near), clamp(ink, 0.0, 1.0));
 
   // --- Aerial perspective -----------------------------------------------------
   float fogFactor = 1.0 - exp(-uFogDensity * vFogDepth * vFogDepth);

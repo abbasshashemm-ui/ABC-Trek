@@ -29,7 +29,7 @@ export default function Atmosphere() {
 
   return (
     <>
-      <directionalLight position={sunPos} color={linear(1, 0.94, 0.82)} intensity={1.45 * Math.PI} />
+      <directionalLight position={sunPos} color={linear(1, 0.95, 0.84)} intensity={1.6 * Math.PI} />
       <hemisphereLight args={[linear(0.62, 0.74, 0.9), linear(0.42, 0.36, 0.26), 0.62 * Math.PI]} />
     </>
   )

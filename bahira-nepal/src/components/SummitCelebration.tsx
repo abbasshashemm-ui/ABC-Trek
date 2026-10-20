@@ -36,11 +36,12 @@ function driftFlags() {
   }
 }
 
-/** Ease the Day 9 stop to the centre of the screen, then rest on it. Escape or any button-driven scroll releases. */
+/** Ease the Day 9 stop to the centre of the screen, then rest on it (mouse/trackpad only). Escape or any button-driven scroll releases. */
 function holdOn(el: HTMLElement): () => void {
   const lenis = scrollApi.lenis
-  // Reduced motion runs without Lenis: never take over the user's scroll there.
-  if (!lenis) return () => {}
+  // Reduced motion runs without Lenis: never take over the user's scroll there. Touch screens skip
+  // the hold too: stopping Lenis mid-fling fights iOS momentum scrolling and the page jumps.
+  if (!lenis || window.matchMedia('(pointer: coarse)').matches) return () => {}
   let done = false
   const release = () => {
     if (done) return

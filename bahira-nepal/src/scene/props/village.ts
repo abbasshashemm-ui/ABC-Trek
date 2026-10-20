@@ -1,6 +1,7 @@
 import { rng, besideTrail, slopeAt, groundUnder, faceTrail } from './placement'
 import { clearOfLandmarks } from './spots'
 import { getTerrainHeight } from '../../utils/terrainMath'
+import { nearTrail } from '../../utils/journey'
 
 export interface BuildingSpec {
   x: number
@@ -47,6 +48,7 @@ export function village(o: VillageOptions): BuildingSpec[] {
     // Reject footprints whose downhill corner drops so far the house would stand on stilts.
     if (getTerrainHeight(p.x, p.z) - groundUnder(p.x, p.z, s / 2, d / 2, rot) > s * 0.35) continue
     if (!clearOfLandmarks(p.x, p.z, s / 2)) continue
+    if (nearTrail(p.x, p.z, s * 0.5 + 0.8)) continue // the way back runs through some villages
     if (out.some((b) => Math.hypot(b.x - p.x, b.z - p.z) < (b.w + s) * 0.75)) continue
     out.push({
       x: p.x,
