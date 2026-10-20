@@ -9,7 +9,7 @@ function ReserveButton({ className }: { className?: string }) {
       target="_blank"
       rel="noopener noreferrer"
       className={clsx(
-        'flex w-full items-center justify-center gap-2 rounded-full bg-solar-hi px-6 py-3.5 text-[15px] font-medium text-obsidian transition hover:bg-white sm:inline-flex sm:w-auto',
+        'btn btn-primary h-12 w-full px-6 text-[15px] sm:w-auto',
         className,
       )}
     >
@@ -23,9 +23,9 @@ const rowClass = 'flex items-start gap-3 py-2.5 text-sm leading-snug md:py-3 md:
 
 export default function Booking() {
   return (
-    <section id="booking" className="relative z-10 pb-12 pt-24 md:px-12 md:pb-16 md:pt-32">
+    <section id="booking" className="relative z-10 mt-24 bg-panel md:mt-0 md:bg-transparent md:px-12 md:pb-16 md:pt-32">
       {/* Phones: full-bleed solid panel (a card inside a page gutter wastes ~40px a side). Desktop: floating card. */}
-      <div className="mx-auto grid max-w-6xl gap-10 border-y border-white/10 bg-panel px-5 py-10 md:rounded-3xl md:border md:bg-panel/85 md:p-12 md:backdrop-blur-xl lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+      <div className="mx-auto grid max-w-6xl gap-10 border-t border-white/10 bg-panel px-5 pt-10 pb-6 md:rounded-3xl md:border md:bg-panel/85 md:p-12 md:backdrop-blur-xl lg:grid-cols-[1fr_1.1fr] lg:gap-16">
         <div>
           <p className="font-mono text-xs text-sage">{DEPARTURE} · 15 days</p>
           <h2 className="font-display mt-3 text-[2.75rem] leading-[1] text-ink md:text-6xl">
@@ -53,8 +53,9 @@ export default function Booking() {
             ))}
           </ul>
 
-          <h3 className="mt-8 text-sm font-medium text-ink">Not included</h3>
-          <ul className={clsx('mt-3', listClass)}>
+          {/* Phones get the same facts in the summary below, so the list would just repeat it. */}
+          <h3 className="mt-8 hidden text-sm font-medium text-ink lg:block">Not included</h3>
+          <ul className={clsx('mt-3 hidden lg:block', listClass)}>
             {extras.map(({ icon: Icon, text, price }) => (
               <li key={text} className={clsx(rowClass, 'text-ink/70')}>
                 <Icon size={17} className="mt-px shrink-0 text-muted" aria-hidden />
@@ -64,18 +65,28 @@ export default function Booking() {
             ))}
           </ul>
 
-          {/* Phones read the list after the first button has scrolled away: recap and ask again. */}
+          {/* Phones read the list after the first button has scrolled away: total it up and ask again. */}
           <div className="mt-8 lg:hidden">
-            <p className="flex items-baseline justify-between text-sm text-ink/80">
-              <span>Per person, without flights</span>
-              <span className="font-display tabular text-3xl text-solar-hi">{PRICE}</span>
-            </p>
-            <p className="mt-1 text-right text-xs text-muted">Travel insurance optional, +{INSURANCE_PRICE}</p>
+            <dl className="rounded-2xl bg-white/[0.04] px-4 text-[15px] ring-1 ring-white/10">
+              <div className="flex items-baseline justify-between gap-4 border-b border-white/10 py-3.5">
+                <dt className="text-ink">Expedition, per person</dt>
+                <dd className="font-display tabular text-3xl leading-none text-solar-hi">{PRICE}</dd>
+              </div>
+              <div className="flex items-baseline justify-between gap-4 border-b border-white/10 py-3">
+                <dt className="text-ink/70">International flight</dt>
+                <dd className="text-sm text-muted">Book separately</dd>
+              </div>
+              <div className="flex items-baseline justify-between gap-4 py-3">
+                <dt className="text-ink/70">Travel insurance</dt>
+                <dd className="text-sm text-muted">Optional, +{INSURANCE_PRICE}</dd>
+              </div>
+            </dl>
             <ReserveButton className="mt-5" />
+            <p className="mt-3 text-center text-xs text-muted">Opens a chat with Bahira on WhatsApp.</p>
           </div>
         </div>
       </div>
-      <p className="mt-10 text-center text-xs text-muted">© Bahira Expeditions</p>
+      <p className="py-8 pb-[max(2rem,calc(env(safe-area-inset-bottom)+1rem))] text-center text-xs text-muted md:pb-0 md:pt-10">© Bahira Expeditions</p>
     </section>
   )
 }

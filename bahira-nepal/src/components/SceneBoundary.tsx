@@ -17,7 +17,7 @@ export default class SceneBoundary extends Component<{ children: ReactNode }, { 
 
   render() {
     if (this.state.failed) {
-      return <div className="fixed inset-0 z-0 bg-gradient-to-b from-[#1b2a36] via-[#24382c] to-obsidian" aria-hidden />
+      return <div className="fixed inset-x-0 top-0 z-0 h-lvh bg-gradient-to-b from-[#1b2a36] via-[#24382c] to-obsidian" aria-hidden />
     }
     return this.props.children
   }

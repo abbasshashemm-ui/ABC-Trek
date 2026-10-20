@@ -45,6 +45,11 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
   anchors) and button-driven scrolls (`scrollApi.auto`). Hold = `lenis.stop()` then `scrollTo({ force })`; Lenis's
   `lock` alone lets native scroll through. Escape or any `scrollToId` releases it; reduced motion: badge only.
 
+- Chrome (Apple-style): header is a translucent material (`.nav-material`, blur fading out at the bottom, no border),
+  padded by `env(safe-area-inset-*)`. Buttons: `.btn-primary` warm off-white fill, `.btn-glass` frosted; gold is an
+  accent only (prices, the trail), never a button fill. Press feedback on `:active`. Reduced transparency/contrast
+  fall back to solid. `viewport-fit=cover`, no fixed theme-color, 3D canvas is `100lvh` so it runs behind Safari's bars.
+
 ## Data
 - `src/data/itinerary.ts`: all 15 days; every activity from the client's itinerary must stay.
 - `src/data/booking.ts`: $1,570 per person + international ticket (not included), optional insurance $120,

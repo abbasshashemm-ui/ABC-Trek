@@ -19,17 +19,17 @@ export default function TopNav() {
   }, [])
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-obsidian/55 backdrop-blur-xl">
-      <div className="mx-auto grid h-16 max-w-[1600px] grid-cols-[auto_1fr_auto] items-center gap-4 px-4 md:px-8">
+    <header className="nav-material fixed inset-x-0 top-0 z-40 pt-[env(safe-area-inset-top)]">
+      <div className="relative mx-auto grid h-14 max-w-[1600px] grid-cols-[auto_1fr_auto] items-center gap-4 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] md:h-16 md:px-8">
         <div className="flex items-center gap-3">
-          <BahiraLogo size={36} />
-          <span className="font-display hidden text-xl text-ink sm:block">Bahira Expeditions</span>
+          <BahiraLogo size={34} />
+          <span className="font-display hidden text-xl tracking-[-0.01em] text-ink sm:block">Bahira Expeditions</span>
         </div>
 
         <div className="min-w-0 text-center">
           <span
             key={act}
-            className="block truncate font-mono text-xs text-sage"
+            className="block truncate text-[13px] font-medium tracking-[0.01em] text-ink/80"
             aria-live="polite"
           >
             {ACT_LABELS[act]}
@@ -37,13 +37,13 @@ export default function TopNav() {
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="hidden font-mono text-xs text-muted lg:block">
+          <span className="hidden text-[13px] text-ink/60 lg:block">
             {SEATS} seats · {DEPARTURE}
           </span>
           <button
             type="button"
             onClick={() => scrollToId('booking')}
-            className="rounded-full bg-solar-hi px-4 py-2 text-sm font-medium text-obsidian transition hover:bg-white"
+            className="btn btn-glass h-9 px-4 text-sm"
           >
             Reserve
           </button>

@@ -19,7 +19,7 @@ export default function Hero() {
         className="absolute inset-0 bg-[linear-gradient(to_top,var(--color-obsidian)_0%,rgb(10_17_14/0.85)_28%,rgb(10_17_14/0.35)_55%,transparent_75%)]"
       />
 
-      <div className="relative mx-auto w-full max-w-[1400px] px-5 pb-14 pt-32 md:px-12 md:pb-20">
+      <div className="relative mx-auto w-full max-w-[1400px] px-5 pb-[max(3.5rem,calc(env(safe-area-inset-bottom)+2rem))] pt-32 md:px-12 md:pb-20">
         <p className="font-mono text-xs text-sage">Nepal · departs {DEPARTURE}</p>
 
         <h1 className="font-display mt-4 max-w-4xl text-[clamp(2.75rem,8vw,6.5rem)] leading-[0.95] text-ink">
@@ -36,14 +36,14 @@ export default function Hero() {
             href={BOOKING_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-solar-hi px-6 py-3 text-sm font-medium text-obsidian transition hover:bg-white"
+            className="btn btn-primary h-12 px-6 text-[15px]"
           >
             Reserve on WhatsApp <ArrowUpRight size={16} aria-hidden />
           </a>
           <button
             type="button"
             onClick={() => scrollToId('journey')}
-            className="inline-flex items-center gap-2 rounded-full border border-white/25 px-6 py-3 text-sm text-ink transition hover:border-white/60"
+            className="btn btn-glass h-12 px-6 text-[15px]"
           >
             See the 15 days <ArrowDown size={16} aria-hidden />
           </button>

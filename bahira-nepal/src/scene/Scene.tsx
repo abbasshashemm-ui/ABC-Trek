@@ -12,7 +12,8 @@ import Props from './props/Props'
 export default function Scene() {
   return (
     <Canvas
-      className="!fixed inset-0 z-0"
+      // 100lvh: run behind the iOS Safari toolbars instead of stopping above them
+      className="!fixed inset-x-0 top-0 z-0 !h-lvh"
       dpr={[1, 1.75]}
       camera={{ fov: 35, near: 0.5, far: 1200, position: [0, 30, 60] }}
       gl={{ antialias: false, powerPreference: 'high-performance', toneMapping: THREE.NoToneMapping }}
