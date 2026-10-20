@@ -16,17 +16,17 @@ export default function Hero() {
       {/* Dark floor under the copy so it reads over the 3D valley without hiding it */}
       <div
         aria-hidden
-        className="absolute inset-0 bg-[linear-gradient(to_top,var(--color-obsidian)_0%,rgb(10_17_14/0.85)_30%,rgb(10_17_14/0.45)_62%,transparent_88%)]"
+        className="absolute inset-0 bg-[linear-gradient(to_top,var(--color-obsidian)_0%,rgb(13_15_14/0.85)_30%,rgb(13_15_14/0.45)_62%,transparent_88%)]"
       />
 
-      <div className="relative mx-auto w-full max-w-[1400px] [text-shadow:0_1px_3px_rgb(10_17_14/0.6),0_2px_24px_rgb(10_17_14/0.85)] px-5 pb-[max(3.5rem,calc(env(safe-area-inset-bottom)+2rem))] pt-32 md:px-12 md:pb-20">
-        <p className="font-mono text-xs text-sage">Nepal · departs {DEPARTURE}</p>
+      <div className="shell relative [text-shadow:0_1px_3px_rgb(13_15_14/0.6),0_2px_24px_rgb(13_15_14/0.85)] pb-[max(3.5rem,calc(env(safe-area-inset-bottom)+2rem))] pt-32 md:pb-20">
+        <p className="eyebrow">Nepal · departs {DEPARTURE}</p>
 
-        <h1 className="font-display mt-4 max-w-4xl text-[clamp(2.75rem,8vw,6.5rem)] leading-[0.95] text-ink">
-          From Beirut to the foot of <em className="text-solar-hi">Annapurna</em>.
+        <h1 className="heading-1 mt-4 max-w-4xl text-ink">
+          From Beirut to the foot of <span className="text-gold">Annapurna</span>.
         </h1>
 
-        <p className="mt-6 max-w-xl text-base leading-relaxed text-ink/75 md:text-lg">
+        <p className="lead mt-6 max-w-xl">
           Kathmandu’s temples, the Chitwan jungle and two days on Phewa Lake, then six days on foot up the Modi
           Khola to Annapurna Base Camp and back. A small group, with a guide the whole way.
         </p>
@@ -45,11 +45,11 @@ export default function Hero() {
           </button>
         </div>
 
-        <dl className="mt-12 grid max-w-3xl grid-cols-2 gap-x-8 gap-y-6 border-t border-white/15 pt-6 sm:grid-cols-4">
+        <dl className="mt-12 grid max-w-4xl grid-cols-2 gap-x-8 gap-y-6 border-t border-ink/15 pt-6 sm:grid-cols-4">
           {FACTS.map((f) => (
             <div key={f.label} className="flex flex-col-reverse">
-              <dt className="mt-2 text-xs text-muted">{f.label}</dt>
-              <dd className="font-display tabular text-4xl leading-none text-ink md:text-5xl">{f.value}</dd>
+              <dt className="mt-2 text-sm text-muted">{f.label}</dt>
+              <dd className="figure text-4xl text-ink md:text-5xl">{f.value}</dd>
             </div>
           ))}
         </dl>

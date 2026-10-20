@@ -17,36 +17,34 @@ export default function DayStop({ item, side }: { item: ItineraryDay; side: 'lef
   return (
     <article
       data-day={item.day}
-      className={clsx(
-        'relative flex min-h-[100svh] items-center px-5 py-24 md:px-16 md:pr-40',
-        side === 'right' && 'md:justify-end',
-      )}
+      className="relative flex min-h-[100svh] items-center py-24"
     >
-      <div data-reveal className="relative w-full max-w-md [text-shadow:0_1px_3px_rgb(10_17_14/0.6),0_2px_24px_rgb(10_17_14/0.85)]">
-        {/* Base camp: fades in when the page settles here (SummitCelebration sets data-reached) */}
-        {summit && (
-          <p aria-hidden className="summit-figure font-display tabular mb-4 text-7xl leading-none text-ink md:text-8xl">
-            4,130 m
+      {/* Same page edges as the hero and guides; right-hand days keep clear of the altimeter */}
+      <div className={clsx('shell flex', side === 'right' && 'md:justify-end md:max-xl:pr-36')}>
+        <div data-reveal className="relative w-full max-w-md [text-shadow:0_1px_3px_rgb(13_15_14/0.6),0_2px_24px_rgb(13_15_14/0.85)]">
+          {/* Base camp: fades in when the page settles here (SummitCelebration sets data-reached) */}
+          {summit && (
+            <p aria-hidden className="summit-figure figure mb-4 text-7xl text-ink md:text-8xl">
+              4,130 m
+            </p>
+          )}
+
+          <PhotoStrip photos={photosFor(item.day)} title={item.title} />
+
+          <p className="tabular text-sm text-muted">
+            <span className="font-semibold text-ember">Day {pad(item.day)}</span>
+            <span aria-hidden> · </span>
+            {item.region}
+            <span aria-hidden> · </span>
+            {height(item.altitude)}
           </p>
-        )}
-
-        <PhotoStrip photos={photosFor(item.day)} title={item.title} />
-
-        <p className="font-mono text-xs text-ink/60">
-          <span className="text-solar-hi">Day {pad(item.day)}</span>
-          <span aria-hidden> · </span>
-          {item.region}
-          <span aria-hidden> · </span>
-          {height(item.altitude)}
-        </p>
-        <h2 className="font-display mt-3 text-[2.6rem] leading-[1] tracking-[-0.01em] text-ink md:text-6xl">
-          {item.title}
-        </h2>
-        <ul className="mt-5 space-y-2 text-[15px] leading-relaxed text-ink/80 md:text-base">
-          {item.bullets.map((b) => (
-            <li key={b}>{b}</li>
-          ))}
-        </ul>
+          <h2 className="heading-2 mt-2 text-ink">{item.title}</h2>
+          <ul className="mt-5 space-y-2 text-[15px] leading-relaxed text-ink/80 md:text-base">
+            {item.bullets.map((b) => (
+              <li key={b}>{b}</li>
+            ))}
+          </ul>
+        </div>
       </div>
     </article>
   )

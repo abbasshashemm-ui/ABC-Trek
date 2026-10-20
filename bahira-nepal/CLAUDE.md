@@ -45,8 +45,15 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
   and `src/data/photos.generated.json`. Never hand-edit the JSON. Non-trek photos need a `credits.json` entry
   (author, licence allowing commercial use, source URL); never ship placeholder or unlicensed images.
 
-- Type: Instrument Serif (headings, large figures), Geist (body), Geist Mono (small labels only; its full-width
-  commas look gappy at display sizes). Self-hosted via @fontsource; no Google Fonts request.
+- Theme comes from the Bahira logo; all tokens live in `@theme` in `src/index.css`, no hex values in components.
+  Neutrals: `obsidian` (page), `panel`, `ink` (cream text, also the primary button fill; tint with `/opacity`),
+  `muted` (warm grey). Accents: `ember` (logo ring orange: prices, day numbers, altitude, icons, focus rings) is the
+  only accent; `lotus` (logo blue) only for `.eyebrow` labels; `gold` only for the hero's highlighted word.
+  No yellow, sage or cool slate. Prayer-flag confetti keeps its real flag colours.
+- Type: Fraunces (headings, large figures; optical size on) and Figtree (everything else). No mono font.
+  Use the shared classes in `index.css`: `.heading-1`, `.heading-2`, `.eyebrow`, `.lead`, `.figure`.
+  Every section sits in the `shell` utility (72rem, 20px / 48px gutters) so left edges line up from header to booking.
+  Self-hosted via @fontsource; no Google Fonts request.
 - Copy: plain, specific, no filler ("embark", "unforgettable", "memories to treasure"). Every line names a real
   place, height or activity. Don't promise sightings or add activities that aren't in the itinerary.
 - UI libraries (Emil Kowalski's list): base-ui for dialogs (lightbox uses `Dialog.Trigger` + handle/payload so
@@ -68,7 +75,7 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
   `scrollToId` releases; reduced motion = number only. Hold = `lenis.stop()` then `scrollTo({ force })`.
 
 - Chrome (Apple-style): header is a translucent material (`.nav-material`, blur fading out at the bottom, no border),
-  padded by `env(safe-area-inset-*)`. Buttons: `.btn-primary` warm off-white fill, `.btn-glass` frosted; gold is an
+  padded by `env(safe-area-inset-*)`. Buttons: `.btn-primary` cream fill, `.btn-glass` frosted; ember is an
   accent only (prices, the trail), never a button fill. Press feedback on `:active`. Reduced transparency/contrast
   fall back to solid. `viewport-fit=cover`, no fixed theme-color, 3D canvas is `100lvh` so it runs behind Safari's bars.
 
