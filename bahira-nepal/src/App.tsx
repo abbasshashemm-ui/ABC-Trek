@@ -8,6 +8,7 @@ import Hero from './components/Hero'
 import Journey from './components/Journey'
 import Booking from './components/Booking'
 import SceneBoundary from './components/SceneBoundary'
+import SummitCelebration from './components/SummitCelebration'
 import { updateScroll } from './state/scrollStore'
 import { scrollApi } from './state/scrollApi'
 
@@ -46,6 +47,7 @@ export default function App() {
       </SceneBoundary>
       <TopNav />
       <AltimeterHUD />
+      <SummitCelebration />
       <main>
         <Hero />
         <Journey ref={journey} />

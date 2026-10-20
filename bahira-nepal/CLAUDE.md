@@ -40,6 +40,11 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
 - UI libraries (Emil Kowalski's list): base-ui for dialogs (lightbox uses `Dialog.Trigger` + handle/payload so
   focus management works), clsx for conditional classes.
 
+- Base-camp celebration (`SummitCelebration.tsx`): canvas-confetti in prayer-flag colours + badge when the scroll
+  climbs past Day 9 (dayFloat 7.85), then a 3 s scroll hold on the card. Skips jumps (>1 day/frame: reload restore,
+  anchors) and button-driven scrolls (`scrollApi.auto`). Hold = `lenis.stop()` then `scrollTo({ force })`; Lenis's
+  `lock` alone lets native scroll through. Escape or any `scrollToId` releases it; reduced motion: badge only.
+
 ## Data
 - `src/data/itinerary.ts`: all 15 days; every activity from the client's itinerary must stay.
 - `src/data/booking.ts`: $1,570 per person + international ticket (not included), optional insurance $120,
