@@ -42,7 +42,7 @@ export const inclusions: Inclusion[] = [
 ]
 
 /** Not in the package price; shown next to the inclusions so the total is never a surprise. */
-export const extras: (Inclusion & { price: string })[] = [
-  { icon: Plane, text: 'Return flight Beirut to Kathmandu, booked separately', price: 'Not included' },
+export const extras: (Inclusion & { price?: string })[] = [
+  { icon: Plane, text: 'Return flight Beirut to Kathmandu (book separately)' },
   { icon: ShieldCheck, text: 'Travel insurance, optional', price: `+${INSURANCE_PRICE}` },
 ]
