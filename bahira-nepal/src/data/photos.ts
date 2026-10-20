@@ -11,9 +11,11 @@ export interface Photo {
   source?: string
   /** true = from the trek leaders' own past treks */
   ours: boolean
+  /** sharp enough to fill the screen (shortest side of the largest rendition ≥ 1000 px) */
+  full: boolean
 }
 
-/** Written by `npm run photos`; keyed by 1-based itinerary day. */
-const byDay = generated as Record<string, Photo[]>
+/** Written by `npm run photos`; keyed by 1-based itinerary day, plus named galleries ("guides"). */
+const byKey = generated as Record<string, Photo[]>
 
-export const photosForDay = (day: number): Photo[] => byDay[String(day)] ?? []
+export const photosFor = (key: number | string): Photo[] => byKey[String(key)] ?? []

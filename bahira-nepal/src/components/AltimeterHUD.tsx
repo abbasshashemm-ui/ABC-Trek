@@ -9,6 +9,7 @@ export default function AltimeterHUD() {
   const readout = useRef<HTMLSpanElement>(null)
   const marker = useRef<HTMLDivElement>(null)
   const rel = useRef<HTMLSpanElement>(null)
+  const aside = useRef<HTMLElement>(null)
 
   useEffect(() => {
     let shown = scrollState.altitude
@@ -22,6 +23,15 @@ export default function AltimeterHUD() {
       if (readout.current) readout.current.textContent = `${v.toLocaleString("en-US")} m`
       if (marker.current) marker.current.style.bottom = `${(shown / RULER_MAX) * 100}%`
       if (rel.current) rel.current.textContent = `${Math.round(altitudeRatio(shown) * 100)}% of base camp`
+      // A full-screen photo covers the 3D scene, so its readout steps aside too.
+      if (aside.current) {
+        const mid = window.innerHeight / 2
+        const covered = Array.from(document.querySelectorAll('[data-moment]')).some((m) => {
+          const r = m.getBoundingClientRect()
+          return r.top < mid && r.bottom > mid
+        })
+        aside.current.style.opacity = covered ? '0' : ''
+      }
       raf = requestAnimationFrame(tick)
     }
     raf = requestAnimationFrame(tick)
@@ -30,8 +40,9 @@ export default function AltimeterHUD() {
 
   return (
     <aside
+      ref={aside}
       aria-label="Altitude"
-      className="pointer-events-none fixed right-3 top-1/2 z-30 hidden -translate-y-1/2 select-none sm:block md:right-6"
+      className="pointer-events-none fixed right-3 top-1/2 z-30 hidden -translate-y-1/2 select-none transition-opacity duration-500 sm:block md:right-6"
     >
       <div className="flex flex-col items-end gap-3 font-mono [text-shadow:0_1px_10px_rgba(5,10,8,0.8)]">
         <div className="rounded-xl bg-obsidian/45 px-3 py-2 text-right backdrop-blur-md">

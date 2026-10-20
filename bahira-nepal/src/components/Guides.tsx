@@ -1,0 +1,66 @@
+import { useState } from 'react'
+import clsx from 'clsx'
+import { Dialog } from '@base-ui/react/dialog'
+import { photosFor } from '../data/photos'
+import Lightbox from './Lightbox'
+
+/**
+ * "Meet your guides". Copy only states what the photos and the itinerary back up;
+ * replace it with Hmayed & Farhat's own words when they send a bio.
+ */
+export default function Guides() {
+  const photos = photosFor('guides')
+  const [handle] = useState(() => Dialog.createHandle<number>())
+
+  return (
+    <section
+      id="guides"
+      className="relative z-10 bg-[linear-gradient(to_bottom,var(--color-obsidian)_75%,transparent)] px-5 pb-32 pt-16 md:px-12 md:pt-24"
+    >
+      <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
+        <div>
+          <p className="font-mono text-xs text-sage">Your guides</p>
+          <h2 className="font-display mt-3 text-[2.6rem] leading-[1] tracking-[-0.01em] text-ink md:text-6xl">
+            You’ll walk with Hmayed &amp; Farhat.
+          </h2>
+          <p className="mt-6 max-w-md text-base leading-relaxed text-ink/75 md:text-lg">
+            They’ve done this trip themselves, from the temples of Kathmandu and the Chitwan jungle to Pokhara and the
+            climb to Annapurna Base Camp, and reached Everest Base Camp in 2025. This April they lead a small group
+            along the same trail.
+          </p>
+        </div>
+
+        {photos.length > 0 && (
+          <div className="grid grid-cols-2 gap-2">
+            {photos.map((p, i) => (
+              <Dialog.Trigger
+                key={p.src}
+                handle={handle}
+                payload={i}
+                aria-label={`Open photo: ${p.alt}`}
+                className={clsx(
+                  'group relative overflow-hidden rounded-2xl bg-white/5 text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-solar-hi',
+                  i === 2 ? 'col-span-2 aspect-[16/9]' : 'aspect-[3/4]',
+                )}
+              >
+                <img
+                  src={p.src}
+                  srcSet={p.srcSet}
+                  sizes={i === 2 ? '(min-width: 1024px) 640px, 90vw' : '(min-width: 1024px) 320px, 45vw'}
+                  alt={p.alt}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
+                />
+                <span className="absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,rgb(10_17_14/0.75),transparent)] px-3 pb-2.5 pt-8 text-xs text-ink/90">
+                  {p.alt}
+                </span>
+              </Dialog.Trigger>
+            ))}
+          </div>
+        )}
+      </div>
+      {photos.length > 0 && <Lightbox handle={handle} photos={photos} title="Hmayed & Farhat" />}
+    </section>
+  )
+}
