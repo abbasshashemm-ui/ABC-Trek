@@ -1,4 +1,4 @@
-# BAHIRA — "The Golden Thread"
+# Bahira Expeditions: Beirut to Annapurna Base Camp
 
 3D scrollytelling promo for a 15-day Beirut → Annapurna Base Camp expedition.
 Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwind v4.
@@ -33,7 +33,14 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
   and `src/data/photos.generated.json`. Never hand-edit the JSON. Non-trek photos need a `credits.json` entry
   (author, licence allowing commercial use, source URL); never ship placeholder or unlicensed images.
 
+- Type: Instrument Serif (headings, large figures), Geist (body), Geist Mono (small labels only; its full-width
+  commas look gappy at display sizes). Self-hosted via @fontsource; no Google Fonts request.
+- Copy: plain, specific, no filler ("embark", "unforgettable", "memories to treasure"). Every line names a real
+  place, height or activity. Don't promise sightings or add activities that aren't in the itinerary.
+- UI libraries (Emil Kowalski's list): base-ui for dialogs (lightbox uses `Dialog.Trigger` + handle/payload so
+  focus management works), clsx for conditional classes.
+
 ## Data
-- `src/data/itinerary.ts`: the full 15-day dataset (do not summarise).
+- `src/data/itinerary.ts`: all 15 days; every activity from the client's itinerary must stay.
 - `src/data/booking.ts`: $1,570 per person + international ticket (not included), optional insurance $120,
   seats/date, 9 inclusions + `extras`, and `BOOKING_URL` (WhatsApp deep link, +961 71 661 075).

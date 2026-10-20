@@ -19,9 +19,9 @@ export default function AltimeterHUD() {
       last = now
       shown += (scrollState.altitude - shown) * (1 - Math.exp(-6 * dt))
       const v = Math.round(shown)
-      if (readout.current) readout.current.textContent = `${v.toLocaleString('en-US')}m`
+      if (readout.current) readout.current.textContent = `${v.toLocaleString("en-US")} m`
       if (marker.current) marker.current.style.bottom = `${(shown / RULER_MAX) * 100}%`
-      if (rel.current) rel.current.textContent = `${Math.round(altitudeRatio(shown) * 100)}% OF ABC`
+      if (rel.current) rel.current.textContent = `${Math.round(altitudeRatio(shown) * 100)}% of base camp`
       raf = requestAnimationFrame(tick)
     }
     raf = requestAnimationFrame(tick)
@@ -35,13 +35,13 @@ export default function AltimeterHUD() {
     >
       <div className="flex flex-col items-end gap-3 font-mono [text-shadow:0_1px_10px_rgba(5,10,8,0.8)]">
         <div className="rounded-xl bg-obsidian/45 px-3 py-2 text-right backdrop-blur-md">
-          <div className="text-[10px] tracking-[0.2em] text-muted">ALTITUDE</div>
-          <span ref={readout} className="text-2xl font-bold text-solar-hi md:text-3xl">
+          <div className="text-[11px] text-muted">Altitude</div>
+          <span ref={readout} className="font-sans tabular text-2xl font-semibold text-solar-hi md:text-3xl">
             1,400m
           </span>
           <div>
-            <span ref={rel} className="text-[10px] tracking-widest text-muted">
-              0% OF ABC
+            <span ref={rel} className="text-[11px] text-muted">
+              0% of base camp
             </span>
           </div>
         </div>

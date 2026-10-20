@@ -35,7 +35,7 @@
     { "file": "abc trek..jpg", "alt": "A trekker climbing through grassland beneath snow peaks" }
   ],
   "9": [
-    { "file": "8CC7916A-1BAD-464E-9858-DBE654C1B2CB.jpg", "alt": "Hmayed and Farhat at the Annapurna Base Camp sign, 4,130 m", "ours": true, "credit": "Hmayed & Farhat · Annapurna Base Camp" },
+    { "file": "8CC7916A-1BAD-464E-9858-DBE654C1B2CB.jpg", "alt": "Hmayed and Farhat at the Annapurna Base Camp sign, 4,130 m", "ours": true, "credit": "Photo: Hmayed & Farhat" },
     { "file": "abc.jpg", "alt": "The Namaste sign and prayer flags at Annapurna Base Camp" }
   ],
   "11": [
@@ -46,6 +46,6 @@
     { "file": "Photo Nepal - Share Nepal_s Beauty.jpg", "alt": "Boudhanath Stupa lit at dusk, Kathmandu" }
   ],
   "15": [
-    { "file": "IMG_2736 2.jpg", "alt": "Hmayed and Farhat with the Lebanese flag at Everest Base Camp", "ours": true, "credit": "Hmayed & Farhat · Everest Base Camp, 2025" }
+    { "file": "IMG_2736 2.jpg", "alt": "Hmayed and Farhat with the Lebanese flag at Everest Base Camp", "ours": true, "credit": "Photo: Hmayed & Farhat, 2025" }
   ]
 }
