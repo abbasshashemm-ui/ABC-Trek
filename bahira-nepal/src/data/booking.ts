@@ -7,6 +7,8 @@ import {
   PawPrint,
   Waves,
   Bike,
+  FileCheck2,
+  Compass,
   BedDouble,
   type LucideIcon,
 } from 'lucide-react'
@@ -45,6 +47,8 @@ export const inclusions: Inclusion[] = [
   { icon: PawPrint, text: 'Elephant ride' },
   { icon: Waves, text: 'Canoe & kayak' },
   { icon: Bike, text: '2 bike rentals' },
+  { icon: FileCheck2, text: 'Trek permits' },
+  { icon: Compass, text: 'Expedition guide' },
   { icon: BedDouble, text: 'Hotels, breakfast & lunch' },
 ]
 

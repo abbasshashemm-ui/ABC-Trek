@@ -52,12 +52,12 @@ export default function Booking() {
 
         <div>
           <h3 className="text-sm font-medium text-ink">What {PRICE} covers</h3>
-          {/* 6 perks = an even 3×2 at every width, so no orphan tile */}
-          <ul className="mt-3 grid grid-cols-3 gap-2">
+          {/* 8 perks = even rows at every width (no orphan tile); the narrow desktop column goes back to 2 wide rows */}
+          <ul className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-2">
             {inclusions.map(({ icon: Icon, text }) => (
               <li
                 key={text}
-                className="flex flex-col gap-2 rounded-xl bg-white/[0.04] p-3 text-[13px] leading-tight text-ink/85 ring-1 ring-white/10 md:text-sm"
+                className="flex flex-col gap-2 rounded-xl lg:flex-row lg:items-center lg:gap-3 bg-white/[0.04] p-3 text-[13px] leading-tight text-ink/85 ring-1 ring-white/10 md:text-sm"
               >
                 <Icon size={18} className="text-sage" aria-hidden />
                 {text}
