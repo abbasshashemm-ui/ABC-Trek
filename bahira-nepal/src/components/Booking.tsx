@@ -1,20 +1,28 @@
 import clsx from 'clsx'
 import { ArrowUpRight } from 'lucide-react'
-import { inclusions, extras, DEPARTURE, PRICE, INSURANCE_PRICE, SEATS, BOOKING_URL } from '../data/booking'
+import { inclusions, extras, DEPARTURE, PRICE, INSURANCE_PRICE, SEATS, CONTACTS } from '../data/booking'
 
-function ReserveButton({ className }: { className?: string }) {
+/** One WhatsApp button per guide; either can take the booking. */
+function ReserveButtons({ className }: { className?: string }) {
   return (
-    <a
-      href={BOOKING_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={clsx(
-        'btn btn-primary h-12 w-full px-6 text-[15px] sm:w-auto',
-        className,
-      )}
-    >
-      Reserve on WhatsApp <ArrowUpRight size={16} aria-hidden />
-    </a>
+    <div className={clsx('grid grid-cols-2 gap-2 sm:max-w-sm', className)}>
+      {CONTACTS.map((c) => (
+        <a
+          key={c.name}
+          href={c.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Reserve on WhatsApp with ${c.name}, ${c.phone}`}
+          // Same style for both: neither guide is the "main" contact.
+          className="btn btn-primary h-auto flex-col gap-0.5 px-4 py-3"
+        >
+          <span className="inline-flex items-center gap-1.5 text-[15px]">
+            {c.name} <ArrowUpRight size={15} aria-hidden />
+          </span>
+          <span className="tabular text-xs font-normal opacity-70">{c.phone}</span>
+        </a>
+      ))}
+    </div>
   )
 }
 
@@ -38,8 +46,8 @@ export default function Booking() {
           </p>
           <p className="mt-2 text-sm text-ink/70">International flights to Kathmandu are not included.</p>
 
-          <ReserveButton className="mt-7" />
-          <p className="mt-3 text-center text-xs text-muted sm:text-left">Opens a chat with Bahira on WhatsApp.</p>
+          <p className="mt-7 text-sm text-ink">Reserve on WhatsApp with</p>
+          <ReserveButtons className="mt-3" />
         </div>
 
         <div>
@@ -85,8 +93,8 @@ export default function Booking() {
                 <dd className="text-sm text-muted">Optional, +{INSURANCE_PRICE}</dd>
               </div>
             </dl>
-            <ReserveButton className="mt-5" />
-            <p className="mt-3 text-center text-xs text-muted">Opens a chat with Bahira on WhatsApp.</p>
+            <p className="mt-5 text-center text-sm text-ink">Reserve on WhatsApp with</p>
+            <ReserveButtons className="mt-3" />
           </div>
         </div>
       </div>

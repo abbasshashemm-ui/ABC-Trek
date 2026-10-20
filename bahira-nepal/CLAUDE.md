@@ -41,7 +41,7 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
   focus management works), clsx for conditional classes.
 
 - Layout (direction C, quiet/premium, phone first): no cards. Each day is a `DayStop` (`[data-day]`) with text on the
-  valley over a soft radial scrim and its 2-3 photos above it (`PhotoStrip`, tap = gallery). Full-screen photo moments
+  valley under ONE journey-wide tint (`Journey.tsx`, fades in/out at the ends; per-day scrims caused visible bands) and its 2-3 photos above it (`PhotoStrip`, tap = gallery). Full-screen photo moments
   were tried and dropped (client preferred the grid). `updateScroll` interpolates between the real `[data-day]` centres.
   Header auto-hides on scroll down, returns on scroll up/focus.
 - Guides (`Guides.tsx`, manifest key `"guides"`): copy only states what photos/itinerary back up; replace with their bio.
@@ -57,4 +57,5 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
 ## Data
 - `src/data/itinerary.ts`: all 15 days; every activity from the client's itinerary must stay.
 - `src/data/booking.ts`: $1,570 per person + international ticket (not included), optional insurance $120,
-  seats/date, 9 inclusions + `extras`, and `BOOKING_URL` (WhatsApp deep link, +961 71 661 075).
+  seats/date, 9 inclusions + `extras`, and `CONTACTS`: Hmayed +961 71 661 075 and Farhat +961 79 183 091, each with
+  a WhatsApp link and personal greeting. Both buttons look identical; hero "Reserve a seat" scrolls to booking.

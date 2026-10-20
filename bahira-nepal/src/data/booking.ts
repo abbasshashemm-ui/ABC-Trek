@@ -19,10 +19,22 @@ export const PRICE = '$1,570'
 export const PRICE_EXCLUDES = 'international flight ticket'
 export const INSURANCE_PRICE = '$120'
 export const SEATS = 9
-/** International format, digits only (wa.me requires no +, spaces or dashes). */
-export const WHATSAPP_NUMBER = '96171661075'
-const WHATSAPP_MESSAGE = `Hi Bahira, I'd like to reserve a seat on the ${DEPARTURE} Nepal expedition (${PRICE} + ${PRICE_EXCLUDES}).`
-export const BOOKING_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`
+export interface Contact {
+  name: string
+  /** As shown on the page. */
+  phone: string
+  /** WhatsApp link with a greeting prefilled for this person. */
+  url: string
+}
+
+const contact = (name: string, phone: string): Contact => {
+  const digits = phone.replace(/\D/g, '') // wa.me wants international digits only: no +, spaces or dashes
+  const message = `Hi ${name}, I'd like to reserve a seat on the ${DEPARTURE} Nepal expedition (${PRICE} + ${PRICE_EXCLUDES}).`
+  return { name, phone, url: `https://wa.me/${digits}?text=${encodeURIComponent(message)}` }
+}
+
+/** Either guide can take a booking. */
+export const CONTACTS: Contact[] = [contact('Hmayed', '+961 71 661 075'), contact('Farhat', '+961 79 183 091')]
 
 export interface Inclusion {
   icon: LucideIcon
