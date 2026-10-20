@@ -26,13 +26,29 @@ export function altitudeAt(dayFloat: number): number {
 
 export const altitudeRatio = (alt: number) => Math.min(1, alt / ABC_ALTITUDE)
 
+/**
+ * Map scroll position to a fractional day. Each day's anchor is its `[data-day]` element; the day is
+ * "current" when that element's centre crosses the viewport centre. Anchors can have different
+ * heights (some days add a full-screen photo), so we interpolate between their real positions.
+ */
 export function updateScroll(journeyEl: HTMLElement | null) {
   if (!journeyEl) return
-  const rect = journeyEl.getBoundingClientRect()
-  const vh = window.innerHeight
-  const sectionH = rect.height / DAY_COUNT
-  const raw = (-rect.top + vh / 2 - sectionH / 2) / sectionH
-  const dayFloat = Math.min(DAY_COUNT - 1, Math.max(0, raw))
+  const anchors = journeyEl.querySelectorAll<HTMLElement>('[data-day]')
+  if (anchors.length < 2) return
+  const mid = window.innerHeight / 2
+  const centres = Array.from(anchors, (a) => {
+    const r = a.getBoundingClientRect()
+    return r.top + r.height / 2
+  })
+  let dayFloat: number
+  if (mid <= centres[0]) dayFloat = 0
+  else if (mid >= centres[centres.length - 1]) dayFloat = centres.length - 1
+  else {
+    let i = 0
+    while (centres[i + 1] < mid) i++
+    dayFloat = i + (mid - centres[i]) / (centres[i + 1] - centres[i])
+  }
+  dayFloat = Math.min(DAY_COUNT - 1, Math.max(0, dayFloat))
   scrollState.dayFloat = dayFloat
   scrollState.progress = dayFloat / (DAY_COUNT - 1)
   scrollState.altitude = altitudeAt(dayFloat)

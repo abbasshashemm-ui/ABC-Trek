@@ -32,7 +32,9 @@ const MANIFEST = join(ROOT, 'src', 'data', 'photos.generated.json')
 
 const TREK_CREDIT = 'Hmayed & Farhat · past trek'
 const PER_DAY = 3
-const WIDTHS = [800, 1600]
+const WIDTHS = [800, 1600, 2400]
+/** Shortest side of the largest rendition needed to fill a phone or laptop screen without looking soft. */
+const FULL_MIN = 1000
 
 /** Folder name -> itinerary days (1-based) spent there. */
 const PLACES = {
@@ -99,13 +101,14 @@ async function processPhoto(path, slug, info) {
     w = out.width
     h = out.height
   }
-  return { src: `/photos/${slug}-${WIDTHS[0]}.webp`, srcSet: srcSet.join(', '), width: w, height: h, ...info }
+  return { src: `/photos/${slug}-${WIDTHS[0]}.webp`, srcSet: srcSet.join(', '), width: w, height: h, full: Math.min(w, h) >= FULL_MIN, ...info }
 }
 
 async function fromManifest(byDay) {
   const manifest = JSON.parse(await readFile(join(SRC, 'manifest.json'), 'utf8'))
   for (const [day, list] of Object.entries(manifest)) {
     if (day.startsWith('_')) continue // comments
+    // Non-numeric keys (e.g. "guides") are named galleries, not itinerary days.
     if (list.length > PER_DAY) console.warn(`day ${day}: ${list.length} photos listed, only the first ${PER_DAY} are shown`)
     for (const [i, p] of list.entries()) {
       const path = join(SRC, p.file)

@@ -5,6 +5,7 @@
       "srcSet": "/photos/day01-1-800.webp 683w, /photos/day01-1-1600.webp 736w",
       "width": 736,
       "height": 862,
+      "full": false,
       "alt": "Prayer flags over the evening streets of Thamel, Kathmandu",
       "ours": false
     },
@@ -13,6 +14,7 @@
       "srcSet": "/photos/day01-2-800.webp 600w, /photos/day01-2-1600.webp 736w",
       "width": 736,
       "height": 981,
+      "full": false,
       "alt": "Evening aarti ceremony at Pashupatinath Temple",
       "ours": false
     },
@@ -21,6 +23,7 @@
       "srcSet": "/photos/day01-3-800.webp 655w, /photos/day01-3-1600.webp 735w",
       "width": 735,
       "height": 898,
+      "full": false,
       "alt": "The ghats of Pashupatinath on the Bagmati river",
       "ours": false
     }
@@ -31,6 +34,7 @@
       "srcSet": "/photos/day02-1-800.webp 800w, /photos/day02-1-1600.webp 1500w",
       "width": 1500,
       "height": 1000,
+      "full": true,
       "alt": "Swayambhunath, the Monkey Temple, under prayer flags",
       "ours": false
     },
@@ -39,6 +43,7 @@
       "srcSet": "/photos/day02-2-800.webp 600w, /photos/day02-2-1600.webp 736w",
       "width": 736,
       "height": 981,
+      "full": false,
       "alt": "The golden spire of Swayambhunath Stupa",
       "ours": false
     },
@@ -47,6 +52,7 @@
       "srcSet": "/photos/day02-3-800.webp 735w",
       "width": 735,
       "height": 414,
+      "full": false,
       "alt": "Boudhanath Stupa ringed with prayer flags",
       "ours": false
     }
@@ -57,6 +63,7 @@
       "srcSet": "/photos/day03-1-800.webp 533w, /photos/day03-1-1600.webp 736w",
       "width": 736,
       "height": 1104,
+      "full": false,
       "alt": "Dugout canoe on the river in Chitwan",
       "ours": false
     },
@@ -65,6 +72,7 @@
       "srcSet": "/photos/day03-2-800.webp 739w",
       "width": 739,
       "height": 415,
+      "full": false,
       "alt": "Elephants bathing in a Chitwan river",
       "ours": false
     },
@@ -73,6 +81,7 @@
       "srcSet": "/photos/day03-3-800.webp 502w",
       "width": 502,
       "height": 611,
+      "full": false,
       "alt": "Elephants and rhinos in the Chitwan forest",
       "ours": false
     }
@@ -83,6 +92,7 @@
       "srcSet": "/photos/day04-1-800.webp 736w",
       "width": 736,
       "height": 736,
+      "full": false,
       "alt": "Elephant ride through tall grass beside a rhino, Chitwan",
       "ours": false
     },
@@ -91,6 +101,7 @@
       "srcSet": "/photos/day04-2-800.webp 516w",
       "width": 516,
       "height": 387,
+      "full": false,
       "alt": "Jeep safari through the Chitwan jungle",
       "ours": false
     },
@@ -99,6 +110,7 @@
       "srcSet": "/photos/day04-3-800.webp 450w, /photos/day04-3-1600.webp 736w",
       "width": 736,
       "height": 1308,
+      "full": false,
       "alt": "Sunrise from elephant-back in Sauraha, Chitwan",
       "ours": false
     }
@@ -109,6 +121,7 @@
       "srcSet": "/photos/day05-1-800.webp 658w, /photos/day05-1-1600.webp 720w",
       "width": 720,
       "height": 876,
+      "full": false,
       "alt": "Painted boats on Phewa Lake below Machhapuchhre",
       "ours": false
     }
@@ -119,6 +132,7 @@
       "srcSet": "/photos/day06-1-800.webp 736w",
       "width": 736,
       "height": 736,
+      "full": false,
       "alt": "The Pumdikot Shiva statue above Pokhara and Phewa Lake",
       "ours": false
     },
@@ -127,6 +141,7 @@
       "srcSet": "/photos/day06-2-800.webp 600w, /photos/day06-2-1600.webp 736w",
       "width": 736,
       "height": 981,
+      "full": false,
       "alt": "The spiral entrance to Gupteshwor Mahadev Cave",
       "ours": false
     }
@@ -137,6 +152,7 @@
       "srcSet": "/photos/day07-1-800.webp 800w, /photos/day07-1-1600.webp 1600w",
       "width": 1600,
       "height": 1280,
+      "full": true,
       "alt": "Blue-roofed lodges of Sinuwa on a forested ridge",
       "ours": false
     },
@@ -145,6 +161,7 @@
       "srcSet": "/photos/day07-2-800.webp 800w, /photos/day07-2-1600.webp 1200w",
       "width": 1200,
       "height": 900,
+      "full": false,
       "alt": "Trekkers on the trail toward Annapurna",
       "ours": false
     }
@@ -152,9 +169,20 @@
   "8": [
     {
       "src": "/photos/day08-1-800.webp",
-      "srcSet": "/photos/day08-1-800.webp 638w",
+      "srcSet": "/photos/day08-1-800.webp 640w, /photos/day08-1-1600.webp 1280w, /photos/day08-1-2400.webp 1440w",
+      "width": 1440,
+      "height": 1800,
+      "full": true,
+      "alt": "On the trail up the Modi Khola valley toward base camp",
+      "credit": "Photo: Hmayed & Farhat",
+      "ours": true
+    },
+    {
+      "src": "/photos/day08-2-800.webp",
+      "srcSet": "/photos/day08-2-800.webp 638w",
       "width": 638,
       "height": 480,
+      "full": false,
       "alt": "A trekker climbing through grassland beneath snow peaks",
       "ours": false
     }
@@ -162,9 +190,10 @@
   "9": [
     {
       "src": "/photos/day09-1-800.webp",
-      "srcSet": "/photos/day09-1-800.webp 640w, /photos/day09-1-1600.webp 1281w",
-      "width": 1281,
-      "height": 1600,
+      "srcSet": "/photos/day09-1-800.webp 640w, /photos/day09-1-1600.webp 1281w, /photos/day09-1-2400.webp 1440w",
+      "width": 1440,
+      "height": 1799,
+      "full": true,
       "alt": "Hmayed and Farhat at the Annapurna Base Camp sign, 4,130 m",
       "credit": "Photo: Hmayed & Farhat",
       "ours": true
@@ -174,6 +203,7 @@
       "srcSet": "/photos/day09-2-800.webp 640w, /photos/day09-2-1600.webp 1080w",
       "width": 1080,
       "height": 1350,
+      "full": true,
       "alt": "The Namaste sign and prayer flags at Annapurna Base Camp",
       "ours": false
     }
@@ -181,9 +211,10 @@
   "10": [
     {
       "src": "/photos/day10-1-800.webp",
-      "srcSet": "/photos/day10-1-800.webp 800w, /photos/day10-1-1600.webp 1600w",
-      "width": 1600,
-      "height": 423,
+      "srcSet": "/photos/day10-1-800.webp 800w, /photos/day10-1-1600.webp 1600w, /photos/day10-1-2400.webp 2048w",
+      "width": 2048,
+      "height": 541,
+      "full": false,
       "alt": "Sinuwa’s lodges strung along a forested ridge above the Modi Khola",
       "ours": false
     }
@@ -194,6 +225,7 @@
       "srcSet": "/photos/day11-1-800.webp 533w, /photos/day11-1-1600.webp 550w",
       "width": 550,
       "height": 826,
+      "full": false,
       "alt": "Bathing in the natural hot springs at Jhinu Danda",
       "ours": false
     },
@@ -202,6 +234,7 @@
       "srcSet": "/photos/day11-2-800.webp 678w",
       "width": 678,
       "height": 452,
+      "full": false,
       "alt": "Steaming hot-spring pool beside the river at Jhinu Danda",
       "ours": false
     }
@@ -209,9 +242,10 @@
   "12": [
     {
       "src": "/photos/day12-1-800.webp",
-      "srcSet": "/photos/day12-1-800.webp 800w, /photos/day12-1-1600.webp 1600w",
-      "width": 1600,
-      "height": 1200,
+      "srcSet": "/photos/day12-1-800.webp 800w, /photos/day12-1-1600.webp 1600w, /photos/day12-1-2400.webp 2048w",
+      "width": 2048,
+      "height": 1536,
+      "full": true,
       "alt": "The suspension bridge over the Modi Khola below the terraces of Jhinu Danda",
       "ours": false
     }
@@ -222,6 +256,7 @@
       "srcSet": "/photos/day13-1-800.webp 800w",
       "width": 800,
       "height": 530,
+      "full": false,
       "alt": "Machhapuchhre reflected in Phewa Lake, Pokhara",
       "ours": false
     }
@@ -232,6 +267,7 @@
       "srcSet": "/photos/day14-1-800.webp 735w",
       "width": 735,
       "height": 490,
+      "full": false,
       "alt": "Boudhanath Stupa lit at dusk, Kathmandu",
       "ours": false
     }
@@ -239,11 +275,44 @@
   "15": [
     {
       "src": "/photos/day15-1-800.webp",
-      "srcSet": "/photos/day15-1-800.webp 640w, /photos/day15-1-1600.webp 1280w",
-      "width": 1280,
-      "height": 1600,
+      "srcSet": "/photos/day15-1-800.webp 640w, /photos/day15-1-1600.webp 1280w, /photos/day15-1-2400.webp 1920w",
+      "width": 1920,
+      "height": 2400,
+      "full": true,
       "alt": "Hmayed and Farhat with the Lebanese flag at Everest Base Camp",
       "credit": "Photo: Hmayed & Farhat, 2025",
+      "ours": true
+    }
+  ],
+  "guides": [
+    {
+      "src": "/photos/dayguides-1-800.webp",
+      "srcSet": "/photos/dayguides-1-800.webp 600w, /photos/dayguides-1-1600.webp 1200w, /photos/dayguides-1-2400.webp 1440w",
+      "width": 1440,
+      "height": 1920,
+      "full": true,
+      "alt": "At the World Peace Pagoda, Pokhara",
+      "credit": "Photo: Hmayed & Farhat",
+      "ours": true
+    },
+    {
+      "src": "/photos/dayguides-2-800.webp",
+      "srcSet": "/photos/dayguides-2-800.webp 600w, /photos/dayguides-2-1600.webp 1200w, /photos/dayguides-2-2400.webp 1440w",
+      "width": 1440,
+      "height": 1920,
+      "full": true,
+      "alt": "With an elephant in Chitwan",
+      "credit": "Photo: Hmayed & Farhat",
+      "ours": true
+    },
+    {
+      "src": "/photos/dayguides-3-800.webp",
+      "srcSet": "/photos/dayguides-3-800.webp 800w, /photos/dayguides-3-1600.webp 1440w",
+      "width": 1440,
+      "height": 754,
+      "full": false,
+      "alt": "On the trail in the Everest region",
+      "credit": "Photo: Hmayed & Farhat",
       "ours": true
     }
   ]
