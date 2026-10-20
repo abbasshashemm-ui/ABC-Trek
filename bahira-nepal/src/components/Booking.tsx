@@ -44,10 +44,14 @@ export default function Booking() {
 
         <div>
           <h3 className="text-sm font-medium text-ink">What {PRICE} covers</h3>
-          <ul className={clsx('mt-3', listClass)}>
+          {/* 9 perks = an even 3×3 at every width, so no orphan tile */}
+          <ul className="mt-3 grid grid-cols-3 gap-2">
             {inclusions.map(({ icon: Icon, text }) => (
-              <li key={text} className={clsx(rowClass, 'text-ink/85')}>
-                <Icon size={17} className="mt-px shrink-0 text-sage" aria-hidden />
+              <li
+                key={text}
+                className="flex flex-col gap-2 rounded-xl bg-white/[0.04] p-3 text-[13px] leading-tight text-ink/85 ring-1 ring-white/10 md:text-sm"
+              >
+                <Icon size={18} className="text-sage" aria-hidden />
                 {text}
               </li>
             ))}

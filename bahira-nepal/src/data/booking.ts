@@ -30,15 +30,15 @@ export interface Inclusion {
 }
 
 export const inclusions: Inclusion[] = [
-  { icon: PlaneLanding, text: 'Domestic flight, Pokhara to Kathmandu' },
-  { icon: Bus, text: 'All ground transport inside Nepal' },
-  { icon: Binoculars, text: 'Jeep safari in Chitwan National Park' },
-  { icon: PawPrint, text: 'Elephant ride through the Chitwan forest' },
-  { icon: Waves, text: 'River canoe in Chitwan, kayak on Phewa Lake' },
-  { icon: Bike, text: 'Two bike rentals' },
-  { icon: FileCheck2, text: 'TIMS card and Annapurna Conservation Area permit' },
-  { icon: Compass, text: 'An expedition guide for the whole trip' },
-  { icon: BedDouble, text: 'Hotels and mountain teahouses, breakfast and lunch every day' },
+  { icon: PlaneLanding, text: 'Domestic flight' },
+  { icon: Bus, text: 'Ground transport' },
+  { icon: Binoculars, text: 'Jeep safari' },
+  { icon: PawPrint, text: 'Elephant ride' },
+  { icon: Waves, text: 'Canoe & kayak' },
+  { icon: Bike, text: '2 bike rentals' },
+  { icon: FileCheck2, text: 'Trek permits' },
+  { icon: Compass, text: 'Expedition guide' },
+  { icon: BedDouble, text: 'Hotels, breakfast & lunch' },
 ]
 
 /** Not in the package price; shown next to the inclusions so the total is never a surprise. */
