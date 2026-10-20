@@ -1,5 +1,5 @@
-import { ArrowDown, ArrowUpRight } from 'lucide-react'
-import { BOOKING_URL, DEPARTURE, PRICE, SEATS } from '../data/booking'
+import { ArrowDown } from 'lucide-react'
+import { DEPARTURE, PRICE, SEATS } from '../data/booking'
 import { ABC_ALTITUDE } from '../data/itinerary'
 import { scrollToId } from '../state/scrollApi'
 
@@ -32,14 +32,10 @@ export default function Hero() {
         </p>
 
         <div className="pointer-events-auto mt-8 flex flex-wrap items-center gap-3">
-          <a
-            href={BOOKING_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-primary h-12 px-6 text-[15px]"
-          >
-            Reserve on WhatsApp <ArrowUpRight size={16} aria-hidden />
-          </a>
+          {/* Goes to booking, where both guides' WhatsApp numbers sit next to the price */}
+          <button type="button" onClick={() => scrollToId('booking')} className="btn btn-primary h-12 px-6 text-[15px]">
+            Reserve a seat <ArrowDown size={16} aria-hidden />
+          </button>
           <button
             type="button"
             onClick={() => scrollToId('journey')}

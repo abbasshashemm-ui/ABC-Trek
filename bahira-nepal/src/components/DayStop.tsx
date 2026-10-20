@@ -7,7 +7,8 @@ const height = (m: number) => (m === 0 ? 'sea level' : `${m.toLocaleString('en-U
 const pad = (n: number) => String(n).padStart(2, '0')
 
 /**
- * One itinerary day, without a card: type sits straight on the valley over a soft scrim,
+ * One itinerary day, without a card: type sits straight on the valley (the journey-wide tint
+ * in Journey.tsx keeps it legible),
  * with the day's 2–3 photos above it (tap to open the gallery).
  */
 export default function DayStop({ item, side }: { item: ItineraryDay; side: 'left' | 'right' }) {
@@ -21,19 +22,7 @@ export default function DayStop({ item, side }: { item: ItineraryDay; side: 'lef
         side === 'right' && 'md:justify-end',
       )}
     >
-      {/* Scrim: darkens behind the text only, so the valley stays visible around it */}
-      <div
-        aria-hidden
-        className={clsx(
-          'pointer-events-none absolute inset-0',
-          side === 'left'
-            ? 'bg-[radial-gradient(ellipse_70%_60%_at_20%_50%,rgb(10_17_14/0.82),transparent_75%)]'
-            : 'bg-[radial-gradient(ellipse_70%_60%_at_80%_50%,rgb(10_17_14/0.82),transparent_75%)]',
-          'max-md:bg-[radial-gradient(ellipse_120%_65%_at_50%_55%,rgb(10_17_14/0.85),transparent_80%)]',
-        )}
-      />
-
-      <div data-reveal className="relative w-full max-w-md">
+      <div data-reveal className="relative w-full max-w-md [text-shadow:0_1px_20px_rgb(10_17_14/0.75)]">
         {/* Base camp: fades in when the page settles here (SummitCelebration sets data-reached) */}
         {summit && (
           <p aria-hidden className="summit-figure font-display tabular mb-4 text-7xl leading-none text-ink md:text-8xl">
