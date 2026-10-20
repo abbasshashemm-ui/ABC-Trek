@@ -44,7 +44,7 @@ export default function Booking() {
             <span className="font-display tabular text-6xl leading-none text-solar-hi">{PRICE}</span>
             <span className="text-sm text-muted">per person</span>
           </p>
-          <p className="mt-2 text-sm text-ink/70">International flights to Kathmandu are not included.</p>
+          <p className="mt-2 text-sm text-ink/70">Flights are not included.</p>
 
           <p className="mt-7 text-sm text-ink">Reserve on WhatsApp with</p>
           <ReserveButtons className="mt-3" />
@@ -52,7 +52,7 @@ export default function Booking() {
 
         <div>
           <h3 className="text-sm font-medium text-ink">What {PRICE} covers</h3>
-          {/* 9 perks = an even 3×3 at every width, so no orphan tile */}
+          {/* 6 perks = an even 3×2 at every width, so no orphan tile */}
           <ul className="mt-3 grid grid-cols-3 gap-2">
             {inclusions.map(({ icon: Icon, text }) => (
               <li
@@ -87,6 +87,10 @@ export default function Booking() {
               <div className="flex items-baseline justify-between gap-4 border-b border-white/10 py-3">
                 <dt className="text-ink/70">International flight</dt>
                 <dd className="text-sm text-muted">Book separately</dd>
+              </div>
+              <div className="flex items-baseline justify-between gap-4 border-b border-white/10 py-3">
+                <dt className="text-ink/70">Domestic flight</dt>
+                <dd className="text-sm text-muted">Not included</dd>
               </div>
               <div className="flex items-baseline justify-between gap-4 py-3">
                 <dt className="text-ink/70">Travel insurance</dt>

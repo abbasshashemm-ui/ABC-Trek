@@ -7,8 +7,6 @@ import {
   PawPrint,
   Waves,
   Bike,
-  FileCheck2,
-  Compass,
   BedDouble,
   type LucideIcon,
 } from 'lucide-react'
@@ -42,19 +40,17 @@ export interface Inclusion {
 }
 
 export const inclusions: Inclusion[] = [
-  { icon: PlaneLanding, text: 'Domestic flight' },
   { icon: Bus, text: 'Ground transport' },
   { icon: Binoculars, text: 'Jeep safari' },
   { icon: PawPrint, text: 'Elephant ride' },
   { icon: Waves, text: 'Canoe & kayak' },
   { icon: Bike, text: '2 bike rentals' },
-  { icon: FileCheck2, text: 'Trek permits' },
-  { icon: Compass, text: 'Expedition guide' },
   { icon: BedDouble, text: 'Hotels, breakfast & lunch' },
 ]
 
 /** Not in the package price; shown next to the inclusions so the total is never a surprise. */
 export const extras: (Inclusion & { price?: string })[] = [
   { icon: Plane, text: 'Return flight Beirut to Kathmandu (book separately)' },
+  { icon: PlaneLanding, text: 'Domestic flight Pokhara to Kathmandu' },
   { icon: ShieldCheck, text: 'Travel insurance, optional', price: `+${INSURANCE_PRICE}` },
 ]
