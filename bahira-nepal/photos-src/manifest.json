@@ -39,7 +39,8 @@
     },
     {
       "file": "ride elephant chitwan.jpg",
-      "alt": "Elephants and rhinos in the Chitwan forest"
+      "alt": "Elephants and rhinos in the Chitwan forest",
+      "focus": "50% 70%"
     }
   ],
   "4": [
@@ -109,13 +110,15 @@
   "10": [
     {
       "file": "sinuwa-2048x541.webp",
-      "alt": "Sinuwa’s lodges strung along a forested ridge above the Modi Khola"
+      "alt": "Sinuwa’s lodges strung along a forested ridge above the Modi Khola",
+      "focus": "70% 50%"
     }
   ],
   "11": [
     {
       "file": "jhinu-danda hot-springs,.jpg",
-      "alt": "Bathing in the natural hot springs at Jhinu Danda"
+      "alt": "Bathing in the natural hot springs at Jhinu Danda",
+      "focus": "50% 75%"
     },
     {
       "file": "jhinu-danda,hot-springs.jpg",

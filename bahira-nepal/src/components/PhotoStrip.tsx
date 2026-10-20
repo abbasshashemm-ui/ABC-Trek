@@ -4,7 +4,13 @@ import { Dialog } from '@base-ui/react/dialog'
 import type { Photo } from '../data/photos'
 import Lightbox from './Lightbox'
 
-/** 1 photo: wide. 2: side by side. 3: one tall lead + two stacked. */
+/** 1 photo: its own shape (clamped). 2: side by side. 3: one tall lead + two stacked. */
+
+/**
+ * A lone photo keeps its own aspect ratio, clamped between 4:5 and 2.4:1: a fixed 2:1 strip cut
+ * portrait shots down to a band through the middle (Phewa Lake lost both Machhapuchhre and the boats).
+ */
+const soloRatio = (p: Photo) => Math.min(2.4, Math.max(4 / 5, p.width / p.height))
 
 /**
  * Rendered width of each tile (column is max-w-md = 448px, phones get 100vw minus the 40px gutter),
@@ -24,9 +30,10 @@ export default function PhotoStrip({ photos, title }: { photos: Photo[]; title: 
   return (
     <>
       <div
+        style={n === 1 ? { aspectRatio: soloRatio(shown[0]) } : undefined}
         className={clsx(
           'pointer-events-auto mb-6 grid gap-1.5',
-          n === 1 && 'h-48 grid-cols-1 md:h-56',
+          n === 1 && 'grid-cols-1',
           n === 2 && 'h-44 grid-cols-2 md:h-52',
           n === 3 && 'h-56 grid-cols-[1.4fr_1fr] grid-rows-2 md:h-64',
         )}
@@ -49,6 +56,7 @@ export default function PhotoStrip({ photos, title }: { photos: Photo[]; title: 
               alt={p.alt}
               loading="lazy"
               decoding="async"
+              style={p.focus ? { objectPosition: p.focus } : undefined}
               className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
             />
             {p.ours && (

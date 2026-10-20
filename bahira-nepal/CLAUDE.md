@@ -44,6 +44,9 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
 - Photos: `photos-src/manifest.json` maps days to files (folder mode is the fallback; see its README), `npm run photos` writes WebP to `public/photos/`
   and `src/data/photos.generated.json`. Never hand-edit the JSON. Non-trek photos need a `credits.json` entry
   (author, licence allowing commercial use, source URL); never ship placeholder or unlicensed images.
+  A day with one photo shows it at its own aspect ratio (clamped 4:5 to 2.4:1); 2-3 photos use fixed grids, so give a
+  manifest entry `"focus": "50% 70%"` (CSS object-position) when the crop cuts the subject. Sources under ~1200px wide
+  look soft on phones and in the lightbox; the script warns, and the fix is a larger original, never upscaling.
 
 - Theme comes from the Bahira logo; all tokens live in `@theme` in `src/index.css`, no hex values in components.
   Neutrals: `obsidian` (page), `panel`, `ink` (cream text, also the primary button fill; tint with `/opacity`),

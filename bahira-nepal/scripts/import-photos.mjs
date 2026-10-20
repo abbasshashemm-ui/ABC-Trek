@@ -13,8 +13,9 @@
  * Videos (.mov/.mp4) contribute one still frame if ffmpeg is on PATH.
  *
  * Or, curated: photos-src/manifest.json maps itinerary days to files directly and wins over folders:
- *   { "9": [ { "file": "abc.jpg", "alt": "...", "ours": true, "credit": "Hmayed & Farhat" } ] }
+ *   { "9": [ { "file": "abc.jpg", "alt": "...", "ours": true, "credit": "Hmayed & Farhat", "focus": "50% 30%" } ] }
  *   Entries without "ours" are third-party; give author/license/source when known.
+ *   "focus" is a CSS object-position: the point that must stay in frame when a tile crops the photo.
  *
  * Usage: npm run photos
  */
@@ -33,6 +34,8 @@ const MANIFEST = join(ROOT, 'src', 'data', 'photos.generated.json')
 const TREK_CREDIT = 'Hmayed & Farhat · past trek'
 const PER_DAY = 3
 const WIDTHS = [800, 1600]
+/** Narrower than this and a full-width tile on a 3x phone (~1050 device px) or the lightbox is upscaled. */
+const MIN_SHARP_WIDTH = 1200
 
 /** Folder name -> itinerary days (1-based) spent there. */
 const PLACES = {
@@ -85,6 +88,10 @@ async function processPhoto(path, slug, info) {
   // EXIF orientations 5-8 store the image rotated 90deg, so width/height swap once upright.
   const swapped = (meta.orientation ?? 1) >= 5
   const portrait = (swapped ? meta.width : meta.height) > (swapped ? meta.height : meta.width)
+  const longEdge = Math.max(meta.width, meta.height)
+  const shortEdge = Math.min(meta.width, meta.height)
+  if ((portrait ? shortEdge : longEdge) < MIN_SHARP_WIDTH)
+    console.warn(`  low-res: ${path.split('/').pop()} is ${portrait ? shortEdge : longEdge}px wide, looks soft on phones; get a larger original`)
   const srcSet = []
   let w = 0
   let h = 0
@@ -92,7 +99,7 @@ async function processPhoto(path, slug, info) {
     const out = await sharp(input)
       .rotate() // honour EXIF orientation
       .resize({ width, height: portrait ? width : undefined, fit: 'inside', withoutEnlargement: true })
-      .webp({ quality: 78 })
+      .webp({ quality: 84, smartSubsample: true, effort: 6 }) // 78 + 4:2:0 chroma smeared prayer flags and doubled the JPEG artefacts
       .toFile(join(OUT, `${slug}-${width}.webp`))
     // Small sources produce the same file twice; only list distinct widths.
     if (!srcSet.some((e) => e.endsWith(` ${out.width}w`))) srcSet.push(`/photos/${slug}-${width}.webp ${out.width}w`)
@@ -117,6 +124,7 @@ async function fromManifest(byDay) {
         license: p.license,
         source: p.source,
         ours: Boolean(p.ours),
+        focus: p.focus,
       })
       if (entry) (byDay[day] ??= []).push(entry)
       console.log(`day ${String(day).padStart(2)} <- ${p.file}${p.ours ? '  [ours]' : ''}`)
