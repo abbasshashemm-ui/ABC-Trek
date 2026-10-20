@@ -8,9 +8,9 @@
   --color-solar-hi: #ffc700;
   --color-ink: #f8fafc;
   --color-muted: #94a3b8;
-  --font-display: "Cinzel", "Cormorant Garamond", serif;
-  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, monospace;
 }
 
 html {
@@ -28,14 +28,10 @@ body { margin: 0; background: var(--color-obsidian); overflow-x: hidden; }
 
 ::selection { background: rgb(255 138 0 / 0.4); }
 
-.font-display { letter-spacing: 0.08em; }
+.font-display { letter-spacing: -0.015em; font-weight: 400; }
 
-@media (prefers-reduced-motion: reduce) {
-  .animate-pulse-dot { animation: none; }
-}
+/* Tabular figures so altitudes, prices and day numbers don't jitter. */
+.font-mono, .tabular { font-variant-numeric: tabular-nums; }
 
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.45; transform: scale(0.8); }
-}
-.animate-pulse-dot { animation: pulse-dot 1.8s ease-in-out infinite; }
+h1, h2, h3 { text-wrap: balance; }
+p, li { text-wrap: pretty; }
