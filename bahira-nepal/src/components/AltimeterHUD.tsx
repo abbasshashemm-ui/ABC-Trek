@@ -33,21 +33,21 @@ export default function AltimeterHUD() {
       aria-label="Altitude"
       className="pointer-events-none fixed right-3 top-1/2 z-30 hidden -translate-y-1/2 select-none sm:block md:right-6"
     >
-      <div className="flex flex-col items-end gap-3 font-mono [text-shadow:0_1px_10px_rgba(5,10,8,0.8)]">
+      <div className="flex flex-col items-end gap-3 [text-shadow:0_1px_10px_rgb(13_15_14/0.8)]">
         <div className="rounded-xl bg-obsidian/45 px-3 py-2 text-right backdrop-blur-md">
-          <div className="text-[11px] text-muted">Altitude</div>
-          <span ref={readout} className="font-sans tabular text-2xl font-semibold text-solar-hi md:text-3xl">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">Altitude</div>
+          <span ref={readout} className="figure text-2xl text-ember md:text-3xl">
             1,400m
           </span>
           <div>
-            <span ref={rel} className="text-[11px] text-muted">
+            <span ref={rel} className="tabular text-[11px] text-muted">
               0% of base camp
             </span>
           </div>
         </div>
 
         <div className="relative h-[42vh] w-16">
-          <div className="absolute inset-y-0 right-0 w-px bg-white/20" />
+          <div className="absolute inset-y-0 right-0 w-px bg-ink/20" />
           {TICKS.map((m) => {
             const major = m % 1000 === 0
             const label = major && m > 0 && m !== 4000
@@ -57,24 +57,24 @@ export default function AltimeterHUD() {
                 className="absolute right-0 flex items-center gap-1.5"
                 style={{ bottom: `${(m / RULER_MAX) * 100}%` }}
               >
-                {label && <span className="text-[9px] text-muted">{m / 1000}k</span>}
-                <span className={`h-px ${major ? 'w-3 bg-white/60' : 'w-1.5 bg-white/25'}`} />
+                {label && <span className="tabular text-[10px] text-muted">{m / 1000}k</span>}
+                <span className={`h-px ${major ? 'w-3 bg-ink/60' : 'w-1.5 bg-ink/25'}`} />
               </div>
             )
           })}
           <div
-            className="absolute right-0 flex translate-y-1/2 items-center gap-1.5 text-solar-hi"
+            className="absolute right-0 flex translate-y-1/2 items-center gap-1.5 text-ember"
             style={{ bottom: `${(ABC_ALTITUDE / RULER_MAX) * 100}%` }}
           >
-            <span className="text-[9px] tracking-widest">ABC</span>
-            <span className="h-px w-5 bg-solar-hi/70" />
+            <span className="text-[10px] font-semibold tracking-[0.12em]">ABC</span>
+            <span className="h-px w-5 bg-ember/70" />
           </div>
           <div
             ref={marker}
             className="absolute right-0 translate-x-[5px] translate-y-1/2"
             style={{ bottom: 0 }}
           >
-            <span className="block h-3 w-3 rounded-full bg-solar-hi shadow-[0_0_18px_6px_rgba(255,184,0,0.65)]" />
+            <span className="block h-3 w-3 rounded-full bg-ember shadow-[0_0_18px_6px_rgb(242_138_50/0.6)]" />
           </div>
         </div>
       </div>

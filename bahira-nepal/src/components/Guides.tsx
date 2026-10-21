@@ -29,19 +29,19 @@ export default function Guides() {
   return (
     <section
       id="guides"
-      className="relative z-10 bg-[linear-gradient(to_bottom,var(--color-obsidian)_75%,transparent)] px-5 pb-32 pt-16 md:px-12 md:pt-24"
+      className="relative z-10 bg-[linear-gradient(to_bottom,var(--color-obsidian)_75%,transparent)] pb-32 pt-16 md:pt-24"
     >
-      <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
+      <div className="shell grid items-center gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
         <div>
-          <p className="font-mono text-xs text-sage">Your guides</p>
-          <h2 className="font-display mt-3 text-[2.6rem] leading-[1] tracking-[-0.01em] text-ink md:text-6xl">
+          <p className="eyebrow">Your guides</p>
+          <h2 className="heading-2 mt-3 text-ink">
             You’ll walk with Hmayed &amp; Farhat.
           </h2>
-          <p className="mt-6 max-w-md text-base leading-relaxed text-ink/75 md:text-lg">
+          <p className="lead mt-6 max-w-md">
             Both are experienced trekkers. They’ve reached Everest Base Camp, walked this trail to Annapurna Base Camp,
             and done many treks besides. This April they lead a small group along the same route.
           </p>
-          <p className="mt-4 max-w-md text-sm leading-relaxed text-ink/60">
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-muted">
             Bahira Expeditions is run by Hussein Farhat.
           </p>
 
@@ -71,7 +71,7 @@ export default function Guides() {
                 payload={i}
                 aria-label={`Open photo: ${p.alt}`}
                 className={clsx(
-                  'group relative overflow-hidden rounded-2xl bg-white/5 text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-solar-hi',
+                  'group relative overflow-hidden rounded-2xl bg-white/5 text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ember',
                   i === 2 ? 'col-span-2 aspect-[16/9]' : 'aspect-[3/4]',
                 )}
               >
@@ -84,7 +84,7 @@ export default function Guides() {
                   decoding="async"
                   className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
                 />
-                <span className="absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,rgb(10_17_14/0.75),transparent)] px-3 pb-2.5 pt-8 text-xs text-ink/90">
+                <span className="absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,rgb(13_15_14/0.75),transparent)] px-3 pb-2.5 pt-8 text-xs text-ink/90">
                   {p.alt}
                 </span>
               </Dialog.Trigger>

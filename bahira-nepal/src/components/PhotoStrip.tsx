@@ -38,7 +38,7 @@ export default function PhotoStrip({ photos, title }: { photos: Photo[]; title: 
             payload={i}
             aria-label={`Open photo: ${p.alt}`}
             className={clsx(
-              'group relative overflow-hidden rounded-xl bg-white/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-solar-hi',
+              'group relative overflow-hidden rounded-xl bg-white/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ember',
               n === 3 && i === 0 && 'row-span-2',
             )}
           >
@@ -52,7 +52,7 @@ export default function PhotoStrip({ photos, title }: { photos: Photo[]; title: 
               className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
             />
             {p.ours && (
-              <span className="absolute bottom-1.5 left-1.5 rounded bg-obsidian/75 px-1.5 py-0.5 font-mono text-[10px] text-solar-hi backdrop-blur">
+              <span className="absolute bottom-1.5 left-1.5 rounded bg-obsidian/75 px-1.5 py-0.5 text-[10px] font-semibold text-ember backdrop-blur">
                 Our trek
               </span>
             )}
