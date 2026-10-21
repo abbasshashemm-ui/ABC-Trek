@@ -74,7 +74,8 @@
       "width": 502,
       "height": 611,
       "alt": "Elephants and rhinos in the Chitwan forest",
-      "ours": false
+      "ours": false,
+      "focus": "50% 70%"
     }
   ],
   "4": [
@@ -194,7 +195,8 @@
       "width": 1600,
       "height": 423,
       "alt": "Sinuwa’s lodges strung along a forested ridge above the Modi Khola",
-      "ours": false
+      "ours": false,
+      "focus": "70% 50%"
     }
   ],
   "11": [
@@ -204,7 +206,8 @@
       "width": 550,
       "height": 826,
       "alt": "Bathing in the natural hot springs at Jhinu Danda",
-      "ours": false
+      "ours": false,
+      "focus": "50% 75%"
     },
     {
       "src": "/photos/day11-2-800.webp",

@@ -9,6 +9,8 @@ export interface Photo {
   credit?: string
   license?: string
   source?: string
+  /** CSS object-position kept in frame when a tile crops the photo (default centre) */
+  focus?: string
   /** true = from the trek leaders' own past treks */
   ours: boolean
 }
