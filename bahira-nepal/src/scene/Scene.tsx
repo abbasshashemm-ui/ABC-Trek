@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { PerformanceMonitor } from '@react-three/drei'
-import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing'
+import { EffectComposer, Bloom, ToneMapping, Vignette } from '@react-three/postprocessing'
+import { ToneMappingMode } from 'postprocessing'
 import * as THREE from 'three'
 import Terrain from './Terrain'
 import Sky from './Sky'
@@ -52,6 +53,9 @@ export default function Scene() {
       <CameraRig />
       <EffectComposer multisampling={COARSE ? 2 : 4}>
         <Bloom mipmapBlur luminanceThreshold={1.1} luminanceSmoothing={0.15} intensity={0.6} radius={0.7} />
+        {/* Khronos neutral: leaves mid-tones and the palette as authored, rolls sunlit snow off
+            instead of clipping it flat white. Runs inside the same effect pass (no extra draw). */}
+        <ToneMapping mode={ToneMappingMode.NEUTRAL} />
         <Vignette eskil={false} offset={0.3} darkness={0.3} />
       </EffectComposer>
     </Canvas>

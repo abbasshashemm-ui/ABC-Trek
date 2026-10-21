@@ -20,6 +20,10 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
   Contours are faint shade lines that lighten near the trekkers; no orange ground glow. Sun and sky live in
   `src/scene/palette.ts` (shared by terrain and sky dome). Palette authored in sRGB, lit in linear (`lin()`).
   Terrain fog colour must equal the sky horizon or the seam shows.
+- Realism (terrain shader): ridge shadows + cavity AO are computed per vertex (sun march capped at ~20 units so the big
+  walls never shade whole valleys or the ABC basin); haze takes the sky's sun glow (`sunGlow`, shared with the dome);
+  surface noise is top-down on gentle ground and z-vs-height on walls (a plane that turns with the normal marbles).
+  Neutral tone mapping runs in the effect pass, so the palette is unchanged below ~0.8 and snow rolls off instead of clipping.
 - Scroll state lives in `src/state/scrollStore.ts` (mutable, updated once per GSAP tick). Never put per-frame
   scroll values in React state.
 - The trip is a loop, not a line: `STATIONS` in `utils/journey.ts` puts Days 1-9 up the valley centre to base camp
