@@ -258,34 +258,5 @@
       "credit": "Photo: Hmayed & Farhat, 2025",
       "ours": true
     }
-  ],
-  "guides": [
-    {
-      "src": "/photos/dayguides-1-800.webp",
-      "srcSet": "/photos/dayguides-1-800.webp 600w, /photos/dayguides-1-1600.webp 1200w",
-      "width": 1200,
-      "height": 1600,
-      "alt": "At the World Peace Pagoda, Pokhara",
-      "credit": "Photo: Hmayed & Farhat",
-      "ours": true
-    },
-    {
-      "src": "/photos/dayguides-2-800.webp",
-      "srcSet": "/photos/dayguides-2-800.webp 600w, /photos/dayguides-2-1600.webp 1200w",
-      "width": 1200,
-      "height": 1600,
-      "alt": "With an elephant in Chitwan",
-      "credit": "Photo: Hmayed & Farhat",
-      "ours": true
-    },
-    {
-      "src": "/photos/dayguides-3-800.webp",
-      "srcSet": "/photos/dayguides-3-800.webp 800w, /photos/dayguides-3-1600.webp 1440w",
-      "width": 1440,
-      "height": 754,
-      "alt": "On the trail in the Everest region",
-      "credit": "Photo: Hmayed & Farhat",
-      "ours": true
-    }
   ]
 }
