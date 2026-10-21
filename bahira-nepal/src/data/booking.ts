@@ -34,7 +34,7 @@ const contact = (name: string, phone: string): Contact => {
 }
 
 /** Either guide can take a booking. */
-export const CONTACTS: Contact[] = [contact('Hmayed', '+961 71 661 075'), contact('Farhat', '+961 79 183 091')]
+export const CONTACTS: Contact[] = [contact('Hmayed', '+961 71 661 075'), contact('Farhat', '+961 70 181 579')]
 
 export interface Inclusion {
   icon: LucideIcon
