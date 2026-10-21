@@ -84,7 +84,7 @@ function Viewer({ photos, title, start }: { photos: Photo[]; title: string; star
 
 /** Attribution: ours by name; licensed images by author, licence and a link to the source. */
 function PhotoCredit({ photo }: { photo: Photo }) {
-  if (photo.ours) return <span className="text-solar-hi/90">{photo.credit}</span>
+  if (photo.ours) return <span className="text-ember/90">{photo.credit}</span>
   // Never invent attribution: unknown-source images show no credit line.
   if (!photo.credit) return null
   return (

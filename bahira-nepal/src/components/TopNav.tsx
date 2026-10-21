@@ -38,16 +38,16 @@ export default function TopNav() {
       // Keyboard users tabbing to a hidden bar should still see it.
       onFocusCapture={() => setHidden(false)}
     >
-      <div className="relative mx-auto grid h-14 max-w-[1600px] grid-cols-[auto_1fr_auto] items-center gap-4 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] md:h-16 md:px-8">
+      <div className="shell relative grid h-14 grid-cols-[auto_1fr_auto] items-center gap-4 max-md:pl-[max(1.25rem,env(safe-area-inset-left))] max-md:pr-[max(1.25rem,env(safe-area-inset-right))] md:h-16">
         <div className="flex items-center gap-3">
           <BahiraLogo size={34} />
-          <span className="font-display hidden text-xl tracking-[-0.01em] text-ink sm:block">Bahira Expeditions</span>
+          <span className="font-display hidden text-lg text-ink sm:block">Bahira Expeditions</span>
         </div>
 
         <div className="min-w-0 text-center">
           <span
             key={act}
-            className="block truncate text-[13px] font-medium tracking-[0.01em] text-ink/80"
+            className="block truncate text-sm font-medium text-ink/80"
             aria-live="polite"
           >
             {ACT_LABELS[act]}
@@ -55,7 +55,7 @@ export default function TopNav() {
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="hidden text-[13px] text-ink/60 lg:block">
+          <span className="hidden text-sm text-muted lg:block">
             {SEATS} seats · {DEPARTURE}
           </span>
           <button
