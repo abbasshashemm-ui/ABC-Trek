@@ -93,5 +93,5 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
 ## Data
 - `src/data/itinerary.ts`: all 15 days; every activity from the client's itinerary must stay.
 - `src/data/booking.ts`: $1,570 per person + international ticket (not included), optional insurance $120,
-  seats/date, 9 inclusions (domestic flight Pokhara to Kathmandu included) + `extras`, and `CONTACTS`: Hmayed +961 71 661 075 and Farhat +961 79 183 091, each with
+  seats/date, 9 inclusions (domestic flight Pokhara to Kathmandu included) + `extras`, and `CONTACTS`: Hmayed +961 71 661 075 and Farhat +961 70 181 579, each with
   a WhatsApp link and personal greeting. Both buttons look identical; hero "Reserve a seat" scrolls to booking.
