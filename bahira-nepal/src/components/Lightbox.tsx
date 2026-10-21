@@ -57,7 +57,7 @@ function Viewer({ photos, title, start }: { photos: Photo[]; title: string; star
           alt={photo.alt}
           width={photo.width}
           height={photo.height}
-          className="max-h-[80vh] w-auto rounded-xl object-contain"
+          className="max-h-[80dvh] w-auto rounded-xl object-contain"
         />
         <figcaption className="mt-3 flex flex-wrap items-center justify-between gap-2 text-sm text-muted">
           <span>{photo.alt}</span>

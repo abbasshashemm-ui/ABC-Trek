@@ -53,7 +53,7 @@ console.log(`${output}: ${m.width}x${m.height}, background sampled as rgb(${bg.m
 // sharp phones) and the home-screen/favicon icons on the dark brand background.
 const dir = output.replace(/[^/]+$/, '')
 await sharp(output).resize({ height: 136 }).webp({ quality: 90, alphaQuality: 90 }).toFile(`${dir}bahira-logo-nav.webp`)
-for (const [name, px] of [['icon-180.png', 180], ['icon-64.png', 64]]) {
+for (const [name, px] of [['icon-512.png', 512], ['icon-192.png', 192], ['icon-180.png', 180], ['icon-64.png', 64]]) {
   await sharp(output)
     .resize({ width: Math.round(px * 0.8), height: Math.round(px * 0.8), fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
     .extend({ top: Math.round(px * 0.1), bottom: px - Math.round(px * 0.8) - Math.round(px * 0.1), left: Math.round(px * 0.1), right: px - Math.round(px * 0.8) - Math.round(px * 0.1), background: '#0a110e' })
@@ -61,4 +61,4 @@ for (const [name, px] of [['icon-180.png', 180], ['icon-64.png', 64]]) {
     .png({ compressionLevel: 9, palette: true })
     .toFile(`${dir}${name}`)
 }
-console.log('wrote bahira-logo-nav.webp, icon-180.png, icon-64.png')
+console.log('wrote bahira-logo-nav.webp, icon-512/192/180/64.png')

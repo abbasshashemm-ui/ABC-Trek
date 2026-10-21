@@ -70,8 +70,10 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
   valley under ONE journey-wide tint (`Journey.tsx`, fades in/out at the ends; per-day scrims caused visible bands) and its 2-3 photos above it (`PhotoStrip`, tap = gallery). Full-screen photo moments
   were tried and dropped (client preferred the grid). `updateScroll` interpolates between the real `[data-day]` centres.
   Header auto-hides on scroll down, returns on scroll up/focus.
-- Guides (`Guides.tsx`, manifest key `"guides"`): experienced trekkers (EBC, this ABC trail, many more), Instagram links
-  @mhmd_hmayed and @_hsenfarhat_; "Bahira Expeditions is run by Hussein Farhat" (= Farhat).
+- Guides (`Guides.tsx`): experienced trekkers (EBC, this ABC trail, many more), one row each with Instagram
+  (@mhmd_hmayed, @_hsenfarhat_). Portrait = manifest key `"guide-hmayed"` / `"guide-farhat"` (one photo, shown as a
+  round avatar; the initial until then). Only a photo the client confirms is that person: the old trip-photo grid
+  was removed because it had no photo of Farhat. Don't say who runs Bahira Expeditions (client asked to remove it).
 - Speed: three.js must only be imported under `src/scene/` (and `utils/journey.ts`, which only the scene uses); anything the
   page shell imports stays three-free (`DAY_COUNT` lives in `itinerary.ts` for that reason). The Scene chunk is fetched on
   idle after first paint and fades in; `PerformanceMonitor` drops DPR to 1 on slow devices. Photo `sizes` must match the
@@ -84,7 +86,9 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
 - Chrome (Apple-style): header is a translucent material (`.nav-material`, blur fading out at the bottom, no border),
   padded by `env(safe-area-inset-*)`. Buttons: `.btn-primary` cream fill, `.btn-glass` frosted; ember is an
   accent only (prices, the trail), never a button fill. Press feedback on `:active`. Reduced transparency/contrast
-  fall back to solid. `viewport-fit=cover`, no fixed theme-color, 3D canvas is `100lvh` so it runs behind Safari's bars.
+  fall back to solid. `viewport-fit=cover`, no fixed theme-color meta, 3D canvas is `100lvh` so it runs behind Safari's bars.
+  `public/manifest.webmanifest` (standalone, icon-192/512 from `make-logo.mjs`) for Add to Home Screen. Never `100vh`:
+  `svh` for layout, `dvh` for overlays, `lvh` for fixed backdrops.
 
 ## Data
 - `src/data/itinerary.ts`: all 15 days; every activity from the client's itinerary must stay.

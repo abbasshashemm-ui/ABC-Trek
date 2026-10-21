@@ -150,25 +150,5 @@
       "ours": true,
       "credit": "Photo: Hmayed & Farhat, 2025"
     }
-  ],
-  "guides": [
-    {
-      "file": "guides-peace-pagoda.webp",
-      "alt": "At the World Peace Pagoda, Pokhara",
-      "ours": true,
-      "credit": "Photo: Hmayed & Farhat"
-    },
-    {
-      "file": "guides-chitwan-elephant.webp",
-      "alt": "With an elephant in Chitwan",
-      "ours": true,
-      "credit": "Photo: Hmayed & Farhat"
-    },
-    {
-      "file": "guides-everest-trail.webp",
-      "alt": "On the trail in the Everest region",
-      "ours": true,
-      "credit": "Photo: Hmayed & Farhat"
-    }
   ]
 }

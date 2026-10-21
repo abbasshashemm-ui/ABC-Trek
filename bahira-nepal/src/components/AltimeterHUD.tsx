@@ -46,7 +46,7 @@ export default function AltimeterHUD() {
           </div>
         </div>
 
-        <div className="relative h-[42vh] w-16">
+        <div className="relative h-[42svh] w-16">
           <div className="absolute inset-y-0 right-0 w-px bg-ink/20" />
           {TICKS.map((m) => {
             const major = m % 1000 === 0
