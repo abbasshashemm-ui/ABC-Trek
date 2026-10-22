@@ -94,6 +94,10 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
   padded by `env(safe-area-inset-*)`. Buttons: `.btn-primary` cream fill, `.btn-glass` frosted; ember is an
   accent only (prices, the trail), never a button fill. Press feedback on `:active`. Reduced transparency/contrast
   fall back to solid. `viewport-fit=cover`, no fixed theme-color meta, 3D canvas is `100lvh` so it runs behind Safari's bars.
+  Safari 26 paints the background-color of any fixed element touching the top edge into the status bar: full-width
+  fixed layers use gradient images, never `bg-*` colours (that made a black band). Never give `.nav-material` a
+  `position` (unlayered CSS beats Tailwind's `fixed` and drops the header into the flow). Phone hero is top-aligned
+  under the header with `safe-area-inset-bottom + 6rem` at the bottom so the facts clear Safari's floating toolbar.
   `public/manifest.webmanifest` (standalone, icon-192/512 from `make-logo.mjs`) for Add to Home Screen. Never `100vh`:
   `svh` for layout, `dvh` for overlays, `lvh` for fixed backdrops.
 

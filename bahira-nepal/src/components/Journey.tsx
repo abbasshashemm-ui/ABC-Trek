@@ -51,7 +51,9 @@ const Journey = forwardRef<HTMLElement>(function Journey(_, ref) {
       <div
         ref={tint}
         aria-hidden
-        className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-lvh bg-obsidian/20 opacity-0"
+        // Tint as a gradient image, not a background-color: Safari 26 paints the colour of a fixed element at the
+        // top edge into the status bar, which turned it into a black band above the 3D scene.
+        className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-lvh bg-[linear-gradient(rgb(13_15_14/0.2),rgb(13_15_14/0.2))] opacity-0"
       />
       {itinerary.map((item, i) => (
         <DayStop key={item.day} item={item} side={i % 2 === 0 ? 'left' : 'right'} />

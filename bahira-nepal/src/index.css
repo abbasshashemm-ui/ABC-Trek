@@ -100,12 +100,12 @@ p, li { text-wrap: pretty; }
 /* ---------- Header material ----------
    Translucent layer the page scrolls under; the blur fades out at the bottom edge
    instead of a hard border (iOS scroll-edge effect). Extends under the status bar. */
-.nav-material { position: relative; }
+/* No position here: an unlayered `position` beats Tailwind's `fixed` utility and puts the header back in the page flow. */
 .nav-material::before {
   content: "";
   position: absolute;
   inset: 0 0 -24px 0;
-  background: linear-gradient(to bottom, rgb(13 15 14 / 0.78), rgb(13 15 14 / 0.45) 70%, transparent);
+  background: linear-gradient(to bottom, rgb(13 15 14 / 0.55), rgb(13 15 14 / 0.3) 70%, transparent); /* light enough that the sky shows under the iPhone status bar */
   -webkit-backdrop-filter: blur(18px) saturate(150%);
   backdrop-filter: blur(18px) saturate(150%);
   -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent);
