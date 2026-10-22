@@ -4,6 +4,7 @@ import { Stupa, Pagoda, Boats, Peaks } from './Landmarks'
 import Trees from './Trees'
 import PrayerFlags from './PrayerFlags'
 import Birds from './Birds'
+import Wildlife from './Wildlife'
 import { SPOTS } from './spots'
 
 /** Everything that makes the valley feel inhabited. Not to scale, on purpose. */
@@ -20,6 +21,7 @@ export default function Props() {
       <Trees />
       <PrayerFlags />
       <Birds />
+      <Wildlife />
     </group>
   )
 }

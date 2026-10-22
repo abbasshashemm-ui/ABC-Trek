@@ -1,8 +1,10 @@
-import { useMemo } from 'react'
+import { useLayoutEffect, useMemo, useRef } from 'react'
+import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { besideTrail, groundUnder, rng, merge } from './placement'
 import { getTerrainHeight } from '../../utils/terrainMath'
 import { ANNAPURNA, FISHTAIL } from './spots'
+import { idleTime } from '../motion'
 
 const WHITE = '#f2efe8'
 const GOLD = '#d4a72c'
@@ -74,25 +76,43 @@ export function Pagoda({ day, offset, along = 0 }: { day: number; offset: number
   )
 }
 
-/** Brightly painted boats on Phewa Lake. */
+/** Brightly painted boats on Phewa Lake, drifting and rocking. One instanced mesh. */
 export function Boats() {
   const boats = useMemo(() => {
     const r = rng(77)
     const colors = ['#c0392b', '#2e86c1', '#f1c40f', '#27ae60', '#e67e22']
     return Array.from({ length: 9 }, (_, i) => {
       const p = besideTrail(4, (r() * 2 - 1) * 4.5 + (r() < 0.5 ? -1.5 : 1.5), (r() * 2 - 1) * 8)
-      return { ...p, rot: r() * Math.PI, color: colors[i % colors.length] }
+      return { ...p, rot: r() * Math.PI, color: colors[i % colors.length], phase: r() * Math.PI * 2 }
     })
   }, [])
+  const ref = useRef<THREE.InstancedMesh>(null)
+  const tmp = useMemo(() => ({ m: new THREE.Matrix4(), q: new THREE.Quaternion(), e: new THREE.Euler(), p: new THREE.Vector3(), s: new THREE.Vector3(1, 1, 1) }), [])
+
+  useLayoutEffect(() => {
+    const c = new THREE.Color()
+    boats.forEach((b, i) => ref.current!.setColorAt(i, c.set(b.color)))
+    ref.current!.instanceColor!.needsUpdate = true
+  }, [boats])
+
+  useFrame((state) => {
+    const time = idleTime(state.clock.elapsedTime)
+    boats.forEach((b, i) => {
+      // A slow drift along the hull and back, with a gentle rock.
+      const drift = Math.sin(time * 0.12 + b.phase) * 0.6
+      tmp.p.set(b.x + Math.sin(b.rot) * drift, b.y + 0.12 + Math.sin(time * 1.3 + b.phase) * 0.02, b.z + Math.cos(b.rot) * drift)
+      tmp.e.set(Math.sin(time * 0.9 + b.phase) * 0.04, b.rot, Math.sin(time * 1.1 + b.phase * 2) * 0.06)
+      tmp.m.compose(tmp.p, tmp.q.setFromEuler(tmp.e), tmp.s)
+      ref.current!.setMatrixAt(i, tmp.m)
+    })
+    ref.current!.instanceMatrix.needsUpdate = true
+  })
+
   return (
-    <group>
-      {boats.map((b, i) => (
-        <mesh key={i} position={[b.x, b.y + 0.12, b.z]} rotation={[0, b.rot, 0]}>
-          <boxGeometry args={[0.35, 0.18, 1.0]} />
-          <meshLambertMaterial color={b.color} />
-        </mesh>
-      ))}
-    </group>
+    <instancedMesh ref={ref} args={[undefined, undefined, boats.length]} frustumCulled={false}>
+      <boxGeometry args={[0.35, 0.18, 1.0]} />
+      <meshLambertMaterial />
+    </instancedMesh>
   )
 }
 
