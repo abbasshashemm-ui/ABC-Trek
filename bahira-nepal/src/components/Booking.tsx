@@ -100,7 +100,25 @@ export default function Booking() {
         </div>
       </div>
       </div>
-      <p className="py-8 pb-[max(2rem,calc(env(safe-area-inset-bottom)+1rem))] text-center text-xs text-muted md:pb-0 md:pt-10">© Bahira Expeditions</p>
+      <footer className="py-8 pb-[max(2rem,calc(env(safe-area-inset-bottom)+1rem))] text-center text-xs text-muted md:pb-0 md:pt-10">
+        {/* On desktop this sits over the bright 3D terrain, so it gets a dark backing (the Quantex wordmark is white). */}
+        <div className="md:inline-block md:rounded-2xl md:bg-obsidian/70 md:px-6 md:py-3 md:backdrop-blur-md">
+          <p>© Bahira Expeditions</p>
+          <p className="mt-3 flex items-center justify-center gap-2">
+            Website by
+            <a
+              href="https://quantexai.solutions"
+              target="_blank"
+              rel="noopener"
+              aria-label="Quantex AI Solutions"
+              title="Quantex AI Solutions"
+              className="opacity-75 transition-opacity hover:opacity-100 focus-visible:opacity-100"
+            >
+              <img src="/quantex-logo.png" alt="" width={158} height={38} loading="lazy" className="h-3.5 w-auto" />
+            </a>
+          </p>
+        </div>
+      </footer>
     </section>
   )
 }
