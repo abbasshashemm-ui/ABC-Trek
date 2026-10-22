@@ -90,6 +90,10 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
   `public/manifest.webmanifest` (standalone, icon-192/512 from `make-logo.mjs`) for Add to Home Screen. Never `100vh`:
   `svh` for layout, `dvh` for overlays, `lvh` for fixed backdrops.
 
+- Link preview: `public/og-image.jpg` (1200x630, the guides with the Lebanese flag, client's pick) + og/twitter tags in
+  `index.html`. Absolute URLs come from `%SITE_URL%`, filled in `vite.config.ts` from Vercel's
+  `VERCEL_PROJECT_PRODUCTION_URL`; keep the og copy in step with the description meta when price/date change.
+
 ## Data
 - `src/data/itinerary.ts`: all 15 days; every activity from the client's itinerary must stay.
 - `src/data/booking.ts`: $1,570 per person + international ticket (not included), optional insurance $120,
