@@ -32,6 +32,11 @@ html.lenis, html.lenis body { height: auto; }
 
 body { margin: 0; background: var(--color-obsidian); overflow-x: hidden; }
 
+/* No visible page scrollbar: the altimeter on the right already shows how far down the trek you are.
+   Wheel, touch and keyboard scrolling (and Lenis) are unaffected. */
+html, body { scrollbar-width: none; }
+html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
+
 ::selection { background: rgb(242 138 50 / 0.4); }
 
 /* Fraunces at display sizes: optical size follows the font size, a soft medium weight. */
