@@ -6,6 +6,9 @@ import PrayerFlags from './PrayerFlags'
 import Birds from './Birds'
 import Wildlife from './Wildlife'
 import { SPOTS } from './spots'
+import GroundShadows from './GroundShadows'
+import Smoke from './Smoke'
+import Clouds from './Clouds'
 
 /** Everything that makes the valley feel inhabited. Not to scale, on purpose. */
 export default function Props() {
@@ -22,6 +25,9 @@ export default function Props() {
       <PrayerFlags />
       <Birds />
       <Wildlife />
+      <GroundShadows />
+      <Smoke />
+      <Clouds />
     </group>
   )
 }

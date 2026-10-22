@@ -11,9 +11,9 @@ import Trekkers from './Trekkers'
 import CameraRig from './CameraRig'
 import Atmosphere from './Atmosphere'
 import Props from './props/Props'
+import { COARSE } from './device'
 
 /** Phones get a lower resolution ceiling; desktop keeps the sharper one. */
-const COARSE = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches
 const MAX_DPR = COARSE ? 1.5 : 1.75
 
 /** Fades the canvas in once real frames are on screen (shaders compiled), instead of popping in. */

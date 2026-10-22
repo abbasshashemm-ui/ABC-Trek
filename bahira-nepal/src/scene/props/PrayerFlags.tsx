@@ -5,6 +5,7 @@ import { besideTrail } from './placement'
 import { idleTime } from '../motion'
 import { getTerrainHeight } from '../../utils/terrainMath'
 import { SPOTS } from './spots'
+import { windGust } from '../wind'
 
 const COLORS = ['#1f5fbf', '#f5f5f0', '#c62828', '#2e7d32', '#f9c80e'] // sky, air, fire, water, earth
 const flag = new THREE.PlaneGeometry(0.32, 0.24).translate(0, -0.12, 0)
@@ -76,7 +77,8 @@ export default function PrayerFlags() {
     flags.forEach((f, i) => {
       // Face across the string, then flutter about it.
       tmp.q.setFromUnitVectors(new THREE.Vector3(1, 0, 0), f.dir)
-      tmp.q2.setFromAxisAngle(f.dir, Math.sin(time * 3.1 + f.phase) * 0.45)
+      // Flutter harder as a gust comes through (the same gusts that bend the trees).
+      tmp.q2.setFromAxisAngle(f.dir, Math.sin(time * 3.1 + f.phase) * (0.25 + windGust(f.pos.x, f.pos.z, time) * 0.55))
       tmp.m.compose(f.pos, tmp.q2.multiply(tmp.q), tmp.s)
       mesh.setMatrixAt(i, tmp.m)
       if (!colored.current) mesh.setColorAt(i, tmp.c.set(COLORS[i % COLORS.length]))

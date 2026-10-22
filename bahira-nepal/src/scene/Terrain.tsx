@@ -4,7 +4,8 @@ import * as THREE from 'three'
 import { terrainVertex, terrainFragment } from '../shaders/terrain'
 import { trailCurve, dayToU } from '../utils/journey'
 import { scrollState } from '../state/scrollStore'
-import { HORIZON, SUN_DIR, fogDensityAt } from './palette'
+import { HORIZON, ZENITH, SUN_DIR, fogDensityAt } from './palette'
+import { windClock } from './wind'
 
 export default function Terrain() {
   const geometry = useMemo(() => {
@@ -25,6 +26,8 @@ export default function Terrain() {
           uFogColor: { value: HORIZON },
           uFogDensity: { value: 0.00006 },
           uSunDir: { value: SUN_DIR },
+          uWindTime: windClock,
+          uZenith: { value: ZENITH },
         },
       }),
     [],

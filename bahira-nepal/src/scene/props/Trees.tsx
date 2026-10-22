@@ -1,10 +1,8 @@
 import { useLayoutEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
-import { getTerrainHeight, valleyCenter } from '../../utils/terrainMath'
-import { rng, slopeAt, merge } from './placement'
-import { buildings } from './places'
-import { clearOfLandmarks } from './spots'
-import { nearTrail } from '../../utils/journey'
+import { merge } from './placement'
+import { windyFoliage } from '../wind'
+import { forest, CONIFER_H, BROADLEAF_H, type Tree } from './forest'
 
 const conifer = merge([
   new THREE.CylinderGeometry(0.06, 0.08, 0.5, 5).translate(0, 0.25, 0),
@@ -16,46 +14,9 @@ const broadleaf = merge([
   new THREE.IcosahedronGeometry(0.55, 0).translate(0, 0.95, 0),
 ])
 
-interface Tree {
-  x: number
-  y: number
-  z: number
-  s: number
-  rot: number
-  shade: number
-}
-
-/** Biome rules mirror the terrain shader: jungle in Act II lowlands, conifers on Act I/III slopes. */
-function plant() {
-  const r = rng(2024)
-  const conifers: Tree[] = []
-  const jungle: Tree[] = []
-  for (let i = 0; i < 9000 && conifers.length + jungle.length < 1900; i++) {
-    const t = r() * 310
-    const z = -t
-    const off = (r() < 0.5 ? -1 : 1) * (4.5 + Math.pow(r(), 1.4) * 55)
-    const x = valleyCenter(z) + off
-    const h = getTerrainHeight(x, z)
-    const slope = slopeAt(x, z)
-    if (slope > 0.5 || h > 33) continue
-    if (t > 74 && t < 100 && Math.abs(off) < 10) continue // Phewa Lake
-    if (buildings.some((b) => Math.hypot(b.x - x, b.z - z) < b.w + 0.6)) continue
-    if (!clearOfLandmarks(x, z, 0.5)) continue
-    if (nearTrail(x, z, 1.4)) continue
-
-    const lush = t > 35 && t < 120 && h < 10
-    const tree = { x, y: h - 0.1, z, s: 0.8 + r() * 0.9, rot: r() * Math.PI * 2, shade: r() }
-    if (lush) {
-      if (r() < 0.85) jungle.push(tree)
-    } else if (h > 4 && r() < 0.6) {
-      conifers.push(tree)
-    }
-  }
-  return { conifers, jungle }
-}
-
-function Forest({ trees, geometry, colors }: { trees: Tree[]; geometry: THREE.BufferGeometry; colors: [string, string] }) {
+function Forest({ trees, geometry, height, colors }: { trees: Tree[]; geometry: THREE.BufferGeometry; height: number; colors: [string, string] }) {
   const ref = useRef<THREE.InstancedMesh>(null)
+  const material = useMemo(() => windyFoliage(height), [height])
   useLayoutEffect(() => {
     const m = new THREE.Matrix4()
     const q = new THREE.Quaternion()
@@ -73,18 +34,16 @@ function Forest({ trees, geometry, colors }: { trees: Tree[]; geometry: THREE.Bu
     ref.current!.computeBoundingSphere()
   }, [trees, colors])
   return (
-    <instancedMesh ref={ref} args={[geometry, undefined, trees.length]}>
-      <meshLambertMaterial flatShading />
-    </instancedMesh>
+    <instancedMesh ref={ref} args={[geometry, material, trees.length]} />
   )
 }
 
 export default function Trees() {
-  const { conifers, jungle } = useMemo(() => plant(), [])
+  const { conifers, jungle } = forest()
   return (
     <group>
-      <Forest trees={conifers} geometry={conifer} colors={['#1f3b26', '#3a5a2c']} />
-      <Forest trees={jungle} geometry={broadleaf} colors={['#244d1f', '#4f7a2a']} />
+      <Forest trees={conifers} geometry={conifer} height={CONIFER_H} colors={['#1f3b26', '#3a5a2c']} />
+      <Forest trees={jungle} geometry={broadleaf} height={BROADLEAF_H} colors={['#244d1f', '#4f7a2a']} />
     </group>
   )
 }

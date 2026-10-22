@@ -5,6 +5,8 @@ import { trailCurve, dayToU, dayU, FIRST_FLIGHT, TRAIL_LENGTH } from '../utils/j
 import { getTerrainHeight } from '../utils/terrainMath'
 import { scrollState } from '../state/scrollStore'
 import { merge } from './props/placement'
+import { blobGeometry, blobMaterial, setBlob } from './props/shadows'
+import { fogDensityAt } from './palette'
 
 /** Jacket colours: the group should read as people on the trail, not as a marker. */
 const JACKETS = ['#c8432f', '#2f6fb3', '#e0a526']
@@ -97,6 +99,8 @@ export default function Trekkers() {
     [],
   )
   const flightStart = dayU[FIRST_FLIGHT]
+  const shadows = useRef<THREE.InstancedMesh>(null)
+  const shadowMat = useMemo(() => blobMaterial(), [])
 
   useFrame((state) => {
     const u = dayToU(scrollState.dayFloat)
@@ -104,6 +108,8 @@ export default function Trekkers() {
     const walked = u * TRAIL_LENGTH
     party.current!.visible = !flying
     plane.current!.visible = flying
+    shadows.current!.visible = !flying
+    shadowMat.uniforms.uFogDensity.value = fogDensityAt(scrollState.dayFloat)
 
     trailCurve.getPointAt(u, tmp.centre)
     const scale = THREE.MathUtils.clamp(state.camera.position.distanceTo(tmp.centre) / 55, 1, 6)
@@ -135,8 +141,11 @@ export default function Trekkers() {
       w.legL!.rotation.x = swing
       w.legR!.rotation.x = -swing
       w.pole!.rotation.x = -swing * 0.6
+      setBlob(shadows.current!, i, { x: tmp.p.x, z: tmp.p.z, r: 0.3 * scale, h: 1.45 * scale, k: 0.6 })
       g.position.y += Math.abs(Math.cos(phase)) * 0.05 * scale
     })
+    shadows.current!.instanceMatrix.needsUpdate = true
+    shadows.current!.instanceColor!.needsUpdate = true
   })
 
   return (
@@ -152,6 +161,7 @@ export default function Trekkers() {
           />
         ))}
       </group>
+      <instancedMesh ref={shadows} args={[blobGeometry, shadowMat, JACKETS.length]} frustumCulled={false} renderOrder={1} />
       <Plane
         setRef={(g) => {
           plane.current = g
