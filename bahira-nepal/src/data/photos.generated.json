@@ -258,5 +258,27 @@
       "credit": "Photo: Hmayed & Farhat, 2025",
       "ours": true
     }
+  ],
+  "guide-hmayed": [
+    {
+      "src": "/photos/dayguide-hmayed-1-800.webp",
+      "srcSet": "/photos/dayguide-hmayed-1-800.webp 700w",
+      "width": 700,
+      "height": 700,
+      "alt": "Hmayed",
+      "credit": "Photo: Hmayed & Farhat",
+      "ours": true
+    }
+  ],
+  "guide-farhat": [
+    {
+      "src": "/photos/dayguide-farhat-1-800.webp",
+      "srcSet": "/photos/dayguide-farhat-1-800.webp 600w",
+      "width": 600,
+      "height": 600,
+      "alt": "Farhat",
+      "credit": "Photo: Hmayed & Farhat",
+      "ours": true
+    }
   ]
 }

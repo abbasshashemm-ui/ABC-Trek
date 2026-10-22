@@ -72,8 +72,8 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
   Header auto-hides on scroll down, returns on scroll up/focus.
 - Guides (`Guides.tsx`): experienced trekkers (EBC, this ABC trail, many more), one row each with Instagram
   (@mhmd_hmayed, @_hsenfarhat_). Portrait = manifest key `"guide-hmayed"` / `"guide-farhat"` (one photo, shown as a
-  round avatar; the initial until then). Only a photo the client confirms is that person: the old trip-photo grid
-  was removed because it had no photo of Farhat. Don't say who runs Bahira Expeditions (client asked to remove it).
+  80px round avatar; the initial if missing). Both are client-confirmed portraits, pre-cropped square to the face in
+  `photos-src/guide-*.jpg`. Only use a photo the client confirms is that person. Don't say who runs Bahira Expeditions (client asked to remove it).
 - Speed: three.js must only be imported under `src/scene/` (and `utils/journey.ts`, which only the scene uses); anything the
   page shell imports stays three-free (`DAY_COUNT` lives in `itinerary.ts` for that reason). The Scene chunk is fetched on
   idle after first paint and fades in; `PerformanceMonitor` drops DPR to 1 on slow devices. Photo `sizes` must match the

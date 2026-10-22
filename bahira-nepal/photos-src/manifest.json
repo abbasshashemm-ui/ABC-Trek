@@ -150,5 +150,21 @@
       "ours": true,
       "credit": "Photo: Hmayed & Farhat, 2025"
     }
+  ],
+  "guide-hmayed": [
+    {
+      "file": "guide-hmayed.jpg",
+      "alt": "Hmayed",
+      "ours": true,
+      "credit": "Photo: Hmayed & Farhat"
+    }
+  ],
+  "guide-farhat": [
+    {
+      "file": "guide-farhat.jpg",
+      "alt": "Farhat",
+      "ours": true,
+      "credit": "Photo: Hmayed & Farhat"
+    }
   ]
 }

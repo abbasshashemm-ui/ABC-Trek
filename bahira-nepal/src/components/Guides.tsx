@@ -23,7 +23,7 @@ function InstagramGlyph() {
 
 function Portrait({ id, name }: { id: string; name: string }) {
   const [photo] = photosFor(`guide-${id}`)
-  const ring = 'size-16 shrink-0 rounded-full ring-1 ring-ink/15'
+  const ring = 'size-20 shrink-0 rounded-full ring-1 ring-ink/15'
   if (!photo) {
     return (
       <span className={`${ring} font-display flex items-center justify-center bg-ink/[0.06] text-2xl text-ink`} aria-hidden>
@@ -35,8 +35,8 @@ function Portrait({ id, name }: { id: string; name: string }) {
     <img
       src={photo.src}
       srcSet={photo.srcSet}
-      sizes="64px"
-      alt={photo.alt}
+      sizes="80px"
+      alt="" // the name sits right beside it
       loading="lazy"
       decoding="async"
       className={`${ring} object-cover`}
