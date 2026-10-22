@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import { merge } from './placement'
+import { addCloudShade } from '../wind'
 
 /**
  * Low-poly animals and people, front facing +z, standing on y = 0. Each part bakes three
@@ -130,20 +131,22 @@ export const herdClock = { value: 0 }
 
 /**
  * Flat-shaded Lambert that honours `aTint` and moves `aSway` vertices: the head dips to graze
- * (`dip`) and swings side to side (`swing`). Each animal's phase comes from its position, so
+ * (`dip`) and swings side to side (`swing`); standing animals slowly shift round (`turn`, radians). Each animal's phase comes from its position, so
  * no per-frame matrix uploads are needed for the ones that stand still.
  */
-export function herdMaterial({ dip = 0, swing = 0, rate = 0.6 }: { dip?: number; swing?: number; rate?: number }) {
+export function herdMaterial({ dip = 0, swing = 0, rate = 0.6, turn = 0 }: { dip?: number; swing?: number; rate?: number; turn?: number }) {
   const mat = new THREE.MeshLambertMaterial({ vertexColors: true, flatShading: true })
   mat.onBeforeCompile = (shader) => {
+    addCloudShade(shader)
     shader.uniforms.uTime = herdClock
+    shader.uniforms.uTurn = { value: turn }
     shader.uniforms.uDip = { value: dip }
     shader.uniforms.uSwing = { value: swing }
     shader.uniforms.uRate = { value: rate }
     shader.vertexShader = shader.vertexShader
       .replace(
         '#include <common>',
-        '#include <common>\nattribute float aTint;\nattribute float aSway;\nuniform float uTime, uDip, uSwing, uRate;',
+        '#include <common>\nattribute float aTint;\nattribute float aSway;\nuniform float uTime, uDip, uSwing, uRate, uTurn;',
       )
       .replace(
         '#include <begin_vertex>',
@@ -156,7 +159,10 @@ export function herdMaterial({ dip = 0, swing = 0, rate = 0.6 }: { dip?: number;
         float down = smoothstep(-0.4, 0.3, sin(uTime * uRate + ph));
         transformed.y -= aSway * uDip * down;
         transformed.z += aSway * uDip * down * 0.4;
-        transformed.x += aSway * uSwing * sin(uTime * uRate * 2.3 + ph * 1.3);`,
+        transformed.x += aSway * uSwing * sin(uTime * uRate * 2.3 + ph * 1.3);
+        // Shift their stance now and then: the whole body slowly turns a little and back.
+        float yaw = uTurn * sin(uTime * uRate * 0.37 + ph * 0.7) * sin(uTime * 0.11 + ph);
+        transformed.xz = mat2(cos(yaw), -sin(yaw), sin(yaw), cos(yaw)) * transformed.xz;`,
       )
       .replace(
         '#include <color_vertex>',

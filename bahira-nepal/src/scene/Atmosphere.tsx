@@ -3,6 +3,8 @@ import { useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 import { scrollState } from '../state/scrollStore'
 import { HORIZON, SUN_DIR, fogDensityAt } from './palette'
+import { idleTime } from './motion'
+import { windClock } from './wind'
 
 const linear = (r: number, g: number, b: number) => new THREE.Color().setRGB(r ** 2.2, g ** 2.2, b ** 2.2)
 
@@ -21,7 +23,8 @@ export default function Atmosphere() {
     }
   }, [scene, fog])
 
-  useFrame(() => {
+  useFrame((state) => {
+    windClock.value = idleTime(state.clock.elapsedTime)
     fog.density = Math.sqrt(fogDensityAt(scrollState.dayFloat))
   })
 

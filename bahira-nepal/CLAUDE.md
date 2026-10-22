@@ -44,13 +44,22 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
   layouts are stable. Landmark sites and the backdrop summits live in `spots.ts`; villages and trees keep clear of them.
   `merge()` normalises indexed/non-indexed parts (raw `mergeGeometries` returns null). `SceneBoundary` keeps the page
   usable if WebGL fails. The ABC basin is a shelf carved into the height function (both twins).
-- Wildlife and people (`props/Wildlife.tsx`, shapes in `props/critters.ts`): one instanced mesh per species (elephant,
+- Wildlife and people (`props/Wildlife.tsx`, layout in `props/herds.ts`, shapes in `props/critters.ts`): one instanced mesh per species (elephant,
   rhino, chital, zebu cow, goat, yak, pack mule, porter, villager), placed where they belong: elephants/rhino/deer only in
   Chitwan (Days 3-4; the two with red saddle cloths are the ride elephants), yaks only on the high grass (Days 8-9), cows and
   goats around villages and farms, mule trains and porters on the trek. `herdMaterial` tints only `aTint` parts (coat,
   shirt, load) and moves `aSway` parts (grazing heads, trunks) in the vertex shader with a phase from position, so grazers
   never re-upload matrices; walkers loop an oval beside the trail. Birds: crows, low swallow flocks, high gliding raptors;
   keep every flock's `|side| - radius` well clear of the trail (or it sweeps through the chase lens). Boats are instanced too.
+- Wind and shade (`src/scene/wind.ts`): one up-valley breeze. `windClock` (written from `idleTime` in `Atmosphere`) drives
+  the GLSL `windGust` bands that bend the trees (`windyFoliage`: top bends most, leaves lighten as a gust passes), the
+  flag flutter and the chimney smoke (JS twin `windGust`), and `cloudShadow`: drifting fair-weather cloud shadows that dim
+  only the direct sun on the terrain and, via `addCloudShade`, on trees, houses and animals. Phewa ripples, reflects the
+  sky and glints with the same clock. Soft billboard puffs (`props/puffs.ts`) for smoke and the cloud on the summits.
+- Prop shadows are not shadow maps (that would draw every prop twice): `props/shadows.ts` gives each caster a soft
+  ellipse stretched away from the sun by its height, draped on the terrain in the vertex shader and multiplied over it
+  (fades under a cloud and into the haze). `GroundShadows` = one draw call for everything standing still, one for the
+  walkers; the trekkers carry their own three. Phones drape a coarser grid (`device.ts` `COARSE`).
 
 - Photos: `photos-src/manifest.json` maps days to files (folder mode is the fallback; see its README), `npm run photos` writes WebP to `public/photos/`
   and `src/data/photos.generated.json`. Never hand-edit the JSON. Non-trek photos need a `credits.json` entry

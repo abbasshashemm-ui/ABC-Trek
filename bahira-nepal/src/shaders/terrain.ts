@@ -1,4 +1,5 @@
 import { terrainHeightGLSL } from './terrainHeight'
+import { windGLSL } from '../scene/wind'
 
 /** Forward-scattered sunlight in the air; the sky dome and the terrain haze share it so they match. */
 const sunGlowGLSL = /* glsl */ `
@@ -75,6 +76,8 @@ uniform vec3 uActivePos;
 uniform vec3 uFogColor;   // linear
 uniform float uFogDensity;
 uniform vec3 uSunDir;
+uniform float uWindTime;
+uniform vec3 uZenith;   // linear
 
 varying vec3 vWorldPos;
 varying vec3 vNormal;
@@ -84,6 +87,7 @@ varying float vAO;
 
 vec3 lin(vec3 c) { return pow(c, vec3(2.2)); }
 ${sunGlowGLSL}
+${windGLSL}
 
 float hash(vec2 p) {
   return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
@@ -176,7 +180,29 @@ void main() {
   float lake = (1.0 - smoothstep(6.0, 9.0, d)) * smoothstep(76.0, 80.0, t) * (1.0 - smoothstep(94.0, 98.0, t));
   albedo = mix(albedo, water, lake);
 
+  // Phewa: wind ripples the surface. Two drifting wave sets perturb the normal (gusts roughen
+  // it), so the sky sheen and the sun glints shimmer instead of sitting still.
+  vec3 viewDir = normalize(vWorldPos - cameraPosition);
+  float glint = 0.0;
+  vec3 skyRefl = vec3(0.0);
+  float reflAmt = 0.0;
+  if (lake > 0.01) {
+    float rough = 0.35 + windGust(vWorldPos.xz, uWindTime) * 0.65;
+    vec2 w1 = vnoised(vWorldPos.xz * 1.3 - WIND_DIR * uWindTime * 0.9).yz;
+    vec2 w2 = vnoised(vWorldPos.xz * 3.1 + vec2(uWindTime * 0.55, -uWindTime * 0.3)).yz;
+    vec3 nw = normalize(vec3(0.0, 1.0, 0.0) + vec3(w1.x + w2.x * 0.5, 0.0, w1.y + w2.y * 0.5) * 0.18 * rough);
+    n = normalize(mix(n, nw, lake));
+    vec3 r = reflect(viewDir, nw);
+    glint = pow(max(dot(r, uSunDir), 0.0), 90.0) * 2.2 * lake;
+    // The ripples break up the reflected sky: brighter where a facet tilts toward the horizon.
+    float fresnel = 0.04 + 0.96 * pow(1.0 - max(dot(-viewDir, nw), 0.0), 5.0);
+    skyRefl = mix(uFogColor, uZenith, pow(max(r.y, 0.0), 0.55));
+    reflAmt = fresnel * lake;
+  }
+
   // --- Lighting: warm mid-morning sun + sky/ground hemisphere ---------------
+  // Fair-weather clouds drift over and take the sun off the ground beneath them.
+  float sunLeft = vSun * (1.0 - cloudShadow(vWorldPos.xz, uWindTime));
   float diff = max(dot(n, uSunDir), 0.0);
   float hemi = n.y * 0.5 + 0.5;
   vec3 sunCol = lin(vec3(1.0, 0.95, 0.84)) * 1.6;
@@ -184,8 +210,10 @@ void main() {
   vec3 gndAmb = lin(vec3(0.42, 0.36, 0.26)) * 0.4;
   // Snow gets a touch of the cold sky in shade and bounces more light than rock.
   vec3 ambient = mix(gndAmb, skyAmb, hemi) * vAO * (1.0 + snowAmt * 0.25);
-  vec3 col = albedo * (sunCol * diff * vSun + ambient);
+  vec3 col = albedo * (sunCol * diff * sunLeft + ambient);
   col += water * lake * 0.6 * pow(max(n.y, 0.0), 8.0); // sky sheen on the lake
+  col = mix(col, skyRefl, reflAmt);
+  col += vec3(1.0, 0.93, 0.8) * glint * sunLeft; // no glints in shadow or under a cloud
 
   // --- Subtle topographic overlay --------------------------------------------
   float contourFreq = 1.8;
@@ -211,7 +239,6 @@ void main() {
   // --- Aerial perspective -----------------------------------------------------
   // Haze takes the sky's colour along the view ray, including the warm glow toward the sun,
   // so far ridges toward the sun go golden and the rest go blue, and still meet the sky dome.
-  vec3 viewDir = normalize(vWorldPos - cameraPosition);
   vec3 fogCol = uFogColor + sunGlow(max(dot(viewDir, uSunDir), 0.0));
   float fogFactor = 1.0 - exp(-uFogDensity * vFogDepth * vFogDepth);
   // A thin haze layer pooled in the low valleys.

@@ -2,12 +2,15 @@ import { useLayoutEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 import { groundUnder } from './placement'
 import type { BuildingSpec } from './village'
+import { cloudShadedLambert } from '../wind'
 
 const box = new THREE.BoxGeometry(1, 1, 1).translate(0, 0.5, 0)
 // 4-sided cone turned 45deg = pyramid roof with a square base slightly wider than the walls.
 const pyramid = new THREE.ConeGeometry(0.8, 1, 4).rotateY(Math.PI / 4).translate(0, 0.5, 0)
 const pane = new THREE.PlaneGeometry(1, 1)
 const WINDOW = new THREE.Color(2.4, 1.5, 0.6) // > 1 so the bloom pass gives a warm glow
+const walls = cloudShadedLambert()
+const roofTiles = cloudShadedLambert()
 
 export default function Buildings({ specs }: { specs: BuildingSpec[] }) {
   const bodies = useRef<THREE.InstancedMesh>(null)
@@ -52,12 +55,8 @@ export default function Buildings({ specs }: { specs: BuildingSpec[] }) {
 
   return (
     <group>
-      <instancedMesh ref={bodies} args={[box, undefined, specs.length]}>
-        <meshLambertMaterial flatShading />
-      </instancedMesh>
-      <instancedMesh ref={roofs} args={[pyramid, undefined, specs.length]}>
-        <meshLambertMaterial flatShading />
-      </instancedMesh>
+      <instancedMesh ref={bodies} args={[box, walls, specs.length]} />
+      <instancedMesh ref={roofs} args={[pyramid, roofTiles, specs.length]} />
       <instancedMesh ref={windows} args={[pane, undefined, Math.max(1, litCount)]} count={litCount}>
         <meshBasicMaterial color={WINDOW} toneMapped={false} />
       </instancedMesh>
