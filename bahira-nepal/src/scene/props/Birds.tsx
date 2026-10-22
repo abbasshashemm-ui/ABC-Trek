@@ -16,19 +16,36 @@ interface Flock {
   radius: number
   count: number
   speed: number
+  /** wing size: swallows ~0.5, crows 1, eagles and griffons ~2 */
+  size: number
+  /** wingbeat amplitude; the big birds mostly glide */
+  flap: number
 }
+
+const crows = { size: 1, flap: 0.6 }
+const swallows = { size: 0.5, flap: 0.8 }
+const raptors = { size: 2.1, flap: 0.12 }
 
 export default function Birds() {
   const flocks: Flock[] = useMemo(
     () =>
       [
-        { day: 2.5, side: -16, lift: 22, radius: 9, count: 6, speed: 0.22 },
-        { day: 4.4, side: 18, lift: 26, radius: 11, count: 7, speed: 0.18 },
-        { day: 8, side: -10, lift: 34, radius: 13, count: 5, speed: 0.14 },
+        { day: 0.6, side: 15, lift: 20, radius: 8, count: 6, speed: 0.2, ...crows },
+        { day: 2.5, side: -16, lift: 22, radius: 9, count: 6, speed: 0.22, ...crows },
+        { day: 3.1, side: 13, lift: 9, radius: 6, count: 9, speed: 0.45, ...swallows },
+        { day: 4.4, side: 18, lift: 26, radius: 11, count: 7, speed: 0.18, ...crows },
+        { day: 4.1, side: -14, lift: 8, radius: 7, count: 10, speed: 0.5, ...swallows },
+        { day: 5.4, side: 16, lift: 12, radius: 6, count: 8, speed: 0.42, ...swallows },
+        { day: 6.5, side: -24, lift: 34, radius: 10, count: 3, speed: 0.08, ...raptors },
+        { day: 7.4, side: 24, lift: 38, radius: 10, count: 2, speed: 0.07, ...raptors },
+        { day: 8, side: -10, lift: 34, radius: 13, count: 5, speed: 0.14, ...crows },
+        { day: 8.6, side: 26, lift: 44, radius: 12, count: 3, speed: 0.06, ...raptors },
+        { day: 10.4, side: -15, lift: 10, radius: 6, count: 7, speed: 0.4, ...swallows },
+        { day: 11.2, side: 24, lift: 32, radius: 10, count: 2, speed: 0.08, ...raptors },
       ].map((f) => {
         // Kept above and beside the chase camera's path so no bird crosses the lens.
         const p = besideTrail(f.day, f.side)
-        return { center: new THREE.Vector3(p.x, p.y + f.lift, p.z), radius: f.radius, count: f.count, speed: f.speed }
+        return { center: new THREE.Vector3(p.x, p.y + f.lift, p.z), radius: f.radius, count: f.count, speed: f.speed, size: f.size, flap: f.flap }
       }),
     [],
   )
@@ -48,11 +65,12 @@ export default function Birds() {
         const r = f.radius * (0.75 + 0.25 * Math.sin(b * 3.7))
         tmp.p.set(f.center.x + Math.cos(ang) * r, f.center.y + Math.sin(time * 0.7 + b) * 1.2, f.center.z + Math.sin(ang) * r)
         const heading = -ang // tangent to the circle
-        const flap = Math.sin(time * 9 + b * 1.3) * 0.6
+        // Big birds beat slower and mostly glide, wings held in a shallow V.
+        const flap = Math.sin((time * 9) / Math.sqrt(f.size) + b * 1.3) * f.flap + (f.flap < 0.3 ? 0.12 : 0)
         for (const side of [1, -1]) {
           tmp.e.set(0, heading, side * flap)
           tmp.q.setFromEuler(tmp.e)
-          tmp.s.set(side, 1, 1)
+          tmp.s.set(side * f.size, f.size, f.size)
           tmp.m.compose(tmp.p, tmp.q, tmp.s)
           ref.current!.setMatrixAt(i++, tmp.m)
         }
