@@ -60,7 +60,7 @@ export default function Guides() {
           </h2>
           <p className="lead mt-6 max-w-md">
             Both are experienced trekkers. They’ve reached Everest Base Camp, walked this trail to Annapurna Base Camp,
-            and done many treks besides. This April they lead a small group along the same route.
+            and done many treks besides. In April 2027 they lead a small group along the same route.
           </p>
         </div>
 
