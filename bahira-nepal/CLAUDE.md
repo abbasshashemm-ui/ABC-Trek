@@ -103,6 +103,9 @@ Vite + React + TypeScript, react-three-fiber, GLSL terrain, Lenis + GSAP, Tailwi
   padded by `env(safe-area-inset-*)`. Buttons: `.btn-primary` cream fill, `.btn-glass` frosted; ember is an
   accent only (prices, the trail), never a button fill. Press feedback on `:active`. Reduced transparency/contrast
   fall back to solid. `viewport-fit=cover`, no fixed theme-color meta, 3D canvas is `100lvh` so it runs behind Safari's bars.
+  iOS Safari 26 clips fixed/sticky layers at the status bar and floating toolbar (flat colour there), so on iOS only
+  (`IOS` in `scene/device.ts`) the canvas is an absolute layer moved to `scrollY` every frame, 64px overscan above and
+  below, with `setViewOffset` keeping the lens framed on the visible screen. Elsewhere it stays `fixed`.
   Safari 26 paints the background-color of any fixed element touching the top edge into the status bar: full-width
   fixed layers use gradient images, never `bg-*` colours (that made a black band). Never give `.nav-material` a
   `position` (unlayered CSS beats Tailwind's `fixed` and drops the header into the flow). Phone hero is top-aligned
