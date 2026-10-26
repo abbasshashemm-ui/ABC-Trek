@@ -13,12 +13,13 @@ const UNREACHED = new THREE.Color('#d9d4c8')
 
 const pathVertex = /* glsl */ `
 varying vec2 vUv;
-varying float vFacing;
+varying vec3 vViewNormal;
+varying vec3 vViewPos;
 void main() {
   vUv = uv;
   vec4 mv = modelViewMatrix * vec4(position, 1.0);
-  // How squarely the tube faces the camera: its sides shade off so it reads round, not as a flat cut-out.
-  vFacing = abs(dot(normalize(normalMatrix * normal), normalize(-mv.xyz)));
+  vViewNormal = normalMatrix * normal;
+  vViewPos = mv.xyz;
   gl_Position = projectionMatrix * mv;
 }
 `
@@ -31,13 +32,17 @@ uniform float uProgress;
 uniform float uFlight;
 uniform float uWalked;
 varying vec2 vUv;
-varying float vFacing;
+varying vec3 vViewNormal;
+varying vec3 vViewPos;
 void main() {
   if (vUv.x > uFlight && fract(vUv.x * 900.0) > 0.55) discard;
   if (uWalked > 0.5) {
     if (vUv.x > uProgress) discard;
     float head = exp(-(uProgress - vUv.x) * 80.0);
-    float shade = mix(0.68, 1.0, sqrt(vFacing));
+    // Per pixel (per vertex streaks along the long thin segments): the tube's sides shade off
+    // so it reads round, not as a flat cut-out.
+    float facing = abs(dot(normalize(vViewNormal), normalize(-vViewPos)));
+    float shade = mix(0.68, 1.0, sqrt(facing));
     gl_FragColor = vec4(mix(vec3(0.86, 0.6, 0.2), vec3(1.0, 0.82, 0.45), head) * (0.9 + head * 0.5) * shade, 1.0);
   } else {
     gl_FragColor = vec4(0.95, 0.9, 0.78, 0.45);
