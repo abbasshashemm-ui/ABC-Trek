@@ -122,6 +122,24 @@ vec3 surface(vec2 q) {
   return vec3(noise, -g);
 }
 
+// Grass is never one green: fresh, dark and sun-dried greens mixed by broad and mid-scale
+// patches, then a fine tuft speckle with bits of earth showing through up close (faded out
+// with distance before it aliases). lushK: 0 = open pasture, 1 = Chitwan/Pokhara jungle floor.
+vec3 grass(vec2 xz, float lushK, float dist) {
+  vec3 fresh = mix(lin(vec3(0.37, 0.47, 0.2)), lin(vec3(0.22, 0.38, 0.14)), lushK);
+  vec3 dark = lin(vec3(0.2, 0.3, 0.13));
+  vec3 dry = lin(vec3(0.53, 0.51, 0.31));
+  float broad = vnoise(xz * 0.035 + 3.1);
+  float mid = vnoise(xz * 0.17 + 7.7) * 0.7 + vnoise(xz * 0.5 + 1.3) * 0.3;
+  vec3 c = mix(fresh, dark, smoothstep(0.4, 0.8, mid) * 0.65);
+  c = mix(c, dry, smoothstep(0.45, 0.85, broad) * 0.6 * (1.0 - lushK * 0.6));
+  float fade = 1.0 - smoothstep(25.0, 80.0, dist);
+  float fine = vnoise(xz * 2.3) * 0.6 + vnoise(xz * 6.1) * 0.4;
+  c *= 1.0 + (fine - 0.5) * 0.4 * fade;
+  c = mix(c, lin(vec3(0.43, 0.37, 0.27)), smoothstep(0.8, 0.95, fine) * 0.3 * fade);
+  return c;
+}
+
 void main() {
   // Per-fragment height keeps contours smooth on steep walls.
   float vElevation = getTerrainHeight(vWorldPos.x, vWorldPos.z);
@@ -150,9 +168,6 @@ void main() {
   n = normalize(n + vec3(surf.y, 0.0, surf.z) * grain);
 
   // --- Biomes ---------------------------------------------------------------
-  vec3 terrace = lin(vec3(0.33, 0.56, 0.17));   // Kathmandu valley / Act IV
-  vec3 jungle  = lin(vec3(0.13, 0.44, 0.13));   // Chitwan & Pokhara (Act II)
-  vec3 meadow  = lin(vec3(0.44, 0.6, 0.24));   // alpine scrub
   vec3 moraine = lin(vec3(0.58, 0.53, 0.45));
   vec3 forest  = lin(vec3(0.11, 0.3, 0.12));    // steep wooded hillsides below the treeline
   vec3 rock    = lin(vec3(0.46, 0.42, 0.38));
@@ -160,14 +175,17 @@ void main() {
   vec3 water   = lin(vec3(0.12, 0.42, 0.52));
 
   float lush = smoothstep(30.0, 60.0, t) * (1.0 - smoothstep(105.0, 135.0, t));
-  vec3 lowland = mix(terrace, jungle, lush) * (0.8 + noise * 0.4);
+  // Top-down noise stretches into streaks on steep ground, so the fine tufts fade out there too.
+  vec3 lowland = grass(vWorldPos.xz, lush, vFogDepth + smoothstep(0.15, 0.4, slope) * 100.0);
+  // Alpine grass higher up: thinner and sun-bleached toward straw.
+  vec3 meadow = mix(lowland, lin(vec3(0.55, 0.52, 0.33)), 0.4) * (0.9 + noise * 0.2);
 
   vec3 albedo = lowland;
-  albedo = mix(albedo, meadow * (0.85 + noise * 0.3), smoothstep(13.0, 24.0, vElevation));
+  albedo = mix(albedo, meadow, smoothstep(13.0, 24.0, vElevation));
   albedo = mix(albedo, moraine, smoothstep(26.0, 34.0, vElevation));
   // Low steep slopes are wooded, not bare: rock takes over from ~18 up.
   float lowSlope = 1.0 - smoothstep(16.0, 28.0, vElevation);
-  albedo = mix(albedo, forest * (0.75 + noise * 0.5), smoothstep(0.22, 0.5, slope) * lowSlope);
+  albedo = mix(albedo, mix(forest, lowland * 0.7, 0.45) * (0.85 + noise * 0.3), smoothstep(0.22, 0.5, slope) * lowSlope);
   albedo = mix(albedo, rock * (0.8 + noise * 0.4), smoothstep(0.38, 0.62, slope) * mix(0.35, 1.0, 1.0 - lowSlope));
 
   // Snow from ~41 up, clinging to all but the sheerest faces so the range reads as Himalayan.
@@ -176,8 +194,17 @@ void main() {
   float snowAmt = smoothstep(snowline - 3.0, snowline + 3.0, vElevation) * (1.0 - smoothstep(0.7, 0.93, slope));
   albedo = mix(albedo, snow, snowAmt);
 
-  // Phewa Lake around Day 5 (Pokhara)
-  float lake = (1.0 - smoothstep(6.0, 9.0, d)) * smoothstep(76.0, 80.0, t) * (1.0 - smoothstep(94.0, 98.0, t));
+  // Phewa Lake around Day 5 (Pokhara): a rounded basin with a noisy shoreline (bays and points)
+  // instead of a box, inside the trees' and herds' keep-out (|offset| < 10, t 74..100).
+  vec2 lq = vec2((vWorldPos.x - valleyCenter(vWorldPos.z)) / 8.5, (t - 87.0) / 12.0);
+  float lr = pow(pow(abs(lq.x), 3.0) + pow(abs(lq.y), 3.0), 1.0 / 3.0);
+  lr += (vnoise(vWorldPos.xz * 0.22) - 0.5) * 0.16 + (vnoise(vWorldPos.xz * 0.9) - 0.5) * 0.05;
+  float lake = 1.0 - smoothstep(0.95, 1.0, lr);
+  // Damp, darker earth along the shore, then shallows that shade from green-blue into deep water.
+  float shore = smoothstep(0.92, 0.98, lr) * (1.0 - smoothstep(1.0, 1.12, lr));
+  albedo = mix(albedo, lin(vec3(0.44, 0.41, 0.3)), shore * 0.4);
+  vec3 shallow = lin(vec3(0.2, 0.5, 0.5));
+  water = mix(shallow, water * 0.8, 1.0 - smoothstep(0.5, 0.98, lr));
   albedo = mix(albedo, water, lake);
 
   // Phewa: wind ripples the surface. Two drifting wave sets perturb the normal (gusts roughen
