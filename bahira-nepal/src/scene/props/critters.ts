@@ -19,8 +19,12 @@ function part(geo: THREE.BufferGeometry, color: string, o: { tint?: boolean; swa
   return g
 }
 
-const blob = (r: [number, number, number], at: [number, number, number], detail = 1) =>
-  new THREE.IcosahedronGeometry(1, detail).scale(...r).translate(...at)
+/** Smooth-shaded ellipsoid: radial normals even at detail 0, where three would bake flat face normals. */
+function blob(r: [number, number, number], at: [number, number, number], detail = 1) {
+  const g = new THREE.IcosahedronGeometry(1, detail)
+  g.setAttribute('normal', g.getAttribute('position').clone())
+  return g.scale(...r).translate(...at)
+}
 const leg = (r: number, h: number, x: number, z: number) => new THREE.CylinderGeometry(r, r * 0.85, h, 5).translate(x, h / 2, z)
 const legs = (r: number, h: number, x: number, z: number, color: string, tint = false) =>
   [[-x, -z], [x, -z], [-x, z], [x, z]].map(([lx, lz]) => part(leg(r, h, lx, lz), color, { tint }))
@@ -130,12 +134,12 @@ export const porter = merge([
 export const herdClock = { value: 0 }
 
 /**
- * Flat-shaded Lambert that honours `aTint` and moves `aSway` vertices: the head dips to graze
+ * Smooth-shaded Lambert that honours `aTint` and moves `aSway` vertices: the head dips to graze
  * (`dip`) and swings side to side (`swing`); standing animals slowly shift round (`turn`, radians). Each animal's phase comes from its position, so
  * no per-frame matrix uploads are needed for the ones that stand still.
  */
 export function herdMaterial({ dip = 0, swing = 0, rate = 0.6, turn = 0 }: { dip?: number; swing?: number; rate?: number; turn?: number }) {
-  const mat = new THREE.MeshLambertMaterial({ vertexColors: true, flatShading: true })
+  const mat = new THREE.MeshLambertMaterial({ vertexColors: true })
   mat.onBeforeCompile = (shader) => {
     addCloudShade(shader)
     shader.uniforms.uTime = herdClock

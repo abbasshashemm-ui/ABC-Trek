@@ -150,7 +150,7 @@ void main() {
   n = normalize(n + vec3(surf.y, 0.0, surf.z) * grain);
 
   // --- Biomes ---------------------------------------------------------------
-  vec3 terrace = lin(vec3(0.33, 0.56, 0.17));   // Kathmandu valley / Act IV
+  vec3 terrace = lin(vec3(0.34, 0.53, 0.19));   // Kathmandu valley / Act IV
   vec3 jungle  = lin(vec3(0.13, 0.44, 0.13));   // Chitwan & Pokhara (Act II)
   vec3 meadow  = lin(vec3(0.44, 0.6, 0.24));   // alpine scrub
   vec3 moraine = lin(vec3(0.58, 0.53, 0.45));
@@ -161,6 +161,8 @@ void main() {
 
   float lush = smoothstep(30.0, 60.0, t) * (1.0 - smoothstep(105.0, 135.0, t));
   vec3 lowland = mix(terrace, jungle, lush) * (0.8 + noise * 0.4);
+  // Broad patches of drier, olive grass so open slopes aren't one even green.
+  lowland = mix(lowland, lin(vec3(0.42, 0.48, 0.24)), smoothstep(0.35, 0.8, vnoise(vWorldPos.xz * 0.035 + 3.1)) * 0.45);
 
   vec3 albedo = lowland;
   albedo = mix(albedo, meadow * (0.85 + noise * 0.3), smoothstep(13.0, 24.0, vElevation));
@@ -176,8 +178,17 @@ void main() {
   float snowAmt = smoothstep(snowline - 3.0, snowline + 3.0, vElevation) * (1.0 - smoothstep(0.7, 0.93, slope));
   albedo = mix(albedo, snow, snowAmt);
 
-  // Phewa Lake around Day 5 (Pokhara)
-  float lake = (1.0 - smoothstep(6.0, 9.0, d)) * smoothstep(76.0, 80.0, t) * (1.0 - smoothstep(94.0, 98.0, t));
+  // Phewa Lake around Day 5 (Pokhara): a rounded basin with a noisy shoreline (bays and points)
+  // instead of a box, inside the trees' and herds' keep-out (|offset| < 10, t 74..100).
+  vec2 lq = vec2((vWorldPos.x - valleyCenter(vWorldPos.z)) / 8.5, (t - 87.0) / 12.0);
+  float lr = pow(pow(abs(lq.x), 3.0) + pow(abs(lq.y), 3.0), 1.0 / 3.0);
+  lr += (vnoise(vWorldPos.xz * 0.22) - 0.5) * 0.16 + (vnoise(vWorldPos.xz * 0.9) - 0.5) * 0.05;
+  float lake = 1.0 - smoothstep(0.95, 1.0, lr);
+  // Damp, darker earth along the shore, then shallows that shade from green-blue into deep water.
+  float shore = smoothstep(0.92, 0.98, lr) * (1.0 - smoothstep(1.0, 1.12, lr));
+  albedo = mix(albedo, lin(vec3(0.44, 0.41, 0.3)), shore * 0.4);
+  vec3 shallow = lin(vec3(0.2, 0.5, 0.5));
+  water = mix(shallow, water * 0.8, 1.0 - smoothstep(0.5, 0.98, lr));
   albedo = mix(albedo, water, lake);
 
   // Phewa: wind ripples the surface. Two drifting wave sets perturb the normal (gusts roughen

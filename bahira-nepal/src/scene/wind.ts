@@ -79,16 +79,21 @@ export function addCloudShade(shader: THREE.WebGLProgramParametersWithUniforms) 
  * `height` is the tree's local height, so the bend is the same in world units whatever the scale.
  */
 export function windyFoliage(height: number) {
-  const mat = new THREE.MeshLambertMaterial({ flatShading: true })
+  // Smooth-shaded: the crowns carry their own rounded normals and baked occlusion (`color`).
+  const mat = new THREE.MeshLambertMaterial({ vertexColors: true })
   mat.onBeforeCompile = (shader) => {
     addCloudShade(shader)
     shader.uniforms.uTreeHeight = { value: height }
     shader.vertexShader = shader.vertexShader
-      .replace('#include <common>', `#include <common>\nuniform float uWindTime;\nuniform float uTreeHeight;\nvarying float vGust;\n${windGLSL}`)
+      .replace(
+        '#include <common>',
+        `#include <common>\nuniform float uWindTime;\nuniform float uTreeHeight;\nattribute float aTrunk;\nvarying float vGust;\nvarying float vTrunk;\n${windGLSL}`,
+      )
       .replace(
         '#include <begin_vertex>',
         `#include <begin_vertex>
         vGust = 0.0;
+        vTrunk = aTrunk;
         #ifdef USE_INSTANCING
           vec3 root = instanceMatrix[3].xyz;
           float gust = windGust(root.xz, uWindTime);
@@ -104,9 +109,12 @@ export function windyFoliage(height: number) {
         #endif`,
       )
     shader.fragmentShader = shader.fragmentShader
-      .replace('#include <common>', '#include <common>\nvarying float vGust;')
-      // Leaves flip their paler undersides as a gust passes; the trunk (low k) stays put.
-      .replace('#include <color_fragment>', '#include <color_fragment>\ndiffuseColor.rgb *= 1.0 + vGust * 0.22;')
+      .replace('#include <common>', '#include <common>\nvarying float vGust;\nvarying float vTrunk;')
+      // Leaves flip their paler undersides as a gust passes; the trunk (low k) stays put. Bark ignores the instance's green.
+      .replace(
+        '#include <color_fragment>',
+        '#include <color_fragment>\ndiffuseColor.rgb *= 1.0 + vGust * 0.22;\ndiffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.09, 0.055, 0.03), vTrunk);',
+      )
   }
   return mat
 }
