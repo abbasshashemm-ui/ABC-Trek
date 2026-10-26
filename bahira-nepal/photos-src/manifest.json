@@ -1,5 +1,4 @@
 {
-  "_note": "Day -> photos. 'ours' = taken by the trek leaders. Everything else was supplied from online sources without licence info: replace or license before launch (see README).",
   "1": [
     {
       "file": "The streets of Thamel, kathmandu.jpg",
@@ -61,9 +60,31 @@
     {
       "file": "phewa lake.jpg",
       "alt": "Painted boats on Phewa Lake below Machhapuchhre"
+    },
+    {
+      "file": "phewa-lake-hullot.jpg",
+      "alt": "Boats moored on Phewa Lake, Pokhara",
+      "author": "Jean-Marie Hullot",
+      "license": "CC BY 2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Phewa_Lake_in_Pokhara_(15715573565).jpg",
+      "focus": "50% 40%"
+    },
+    {
+      "file": "phewa-lakeside.jpg",
+      "alt": "Lakeside promenade on Phewa Lake",
+      "author": "Touristvlogs",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Phewa_Lake_Pokhara_Lakeside.jpg",
+      "focus": "50% 50%"
     }
   ],
   "6": [
+    {
+      "file": "guides-peace-pagoda.webp",
+      "alt": "Morning at the World Peace Pagoda above Pokhara",
+      "ours": true,
+      "credit": "Photo: Hmayed & Farhat"
+    },
     {
       "file": "God Shiva Pokhara.jpg",
       "alt": "The Pumdikot Shiva statue above Pokhara and Phewa Lake"
@@ -71,6 +92,14 @@
     {
       "file": "Gupteshwor Mahadev Cave, pokhara.jpg",
       "alt": "The spiral entrance to Gupteshwor Mahadev Cave"
+    },
+    {
+      "file": "sarangkot-annapurna.jpg",
+      "alt": "Sunrise watchers at Sarangkot facing Machhapuchhre and the Annapurnas",
+      "author": "Gerd Eichmann",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Pokhara-Sarangkot-20-Berge-2015-gje.jpg",
+      "focus": "40% 40%"
     }
   ],
   "7": [
@@ -81,6 +110,14 @@
     {
       "file": "abc trek,..jpg",
       "alt": "Trekkers on the trail toward Annapurna"
+    },
+    {
+      "file": "chhomrong-view-north.jpg",
+      "alt": "Looking north up the valley from Chhomrong",
+      "author": "Josep M. Gracia",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:ABC_-_View_north_from_Chhomrong_on_the_Annapurna_Base_Camp_trek,_Nepal,_2016.jpg",
+      "focus": "50% 50%"
     }
   ],
   "8": [
@@ -93,6 +130,14 @@
     {
       "file": "abc trek..jpg",
       "alt": "A trekker climbing through grassland beneath snow peaks"
+    },
+    {
+      "file": "deurali-trek.jpg",
+      "alt": "Lodges at Deurali, high in the Modi Khola gorge",
+      "author": "Josep M. Gracia",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:ABC_-_Deurali_on_the_Annapurna_Base_Camp_trek,_Nepal,_2016.jpg",
+      "focus": "50% 50%"
     }
   ],
   "9": [
@@ -105,6 +150,46 @@
     {
       "file": "abc.jpg",
       "alt": "The Namaste sign and prayer flags at Annapurna Base Camp"
+    },
+    {
+      "file": "abc-annapurna-south-face.jpg",
+      "alt": "The south face of Annapurna I from base camp",
+      "author": "Josep M. Gracia",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:ABC_-_South_face_of_Annapurna_I_from_Annapurna_Base_Camp,_Nepal,_2016.jpg",
+      "focus": "50% 50%"
+    },
+    {
+      "file": "abc-trail-to-mbc.jpg",
+      "alt": "The trail up to Machhapuchhre Base Camp",
+      "author": "Josep M. Gracia",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:ABC_-_Trail_toward_Machhapuchchhre_Base_Camp,_Nepal,_2016.jpg",
+      "focus": "50% 40%"
+    },
+    {
+      "file": "machhapuchhre-base-camp.jpg",
+      "alt": "Machhapuchhre Base Camp on the way into the sanctuary",
+      "author": "Jodhani.micky",
+      "license": "CC BY-SA 3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Machhapuchhre_Base_Camp.jpg",
+      "focus": "50% 50%"
+    },
+    {
+      "file": "abc-lodges-machhapuchhre.jpg",
+      "alt": "Machhapuchhre seen from the base camp lodges",
+      "author": "Carsten.nebel",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Machapuchare_from_Annapurna_Base_Camp_lodges.jpg",
+      "focus": "50% 50%"
+    },
+    {
+      "file": "abc-sunset-machhapuchhre.jpg",
+      "alt": "Sunset on Machhapuchhre from Annapurna Base Camp",
+      "author": "Nirojsedhai",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Sunset_on_Machhapuchhre_from_Annapurna_base_camp.jpg",
+      "focus": "60% 30%"
     }
   ],
   "10": [
@@ -112,6 +197,22 @@
       "file": "sinuwa-2048x541.webp",
       "alt": "Sinuwa’s lodges strung along a forested ridge above the Modi Khola",
       "focus": "70% 50%"
+    },
+    {
+      "file": "deurali-cascade.jpg",
+      "alt": "A waterfall between Himalaya and Deurali",
+      "author": "Josep M. Gracia",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:ABC_-_Cascade_between_Himalaya_and_Deurali_on_the_Annapurna_Base_Camp_trek,_Nepal,_2016.jpg",
+      "focus": "70% 55%"
+    },
+    {
+      "file": "modi-khola.jpg",
+      "alt": "The Modi Khola river below Sinuwa",
+      "author": "Bijay Chaurasia",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Modi_Khola_(River)_-IMG_4592.jpg",
+      "focus": "50% 50%"
     }
   ],
   "11": [
@@ -123,12 +224,36 @@
     {
       "file": "jhinu-danda,hot-springs.jpg",
       "alt": "Steaming hot-spring pool beside the river at Jhinu Danda"
+    },
+    {
+      "file": "jhinu-kadoorie-bridge.jpg",
+      "alt": "Terraced fields and the suspension bridge below Jhinu Danda",
+      "author": "Bijay Chaurasia",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Jhinu_Danda_Bridge_(Kadoorie_Bridge)-1.jpg",
+      "focus": "50% 50%"
     }
   ],
   "12": [
     {
       "file": "Jhinu danda.webp",
       "alt": "The suspension bridge over the Modi Khola below the terraces of Jhinu Danda"
+    },
+    {
+      "file": "landruk-terraces.jpg",
+      "alt": "Terraced fields at Landruk",
+      "author": "Josep M. Gracia",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:ABC_-_Terraced_fields_at_Landruk,_Nepal,_2016.jpg",
+      "focus": "50% 50%"
+    },
+    {
+      "file": "landruk-morning.jpg",
+      "alt": "Morning over Landruk with Annapurna South and Hiunchuli",
+      "author": "Gerd Eichmann",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Landruk-46-Morgenerwachen-Dorf-Annapurna_Sued-Hiunchuli-2013-gje.jpg",
+      "focus": "50% 35%"
     }
   ],
   "13": [
@@ -151,6 +276,7 @@
       "credit": "Photo: Hmayed & Farhat, 2025"
     }
   ],
+  "_note": "Day -> photos. 'ours' = taken by the trek leaders. Everything else was supplied from online sources without licence info: replace or license before launch (see README).",
   "guide-hmayed": [
     {
       "file": "guide-hmayed.jpg",

@@ -112,24 +112,69 @@
       "height": 876,
       "alt": "Painted boats on Phewa Lake below Machhapuchhre",
       "ours": false
+    },
+    {
+      "src": "/photos/day05-2-800.webp",
+      "srcSet": "/photos/day05-2-800.webp 800w, /photos/day05-2-1600.webp 1600w",
+      "width": 1600,
+      "height": 1067,
+      "alt": "Boats moored on Phewa Lake, Pokhara",
+      "credit": "Jean-Marie Hullot",
+      "license": "CC BY 2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Phewa_Lake_in_Pokhara_(15715573565).jpg",
+      "ours": false,
+      "focus": "50% 40%"
+    },
+    {
+      "src": "/photos/day05-3-800.webp",
+      "srcSet": "/photos/day05-3-800.webp 800w, /photos/day05-3-1600.webp 1600w",
+      "width": 1600,
+      "height": 1200,
+      "alt": "Lakeside promenade on Phewa Lake",
+      "credit": "Touristvlogs",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Phewa_Lake_Pokhara_Lakeside.jpg",
+      "ours": false,
+      "focus": "50% 50%"
     }
   ],
   "6": [
     {
       "src": "/photos/day06-1-800.webp",
-      "srcSet": "/photos/day06-1-800.webp 736w",
+      "srcSet": "/photos/day06-1-800.webp 600w, /photos/day06-1-1600.webp 1200w",
+      "width": 1200,
+      "height": 1600,
+      "alt": "Morning at the World Peace Pagoda above Pokhara",
+      "credit": "Photo: Hmayed & Farhat",
+      "ours": true
+    },
+    {
+      "src": "/photos/day06-2-800.webp",
+      "srcSet": "/photos/day06-2-800.webp 736w",
       "width": 736,
       "height": 736,
       "alt": "The Pumdikot Shiva statue above Pokhara and Phewa Lake",
       "ours": false
     },
     {
-      "src": "/photos/day06-2-800.webp",
-      "srcSet": "/photos/day06-2-800.webp 600w, /photos/day06-2-1600.webp 736w",
+      "src": "/photos/day06-3-800.webp",
+      "srcSet": "/photos/day06-3-800.webp 600w, /photos/day06-3-1600.webp 736w",
       "width": 736,
       "height": 981,
       "alt": "The spiral entrance to Gupteshwor Mahadev Cave",
       "ours": false
+    },
+    {
+      "src": "/photos/day06-4-800.webp",
+      "srcSet": "/photos/day06-4-800.webp 800w, /photos/day06-4-1600.webp 1600w",
+      "width": 1600,
+      "height": 1107,
+      "alt": "Sunrise watchers at Sarangkot facing Machhapuchhre and the Annapurnas",
+      "credit": "Gerd Eichmann",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Pokhara-Sarangkot-20-Berge-2015-gje.jpg",
+      "ours": false,
+      "focus": "40% 40%"
     }
   ],
   "7": [
@@ -148,6 +193,18 @@
       "height": 900,
       "alt": "Trekkers on the trail toward Annapurna",
       "ours": false
+    },
+    {
+      "src": "/photos/day07-3-800.webp",
+      "srcSet": "/photos/day07-3-800.webp 800w, /photos/day07-3-1600.webp 1600w",
+      "width": 1600,
+      "height": 1063,
+      "alt": "Looking north up the valley from Chhomrong",
+      "credit": "Josep M. Gracia",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:ABC_-_View_north_from_Chhomrong_on_the_Annapurna_Base_Camp_trek,_Nepal,_2016.jpg",
+      "ours": false,
+      "focus": "50% 50%"
     }
   ],
   "8": [
@@ -167,6 +224,18 @@
       "height": 480,
       "alt": "A trekker climbing through grassland beneath snow peaks",
       "ours": false
+    },
+    {
+      "src": "/photos/day08-3-800.webp",
+      "srcSet": "/photos/day08-3-800.webp 800w, /photos/day08-3-1600.webp 1600w",
+      "width": 1600,
+      "height": 1063,
+      "alt": "Lodges at Deurali, high in the Modi Khola gorge",
+      "credit": "Josep M. Gracia",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:ABC_-_Deurali_on_the_Annapurna_Base_Camp_trek,_Nepal,_2016.jpg",
+      "ours": false,
+      "focus": "50% 50%"
     }
   ],
   "9": [
@@ -186,6 +255,66 @@
       "height": 1350,
       "alt": "The Namaste sign and prayer flags at Annapurna Base Camp",
       "ours": false
+    },
+    {
+      "src": "/photos/day09-3-800.webp",
+      "srcSet": "/photos/day09-3-800.webp 800w, /photos/day09-3-1600.webp 1600w",
+      "width": 1600,
+      "height": 1063,
+      "alt": "The south face of Annapurna I from base camp",
+      "credit": "Josep M. Gracia",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:ABC_-_South_face_of_Annapurna_I_from_Annapurna_Base_Camp,_Nepal,_2016.jpg",
+      "ours": false,
+      "focus": "50% 50%"
+    },
+    {
+      "src": "/photos/day09-4-800.webp",
+      "srcSet": "/photos/day09-4-800.webp 800w, /photos/day09-4-1600.webp 1600w",
+      "width": 1600,
+      "height": 1063,
+      "alt": "The trail up to Machhapuchhre Base Camp",
+      "credit": "Josep M. Gracia",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:ABC_-_Trail_toward_Machhapuchchhre_Base_Camp,_Nepal,_2016.jpg",
+      "ours": false,
+      "focus": "50% 40%"
+    },
+    {
+      "src": "/photos/day09-5-800.webp",
+      "srcSet": "/photos/day09-5-800.webp 800w, /photos/day09-5-1600.webp 1600w",
+      "width": 1600,
+      "height": 1067,
+      "alt": "Machhapuchhre Base Camp on the way into the sanctuary",
+      "credit": "Jodhani.micky",
+      "license": "CC BY-SA 3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Machhapuchhre_Base_Camp.jpg",
+      "ours": false,
+      "focus": "50% 50%"
+    },
+    {
+      "src": "/photos/day09-6-800.webp",
+      "srcSet": "/photos/day09-6-800.webp 800w, /photos/day09-6-1600.webp 1600w",
+      "width": 1600,
+      "height": 900,
+      "alt": "Machhapuchhre seen from the base camp lodges",
+      "credit": "Carsten.nebel",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Machapuchare_from_Annapurna_Base_Camp_lodges.jpg",
+      "ours": false,
+      "focus": "50% 50%"
+    },
+    {
+      "src": "/photos/day09-7-800.webp",
+      "srcSet": "/photos/day09-7-800.webp 800w, /photos/day09-7-1600.webp 1600w",
+      "width": 1600,
+      "height": 1260,
+      "alt": "Sunset on Machhapuchhre from Annapurna Base Camp",
+      "credit": "Nirojsedhai",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Sunset_on_Machhapuchhre_from_Annapurna_base_camp.jpg",
+      "ours": false,
+      "focus": "60% 30%"
     }
   ],
   "10": [
@@ -197,6 +326,30 @@
       "alt": "Sinuwa’s lodges strung along a forested ridge above the Modi Khola",
       "ours": false,
       "focus": "70% 50%"
+    },
+    {
+      "src": "/photos/day10-2-800.webp",
+      "srcSet": "/photos/day10-2-800.webp 531w, /photos/day10-2-1600.webp 1063w",
+      "width": 1063,
+      "height": 1600,
+      "alt": "A waterfall between Himalaya and Deurali",
+      "credit": "Josep M. Gracia",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:ABC_-_Cascade_between_Himalaya_and_Deurali_on_the_Annapurna_Base_Camp_trek,_Nepal,_2016.jpg",
+      "ours": false,
+      "focus": "70% 55%"
+    },
+    {
+      "src": "/photos/day10-3-800.webp",
+      "srcSet": "/photos/day10-3-800.webp 533w, /photos/day10-3-1600.webp 1067w",
+      "width": 1067,
+      "height": 1600,
+      "alt": "The Modi Khola river below Sinuwa",
+      "credit": "Bijay Chaurasia",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Modi_Khola_(River)_-IMG_4592.jpg",
+      "ours": false,
+      "focus": "50% 50%"
     }
   ],
   "11": [
@@ -216,6 +369,18 @@
       "height": 452,
       "alt": "Steaming hot-spring pool beside the river at Jhinu Danda",
       "ours": false
+    },
+    {
+      "src": "/photos/day11-3-800.webp",
+      "srcSet": "/photos/day11-3-800.webp 800w, /photos/day11-3-1600.webp 1600w",
+      "width": 1600,
+      "height": 900,
+      "alt": "Terraced fields and the suspension bridge below Jhinu Danda",
+      "credit": "Bijay Chaurasia",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Jhinu_Danda_Bridge_(Kadoorie_Bridge)-1.jpg",
+      "ours": false,
+      "focus": "50% 50%"
     }
   ],
   "12": [
@@ -226,6 +391,30 @@
       "height": 1200,
       "alt": "The suspension bridge over the Modi Khola below the terraces of Jhinu Danda",
       "ours": false
+    },
+    {
+      "src": "/photos/day12-2-800.webp",
+      "srcSet": "/photos/day12-2-800.webp 800w, /photos/day12-2-1600.webp 1600w",
+      "width": 1600,
+      "height": 1063,
+      "alt": "Terraced fields at Landruk",
+      "credit": "Josep M. Gracia",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:ABC_-_Terraced_fields_at_Landruk,_Nepal,_2016.jpg",
+      "ours": false,
+      "focus": "50% 50%"
+    },
+    {
+      "src": "/photos/day12-3-800.webp",
+      "srcSet": "/photos/day12-3-800.webp 587w, /photos/day12-3-1600.webp 1174w",
+      "width": 1174,
+      "height": 1600,
+      "alt": "Morning over Landruk with Annapurna South and Hiunchuli",
+      "credit": "Gerd Eichmann",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Landruk-46-Morgenerwachen-Dorf-Annapurna_Sued-Hiunchuli-2013-gje.jpg",
+      "ours": false,
+      "focus": "50% 35%"
     }
   ],
   "13": [
