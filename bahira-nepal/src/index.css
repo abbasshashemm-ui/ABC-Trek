@@ -100,6 +100,13 @@ p, li { text-wrap: pretty; }
     backdrop-filter: blur(16px) saturate(160%);
   }
   @media (hover: hover) { .btn-glass:hover { background: rgb(255 255 255 / 0.16); } }
+
+  /* Booking card: dark enough to read over snow, clear enough that the summit scene shows through. */
+  .booking-card {
+    background: rgb(13 15 14 / 0.62);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    backdrop-filter: blur(20px) saturate(140%);
+  }
 }
 
 /* ---------- Header material ----------
@@ -121,6 +128,7 @@ p, li { text-wrap: pretty; }
 @media (prefers-reduced-transparency: reduce) {
   .nav-material::before { background: var(--color-obsidian); -webkit-backdrop-filter: none; backdrop-filter: none; -webkit-mask-image: none; mask-image: none; inset: 0; }
   .btn-glass { background: #2a2d2b; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .booking-card { background: var(--color-panel); -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
 @media (prefers-contrast: more) {
   .btn-glass { box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.6); }
