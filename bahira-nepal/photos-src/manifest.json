@@ -260,12 +260,44 @@
     {
       "file": "Pokhara lakeside.avif",
       "alt": "Machhapuchhre reflected in Phewa Lake, Pokhara"
+    },
+    {
+      "file": "phewa-sunset-kayaks.jpg",
+      "alt": "Kayaks on Phewa Lake at sunset",
+      "author": "Pexels",
+      "license": "Pexels License",
+      "source": "https://www.pexels.com/photo/sunset-kayaking-on-phewa-lake-in-pokhara-36236714/",
+      "focus": "55% 70%"
+    },
+    {
+      "file": "phewa-kayak.jpg",
+      "alt": "A kayak out on Phewa Lake",
+      "author": "Pexels",
+      "license": "Pexels License",
+      "source": "https://www.pexels.com/photo/men-on-kayak-in-lake-22718468/",
+      "focus": "50% 60%"
     }
   ],
   "14": [
     {
       "file": "Photo Nepal - Share Nepal_s Beauty.jpg",
       "alt": "Boudhanath Stupa lit at dusk, Kathmandu"
+    },
+    {
+      "file": "kathmandu-maju-dega.jpg",
+      "alt": "Maju Dega temple, Kathmandu Durbar Square",
+      "author": "Pexels",
+      "license": "Pexels License",
+      "source": "https://www.pexels.com/photo/maju-dega-temple-in-kathmandu-nepal-13750373/",
+      "focus": "60% 40%"
+    },
+    {
+      "file": "patan-durbar-square.jpg",
+      "alt": "Patan Durbar Square in the Kathmandu Valley",
+      "author": "Pexels",
+      "license": "Pexels License",
+      "source": "https://www.pexels.com/photo/aerial-view-of-patan-durbar-square-in-kathmandu-nepal-33884006/",
+      "focus": "50% 50%"
     }
   ],
   "15": [
@@ -274,6 +306,22 @@
       "alt": "Hmayed and Farhat with the Lebanese flag at Everest Base Camp",
       "ours": true,
       "credit": "Photo: Hmayed & Farhat, 2025"
+    },
+    {
+      "file": "beirut-pigeon-rocks.jpg",
+      "alt": "The Pigeon Rocks at Raouche, Beirut",
+      "author": "Iakub Arifulin",
+      "license": "Pexels License",
+      "source": "https://www.pexels.com/photo/drone-shot-of-pigeon-rocks-in-lebanon-12259278/",
+      "focus": "50% 60%"
+    },
+    {
+      "file": "beirut-flag-skyline.jpg",
+      "alt": "The Lebanese flag over Beirut",
+      "author": "Pexels",
+      "license": "Pexels License",
+      "source": "https://www.pexels.com/photo/lebanese-flag-and-urban-skyline-in-beirut-29677953/",
+      "focus": "50% 30%"
     }
   ],
   "_note": "Day -> photos. 'ours' = taken by the trek leaders. Everything else was supplied from online sources without licence info: replace or license before launch (see README).",

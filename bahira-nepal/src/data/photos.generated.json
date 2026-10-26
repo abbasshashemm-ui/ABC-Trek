@@ -425,6 +425,30 @@
       "height": 530,
       "alt": "Machhapuchhre reflected in Phewa Lake, Pokhara",
       "ours": false
+    },
+    {
+      "src": "/photos/day13-2-800.webp",
+      "srcSet": "/photos/day13-2-800.webp 800w, /photos/day13-2-1600.webp 1600w",
+      "width": 1600,
+      "height": 1067,
+      "alt": "Kayaks on Phewa Lake at sunset",
+      "credit": "Pexels",
+      "license": "Pexels License",
+      "source": "https://www.pexels.com/photo/sunset-kayaking-on-phewa-lake-in-pokhara-36236714/",
+      "ours": false,
+      "focus": "55% 70%"
+    },
+    {
+      "src": "/photos/day13-3-800.webp",
+      "srcSet": "/photos/day13-3-800.webp 800w, /photos/day13-3-1600.webp 1600w",
+      "width": 1600,
+      "height": 1063,
+      "alt": "A kayak out on Phewa Lake",
+      "credit": "Pexels",
+      "license": "Pexels License",
+      "source": "https://www.pexels.com/photo/men-on-kayak-in-lake-22718468/",
+      "ours": false,
+      "focus": "50% 60%"
     }
   ],
   "14": [
@@ -435,6 +459,30 @@
       "height": 490,
       "alt": "Boudhanath Stupa lit at dusk, Kathmandu",
       "ours": false
+    },
+    {
+      "src": "/photos/day14-2-800.webp",
+      "srcSet": "/photos/day14-2-800.webp 800w, /photos/day14-2-1600.webp 1600w",
+      "width": 1600,
+      "height": 1200,
+      "alt": "Maju Dega temple, Kathmandu Durbar Square",
+      "credit": "Pexels",
+      "license": "Pexels License",
+      "source": "https://www.pexels.com/photo/maju-dega-temple-in-kathmandu-nepal-13750373/",
+      "ours": false,
+      "focus": "60% 40%"
+    },
+    {
+      "src": "/photos/day14-3-800.webp",
+      "srcSet": "/photos/day14-3-800.webp 533w, /photos/day14-3-1600.webp 1067w",
+      "width": 1067,
+      "height": 1600,
+      "alt": "Patan Durbar Square in the Kathmandu Valley",
+      "credit": "Pexels",
+      "license": "Pexels License",
+      "source": "https://www.pexels.com/photo/aerial-view-of-patan-durbar-square-in-kathmandu-nepal-33884006/",
+      "ours": false,
+      "focus": "50% 50%"
     }
   ],
   "15": [
@@ -446,6 +494,30 @@
       "alt": "Hmayed and Farhat with the Lebanese flag at Everest Base Camp",
       "credit": "Photo: Hmayed & Farhat, 2025",
       "ours": true
+    },
+    {
+      "src": "/photos/day15-2-800.webp",
+      "srcSet": "/photos/day15-2-800.webp 600w, /photos/day15-2-1600.webp 1199w",
+      "width": 1199,
+      "height": 1600,
+      "alt": "The Pigeon Rocks at Raouche, Beirut",
+      "credit": "Iakub Arifulin",
+      "license": "Pexels License",
+      "source": "https://www.pexels.com/photo/drone-shot-of-pigeon-rocks-in-lebanon-12259278/",
+      "ours": false,
+      "focus": "50% 60%"
+    },
+    {
+      "src": "/photos/day15-3-800.webp",
+      "srcSet": "/photos/day15-3-800.webp 533w, /photos/day15-3-1600.webp 1067w",
+      "width": 1067,
+      "height": 1600,
+      "alt": "The Lebanese flag over Beirut",
+      "credit": "Pexels",
+      "license": "Pexels License",
+      "source": "https://www.pexels.com/photo/lebanese-flag-and-urban-skyline-in-beirut-29677953/",
+      "ours": false,
+      "focus": "50% 30%"
     }
   ],
   "guide-hmayed": [
