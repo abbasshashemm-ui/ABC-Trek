@@ -13,7 +13,7 @@ import {
   type LucideIcon,
 } from 'lucide-react'
 
-export const DEPARTURE = '10 April 2027'
+export const DEPARTURE = '3 April 2027'
 export const PRICE = '$1,570'
 /** The land package excludes the international round-trip ticket. */
 export const PRICE_EXCLUDES = 'international flight ticket'
