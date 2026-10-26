@@ -33,6 +33,8 @@ const MANIFEST = join(ROOT, 'src', 'data', 'photos.generated.json')
 
 const TREK_CREDIT = 'Hmayed & Farhat · past trek'
 const PER_DAY = 3
+/** Manifest days may list more: 3 in the mosaic plus a row of up to 4 thumbnails (PhotoStrip). */
+const MAX_SHOWN = 7
 const WIDTHS = [800, 1600]
 /** Narrower than this and a full-width tile on a 3x phone (~1050 device px) or the lightbox is upscaled. */
 const MIN_SHARP_WIDTH = 1200
@@ -114,7 +116,7 @@ async function fromManifest(byDay) {
   for (const [day, list] of Object.entries(manifest)) {
     if (day.startsWith('_')) continue // comments
     // Non-numeric keys (e.g. "guides") are named galleries, not itinerary days.
-    if (list.length > PER_DAY) console.warn(`day ${day}: ${list.length} photos listed, only the first ${PER_DAY} are shown`)
+    if (list.length > MAX_SHOWN) console.warn(`day ${day}: ${list.length} photos listed, only the first ${MAX_SHOWN} are shown`)
     for (const [i, p] of list.entries()) {
       const path = join(SRC, p.file)
       if (!existsSync(path)) throw new Error(`manifest day ${day}: missing file ${p.file}`)

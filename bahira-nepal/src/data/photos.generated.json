@@ -117,15 +117,24 @@
   "6": [
     {
       "src": "/photos/day06-1-800.webp",
-      "srcSet": "/photos/day06-1-800.webp 736w",
+      "srcSet": "/photos/day06-1-800.webp 600w, /photos/day06-1-1600.webp 1200w",
+      "width": 1200,
+      "height": 1600,
+      "alt": "Morning at the World Peace Pagoda above Pokhara",
+      "credit": "Photo: Hmayed & Farhat",
+      "ours": true
+    },
+    {
+      "src": "/photos/day06-2-800.webp",
+      "srcSet": "/photos/day06-2-800.webp 736w",
       "width": 736,
       "height": 736,
       "alt": "The Pumdikot Shiva statue above Pokhara and Phewa Lake",
       "ours": false
     },
     {
-      "src": "/photos/day06-2-800.webp",
-      "srcSet": "/photos/day06-2-800.webp 600w, /photos/day06-2-1600.webp 736w",
+      "src": "/photos/day06-3-800.webp",
+      "srcSet": "/photos/day06-3-800.webp 600w, /photos/day06-3-1600.webp 736w",
       "width": 736,
       "height": 981,
       "alt": "The spiral entrance to Gupteshwor Mahadev Cave",
