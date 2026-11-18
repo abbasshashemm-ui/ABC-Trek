@@ -16,7 +16,13 @@ export const PRICE = '$1,570'
 /** The land package excludes the international round-trip ticket. */
 export const PRICE_EXCLUDES = 'international flight ticket'
 export const INSURANCE_PRICE = '$120'
-export const SEATS = 9
+/** Nepal tourist visa, not in the package price. */
+export const VISA_PRICE = '$30'
+/** Group size, and seats still open. Update SEATS_LEFT as bookings come in (also in index.html meta text). */
+export const SEATS_TOTAL = 9
+export const SEATS_LEFT = 2
+/** "2 of 9 seats left", or "Fully booked" once SEATS_LEFT hits 0. */
+export const SEATS_LABEL = SEATS_LEFT > 0 ? `${SEATS_LEFT} of ${SEATS_TOTAL} seats left` : 'Fully booked'
 export interface Contact {
   name: string
   /** As shown on the page. */

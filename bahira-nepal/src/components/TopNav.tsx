@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import clsx from 'clsx'
 import BahiraLogo from './BahiraLogo'
 import { ACT_LABELS, type ActId } from '../data/itinerary'
-import { SEATS, DEPARTURE } from '../data/booking'
+import { SEATS_LABEL, DEPARTURE } from '../data/booking'
 import { scrollState } from '../state/scrollStore'
 import { scrollToId } from '../state/scrollApi'
 
@@ -56,7 +56,7 @@ export default function TopNav() {
 
         <div className="flex items-center gap-3">
           <span className="hidden text-sm text-muted lg:block">
-            {SEATS} seats · {DEPARTURE}
+            {SEATS_LABEL} · {DEPARTURE}
           </span>
           <button
             type="button"

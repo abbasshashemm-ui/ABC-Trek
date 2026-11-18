@@ -1,5 +1,5 @@
 import { ArrowUpRight } from 'lucide-react'
-import { inclusions, DEPARTURE, PRICE, INSURANCE_PRICE, SEATS, CONTACTS } from '../data/booking'
+import { inclusions, DEPARTURE, PRICE, INSURANCE_PRICE, VISA_PRICE, SEATS_LABEL, CONTACTS } from '../data/booking'
 
 /**
  * The closing call to action: one compact, translucent card over the summit scene.
@@ -10,7 +10,7 @@ export default function Booking() {
     <section id="booking" className="relative z-10 px-4 pt-24 md:pt-32">
       <div className="booking-card mx-auto max-w-xl rounded-3xl p-6 ring-1 ring-ink/10 md:p-8">
         <p className="eyebrow">
-          {DEPARTURE} · 15 days · {SEATS} seats
+          {DEPARTURE} · 15 days · {SEATS_LABEL}
         </p>
 
         <p className="mt-3 flex items-baseline gap-2.5">
@@ -18,7 +18,7 @@ export default function Booking() {
           <span className="text-sm text-muted">per person</span>
         </p>
         <p className="mt-2 text-[13px] leading-snug text-muted">
-          International flights to Kathmandu not included. Travel insurance optional, +{INSURANCE_PRICE}.
+          International flights to Kathmandu not included. Nepal visa +{VISA_PRICE}. Travel insurance optional, +{INSURANCE_PRICE}.
         </p>
 
         <h2 className="mt-6 text-[13px] font-semibold text-ink">What {PRICE} covers</h2>
