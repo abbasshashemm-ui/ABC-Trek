@@ -1,12 +1,12 @@
 import { ArrowDown } from 'lucide-react'
-import { DEPARTURE, SEATS } from '../data/booking'
+import { DEPARTURE, SEATS_LEFT, SEATS_TOTAL } from '../data/booking'
 import { ABC_ALTITUDE } from '../data/itinerary'
 import { scrollToId } from '../state/scrollApi'
 
 const FACTS = [
   { value: '15', label: 'days' },
   { value: `${ABC_ALTITUDE.toLocaleString('en-US')} m`, label: 'highest point' },
-  { value: String(SEATS), label: 'seats' },
+  { value: `${SEATS_LEFT}/${SEATS_TOTAL}`, label: 'seats left' },
 ]
 
 export default function Hero() {
